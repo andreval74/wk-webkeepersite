@@ -91,12 +91,15 @@
       [data-r7="footer4"] { grid-template-columns:1fr 1fr !important; }
       [data-r7="diag2"] { grid-template-columns:1fr !important; }
       [data-r7="about2"] { grid-template-columns:1fr !important; }
+      [data-r7="projects4"] { grid-template-columns:repeat(2,1fr) !important; }
+      [data-r7="invest2"] { grid-template-columns:1fr !important; }
     }
     @media (max-width:640px) {
       [data-r7="stats4"] { grid-template-columns:1fr 1fr !important; }
       [data-r7="why6"] { grid-template-columns:1fr !important; }
       [data-r7="process4"] { grid-template-columns:1fr !important; }
       [data-r7="footer4"] { grid-template-columns:1fr !important; }
+      [data-r7="projects4"] { grid-template-columns:1fr !important; }
       section[data-screen-label] { padding-left:20px !important; padding-right:20px !important; }
     }
   </style>
@@ -395,6 +398,32 @@
     <p data-reveal style="text-align:center;font-size:11.5px;color:{{ T.text4 }};margin-top:24px;padding:0 24px;">Outras empresas em Londrina, Apucarana, São Paulo, Brasil e nos EUA.</p>
   </section>
 
+  <section id="projetos" data-screen-label="Projetos" style="padding:96px 24px;max-width:1240px;margin:0 auto;scroll-margin-top:96px;">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:44px;">
+      <div style="max-width:560px;">
+        <span data-reveal style="font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:{{ T.accent }};">Projetos</span>
+        <h2 data-reveal style="font-family:'Sora',sans-serif;font-size:clamp(26px,2.8vw,36px);font-weight:700;letter-spacing:-.5px;color:{{ T.text1 }};margin:16px 0 0;">Soluções que geram resultados reais.</h2>
+      </div>
+      <a data-reveal href="{{ waProjetos }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:11px;border:1px solid {{ T.inputBorder }};background:{{ T.cardBg }};font-weight:600;font-size:13.5px;color:{{ T.text1 }};">Ver todos os projetos</a>
+    </div>
+    <div data-r7="projects4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
+      <sc-for list="{{ projects }}" as="p" hint-placeholder-count="4">
+        <div data-reveal style="border-radius:16px;overflow:hidden;background:{{ T.cardBg }};border:1px solid {{ T.cardBorder }};transition:transform .35s ease,border-color .3s ease;" style-hover="transform:translateY(-5px);border-color:{{ T.cardBorderHover }};">
+          <div style="height:150px;position:relative;overflow:hidden;background:{{ T.cardBgSolid }};">
+            <sc-if value="{{ p.image }}" hint-placeholder-val="{{ false }}">
+              <img src="{{ p.image }}" alt="{{ p.title }}" style="width:100%;height:100%;object-fit:cover;display:block;">
+            </sc-if>
+            <div style="position:absolute;top:12px;left:12px;padding:5px 11px;border-radius:100px;background:{{ T.badgeBg }};border:1px solid {{ T.badgeBorder }};color:{{ T.text1 }};font-size:11px;font-weight:600;">{{ p.tag }}</div>
+          </div>
+          <div style="padding:18px;">
+            <h3 style="font-family:'Sora',sans-serif;font-size:15px;color:{{ T.text1 }};font-weight:600;margin:0 0 8px;">{{ p.title }}</h3>
+            <p style="font-size:12.5px;color:{{ T.text3 }};line-height:1.5;margin:0;">{{ p.desc }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
   <section id="diagnostico" data-screen-label="Diagnostico" style="padding:96px 24px;max-width:1050px;margin:0 auto;scroll-margin-top:96px;">
     <div style="max-width:600px;margin:0 auto;text-align:center;">
       <span data-reveal style="font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:{{ T.accent }};">Diagnóstico Digital · Grátis</span>
@@ -453,6 +482,34 @@
           </div>
         </div>
       </sc-if>
+    </div>
+  </section>
+
+  <section id="investimento" data-screen-label="Investimento" style="padding:96px 24px;max-width:1240px;margin:0 auto;scroll-margin-top:96px;">
+    <div data-r7="invest2" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch;">
+      <div>
+        <span data-reveal style="font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:{{ T.accent }};">Investimento sob medida</span>
+        <h2 data-reveal style="font-family:'Sora',sans-serif;font-size:clamp(24px,2.6vw,34px);font-weight:700;letter-spacing:-.5px;color:{{ T.text1 }};margin:16px 0 24px;line-height:1.15;">Você paga pelo que realmente precisa.</h2>
+        <div data-reveal style="display:flex;flex-direction:column;gap:14px;">
+          <sc-for list="{{ pricingPoints }}" as="p" hint-placeholder-count="4">
+            <div style="display:flex;gap:13px;align-items:flex-start;">
+              <div style="width:24px;height:24px;border-radius:7px;flex-shrink:0;background:{{ T.accentSoftBg }};border:1px solid {{ T.accentSoftBorder }};display:flex;align-items:center;justify-content:center;margin-top:1px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="{{ T.accent }}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div>
+              <div>
+                <div style="font-size:14.5px;font-weight:600;color:{{ T.text1 }};">{{ p.title }}</div>
+                <div style="font-size:12.5px;color:{{ T.text3 }};line-height:1.5;">{{ p.desc }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div data-reveal style="display:flex;flex-direction:column;justify-content:center;padding:36px 34px;border-radius:20px;background:{{ T.ctaBg }};border:1px solid {{ T.ctaBorder }};">
+        <div style="font-family:'Sora',sans-serif;font-size:22px;font-weight:700;color:{{ T.text1 }};margin-bottom:10px;letter-spacing:-.3px;">Solicite uma proposta</div>
+        <p style="font-size:13.5px;color:{{ T.text2 }};line-height:1.6;margin:0 0 22px;">Conte o seu desafio e enviamos uma proposta personalizada em até 24 horas. Sem compromisso, sem enrolação.</p>
+        <a href="{{ waProposta }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:15px;border-radius:11px;background:{{ T.gradBtn }};color:#fff;font-weight:700;font-size:14px;font-family:'Sora',sans-serif;box-shadow:0 12px 30px -10px {{ T.accentSoftShadow }};" style-hover="transform:translateY(-2px);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .9.9-2.9-.2-.3A8 8 0 1 1 12 20zm4.4-5.9c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.7-.3-1.4-.7-2-1.3-.5-.5-1-1.1-1.4-1.7-.1-.2 0-.4.1-.5l.4-.4c.1-.2.2-.3.2-.5.1-.2 0-.4 0-.5-.1-.1-.5-1.3-.7-1.8-.2-.4-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.6.6-.9 1.3-.9 2.1 0 1.2.9 2.4 1 2.6.1.2 1.8 2.9 4.5 3.9.6.3 1.1.4 1.5.6.6.2 1.2.1 1.6.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"></path></svg>
+          Solicitar proposta via WhatsApp</a>
+        <div style="font-size:11.5px;color:{{ T.text4 }};text-align:center;margin-top:12px;">Resposta em até 24h · Atendimento 24/7</div>
+      </div>
     </div>
   </section>
 
@@ -664,7 +721,7 @@ class Component extends DCLogic {
 
     this.navLinks = [
       { label: 'Serviços', href: '#servicos' }, { label: 'IA', href: '#ia' }, { label: 'Processo', href: '#processo' }, { label: 'Sobre', href: '#sobre' },
-      { label: 'Clientes', href: '#clientes' }, { label: 'Diagnóstico', href: '#diagnostico' }
+      { label: 'Clientes', href: '#clientes' }, { label: 'Projetos', href: '#projetos' }, { label: 'Diagnóstico', href: '#diagnostico' }, { label: 'Investimento', href: '#investimento' }
     ];
     this.heroStats = [
       { value: 'R$67 bi', label: 'Faturamento online PMEs 2024 (MDIC)' },
@@ -751,8 +808,20 @@ class Component extends DCLogic {
     ];
     this.footerCols = [
       { title: 'Serviços', links: [{ label: 'Inteligência Artificial', href: '#servicos' }, { label: 'Automação de Processos', href: '#servicos' }, { label: 'Web3 & Blockchain', href: '#servicos' }, { label: 'Sistemas sob Medida', href: '#servicos' }, { label: 'SEO & Performance', href: '#servicos' }] },
-      { title: 'Empresa', links: [{ label: 'Sobre', href: '#sobre' }, { label: 'Processo', href: '#processo' }, { label: 'Clientes', href: '#clientes' }, { label: 'FAQ', href: '#faq' }] },
+      { title: 'Empresa', links: [{ label: 'Sobre', href: '#sobre' }, { label: 'Processo', href: '#processo' }, { label: 'Clientes', href: '#clientes' }, { label: 'Projetos', href: '#projetos' }, { label: 'FAQ', href: '#faq' }] },
       { title: 'Contato', links: [{ label: 'WhatsApp', href: 'https://wa.me/5543999446606' }, { label: 'contato@webkeeper.com.br', href: 'mailto:contato@webkeeper.com.br' }, { label: 'Londrina · PR', href: '#' }, { label: 'Atendimento 24h', href: '#' }] }
+    ];
+    this.projectsData = [
+      { tag: 'Sistema Web', title: 'Plataforma de Gestão Empresarial', desc: 'Sistema completo para gestão de processos e equipes.', image: './images/solucao-gestao.png' },
+      { tag: 'SaaS', title: 'Plataforma SaaS Educacional', desc: 'Plataforma completa para cursos online e membros.', image: './images/solucao-saas.png' },
+      { tag: 'Integração', title: 'Integração WhatsApp + CRM', desc: 'Automação de atendimento e gestão de relacionamento.', image: './images/solucao-whatsapp.png' },
+      { tag: 'Landing Page', title: 'Landing Page de Alta Conversão', desc: 'Página otimizada para gerar leads e vendas.', image: './images/solucao-landing.png' }
+    ];
+    this.pricingPoints = [
+      { title: 'Sem pacotes fixos', desc: 'Cada solução é desenhada sob medida para o seu desafio.' },
+      { title: 'Você paga pelo valor', desc: 'Investimento no resultado entregue, não em horas.' },
+      { title: 'Proposta transparente', desc: 'Escopo, prazo e investimento claros, sem surpresas.' },
+      { title: 'Flexibilidade total', desc: 'Parcelamento e etapas conforme o seu projeto.' }
     ];
   }
 
@@ -949,6 +1018,10 @@ class Component extends DCLogic {
       activeService: active,
       aiTimeline: this.aiTimeline, processSteps: this.processSteps, aboutPoints: this.aboutPoints, whyCards: this.whyCards,
       clientsLoop: [...this.clientLogos, ...this.clientLogos],
+      projects: this.projectsData,
+      pricingPoints: this.pricingPoints,
+      waProjetos: wa('Olá! Cliquei em "Ver todos os projetos" no site da WebKeeper.'),
+      waProposta: wa('Olá! Quero solicitar uma proposta personalizada com a WebKeeper.'),
       socials: this.socials, footerCols: this.footerCols,
       showEquityBlock: this.props.showEquityBlock ?? true,
       waOrcamento: wa('Olá! Cliquei em "Solicitar Orçamento" no site da WebKeeper.'),
