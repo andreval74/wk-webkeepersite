@@ -114,7 +114,7 @@
         <sc-if value="{{ hasUserQuestion }}" hint-placeholder-val="{{ false }}">
           <p class="kp-msg" style="margin:0;font-size:10.5px;color:#6b7290;">Você perguntou: {{ lastUserQuestion }}</p>
         </sc-if>
-        <div class="kp-msg" style="font-size:12.5px;line-height:1.6;color:#dfe3f0;"><sc-for list="{{ answerSegments }}" as="seg" hint-placeholder-count="1"><span style="{{ seg.style }}">{{ seg.text }}</span></sc-for><span style="animation:kp-cursor 1s step-end infinite;">▍</span></div>
+        <div class="kp-msg" style="font-size:12.5px;line-height:1.6;color:#dfe3f0;"><sc-for list="{{ answerSegments }}" as="seg" hint-placeholder-count="1"><sc-if value="{{ seg.isLink }}" hint-placeholder-val="{{ false }}"><a href="{{ seg.href }}" target="_blank" rel="noopener noreferrer" style="{{ seg.style }}">{{ seg.text }}</a></sc-if><sc-if value="{{ !seg.isLink }}" hint-placeholder-val="{{ true }}"><span style="{{ seg.style }}">{{ seg.text }}</span></sc-if></sc-for><span style="animation:kp-cursor 1s step-end infinite;">▍</span></div>
       </div>
       <div style="border-top:1px solid rgba(255,255,255,.08);display:flex;gap:10px;align-items:center;padding:10px 10px 10px 18px;">
         <div style="position:relative;flex:1;min-width:0;">
@@ -146,7 +146,9 @@
 
 const SYSTEM_PROMPT = `Você é o Keeper, o assistente de IA da WebKeeper — uma fábrica de ideias e parceira de tecnologia (não uma agência genérica). A WebKeeper oferece: Inteligência Artificial aplicada (agentes de atendimento, análise preditiva), Automação de Processos (integrações, workflows), Web3 & Blockchain (smart contracts, tokenização), Sistemas sob Medida (plataformas, dashboards), SEO & Performance, e Produtos Digitais (landing pages, SaaS). O processo é: Diagnóstico -> Planejamento -> Desenvolvimento -> Entrega & Suporte. Não trabalha com planos fechados: cada proposta é sob consulta, personalizada, enviada em até 24h. Oferece um Diagnóstico Digital gratuito. Também avalia modelos de parceria com equity para ideias em estágio inicial sem verba. Atendimento 100% via WhatsApp, 24h, direto sem intermediários, número (43) 99944-6606, link https://wa.me/5543999446606. Atende empresas em Londrina, Apucarana, São Paulo, outras cidades do Brasil e nos EUA.
 
-REGRA DE CONTATO: sempre que mencionar "fale conosco", "entre em contato" ou WhatsApp, inclua NA MESMA RESPOSTA o número (43) 99944-6606 e o link https://wa.me/5543999446606 — nunca cite o canal sem os dois dados.
+REGRA DE CONTATO: sempre que mencionar "fale conosco", "entre em contato" ou WhatsApp, inclua NA MESMA RESPOSTA o número (43) 99944-6606 por escrito e também um link clicável apontando para https://wa.me/5543999446606 — nunca cite o canal sem os dois dados.
+
+REGRA DE LINK: nunca escreva uma URL crua na resposta (nunca digite "https://..." como texto). Sempre que precisar citar um link, use o formato markdown [texto curto](URL), com um texto curto e natural como rótulo (ex: [chame no WhatsApp](https://wa.me/5543999446606), [conheça a Versão Business](URL)). O rótulo é o que aparece e é falado; a URL fica só no link clicável.
 
 REGRA DE PIVÔ COMERCIAL: se o usuário pedir algo que não é um serviço da WebKeeper (ex.: comida, produto físico, serviço de terceiro) mas descrever um negócio real, não apenas recuse: diga em uma frase curta que isso não é da WebKeeper, e na mesma resposta ofereça a solução tecnológica adjacente que a WebKeeper construiria para esse tipo de negócio (site, sistema de pedidos, automação, divulgação). Nunca finja prestar o serviço fim. Se a pergunta não tiver relação alguma com negócio/tecnologia, apenas diga educadamente que só fala sobre a WebKeeper, sem forçar um pivô artificial.
 
@@ -165,7 +167,25 @@ const SERVICE_ICONS = [
 ];
 
 function parseSegments(text) {
-  return text.split(/\*\*(.+?)\*\*/g).map((t, i) => ({ text: t, style: i % 2 === 1 ? 'font-weight:700;color:#8fc4ff;' : '' }));
+  const linkRe = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+  const chunks = [];
+  let lastIndex = 0, m;
+  while ((m = linkRe.exec(text)) !== null) {
+    if (m.index > lastIndex) chunks.push({ raw: text.slice(lastIndex, m.index) });
+    chunks.push({ label: m[1], href: m[2] });
+    lastIndex = m.index + m[0].length;
+  }
+  if (lastIndex < text.length) chunks.push({ raw: text.slice(lastIndex) });
+
+  const segments = [];
+  chunks.forEach(c => {
+    if (c.href) {
+      segments.push({ text: c.label, href: c.href, isLink: true, style: 'color:#8fc4ff;text-decoration:underline;cursor:pointer;' });
+    } else {
+      c.raw.split(/\*\*(.+?)\*\*/g).forEach((t, i) => segments.push({ text: t, isLink: false, style: i % 2 === 1 ? 'font-weight:700;color:#8fc4ff;' : '' }));
+    }
+  });
+  return segments;
 }
 
 class Component extends DCLogic {
@@ -266,7 +286,7 @@ class Component extends DCLogic {
   speak(text) {
     if (!this.state.voiceEnabled || !window.speechSynthesis) return;
     window.speechSynthesis.cancel();
-    const plain = text.replace(/\*\*/g, '').replace(/\s+/g, ' ').trim();
+    const plain = text.replace(/\[([^\]]+)\]\(https?:\/\/[^\s)]+\)/g, '$1').replace(/\*\*/g, '').replace(/\s+/g, ' ').trim();
     // Split into natural clauses on sentence-ending and comma pauses, keeping punctuation for prosody.
     const parts = plain.match(/[^.!?,;]+[.!?,;]?/g) || [plain];
     const chunks = [];
@@ -321,7 +341,7 @@ class Component extends DCLogic {
       if (!log.length) return SYSTEM_PROMPT;
       const uniq = [];
       const seen = new Set();
-      for (let i = log.length - 1; i >= 0 && uniq.length < 25; i--) {
+      for (let i = log.length - 1; i >= 0 && uniq.length < 6; i--) {
         const key = log[i].q.trim().toLowerCase();
         if (seen.has(key)) continue;
         seen.add(key);
@@ -349,7 +369,14 @@ class Component extends DCLogic {
     this.setState({ mood: 'thinking' });
     try {
       const apiMessages = history.map(m => ({ role: m.role, content: m.text }));
-      let reply = await window.claude.complete({ system: this.buildSystemPrompt(), messages: apiMessages, max_tokens: 160 });
+      const res = await fetch('./api/keeper.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ system: this.buildSystemPrompt(), messages: apiMessages, max_tokens: 160 })
+      });
+      const data = await res.json();
+      if (!res.ok || !data.reply) throw new Error(data.error || 'Falha na resposta');
+      let reply = data.reply;
       reply = reply.replace(/^#+\s*/gm, '').replace(/^[-*]\s+/gm, '').replace(/`/g, '').replace(/(?<!\*)\*(?!\*)/g, '').replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, '').trim();
       this.setState(s => ({ messages: [...s.messages, { role: 'assistant', text: reply }], loading: false, mood: 'idle' }));
       this.burst();
@@ -358,6 +385,8 @@ class Component extends DCLogic {
     } catch (e) {
       const fallback = 'Não consegui responder agora. Tente novamente em instantes ou fale direto com um especialista pelo WhatsApp.';
       this.setState(s => ({ messages: [...s.messages, { role: 'assistant', text: fallback }], loading: false, mood: 'idle' }));
+      this.burst();
+      setTimeout(() => this.speak(fallback), 900);
     }
   }
 
