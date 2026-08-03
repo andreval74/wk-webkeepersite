@@ -30,6 +30,8 @@
   <meta name="twitter:image" content="https://www.webkeeper.com.br/images/wk-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./keeper-orb.css">
+  <script src="./keeper-orb.js"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -62,19 +64,8 @@
     @keyframes p7-float { 0%,100% { transform:translateY(0) rotate(0deg); } 50% { transform:translateY(-14px) rotate(1deg); } }
     @keyframes p7-aurora { 0%,100% { transform:translate(0,0) scale(1); } 33% { transform:translate(4%,-6%) scale(1.08); } 66% { transform:translate(-4%,4%) scale(.96); } }
     @keyframes p7-marquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
-    @keyframes wk-orb-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
-    @keyframes kp-core-glow { 0%,100% { opacity:.75; } 50% { opacity:1; } }
-    @keyframes kp-ring-spin { from { transform:translate(-50%,-50%) rotate(0deg); } to { transform:translate(-50%,-50%) rotate(360deg); } }
-    @keyframes kp-core-breathe { 0%,100% { transform:translate(-50%,-50%) scale(1); } 50% { transform:translate(-50%,-50%) scale(1.045); } }
-    @keyframes kp-blink { 0%,92%,100% { transform:scaleY(1); } 96% { transform:scaleY(.1); } }
-    @keyframes kp-eye-glow { 0%,100% { filter:brightness(1); } 50% { filter:brightness(1.35); } }
     @keyframes p7-shimmer { 0% { background-position:-200% 0; } 100% { background-position:200% 0; } }
     @keyframes p7-ping { 0% { transform:scale(1); opacity:.75; } 75%,100% { transform:scale(2); opacity:0; } }
-    @keyframes wk-core-glow { 0%,100% { opacity:.75; } 50% { opacity:1; } }
-    @keyframes wk-ring-spin { from { transform:translate(-50%,-50%) rotate(0deg); } to { transform:translate(-50%,-50%) rotate(360deg); } }
-    @keyframes wk-core-breathe { 0%,100% { transform:translate(-50%,-50%) scale(1); } 50% { transform:translate(-50%,-50%) scale(1.04); } }
-    @keyframes wk-blink { 0%,92%,100% { transform:scaleY(1); } 96% { transform:scaleY(.1); } }
-    @keyframes wk-eye-glow { 0%,100% { filter:brightness(1); } 50% { filter:brightness(1.3); } }
     .p7-reveal { opacity:0; transform:translateY(26px); transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
     .p7-reveal.p7-in { opacity:1; transform:translateY(0); }
     @media (min-width:961px) { [data-r7="navlinks"] { display:flex !important; } }
@@ -593,7 +584,17 @@
       <div style="width:min(360px,calc(100vw - 44px));border-radius:18px;border:1px solid {{ T.cardBorder }};background:{{ T.cardBgSolid }};box-shadow:0 24px 60px -20px rgba(0,0,0,.35);overflow:hidden;">
         <div style="padding:14px 16px;border-bottom:1px solid {{ T.cardBorder }};display:flex;align-items:center;justify-content:space-between;">
           <span style="font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:{{ T.text1 }};">Keeper · assistente WebKeeper</span>
-          <button onClick="{{ toggleChat }}" aria-label="Fechar" style="border:none;background:none;cursor:pointer;color:{{ T.text3 }};font-size:18px;line-height:1;">×</button>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <button onClick="{{ toggleVoice }}" aria-label="{{ voiceLabel }}" title="{{ voiceLabel }}" style="border:none;background:none;cursor:pointer;color:{{ voiceColor }};display:flex;align-items:center;">
+              <sc-if value="{{ voiceEnabled }}" hint-placeholder-val="{{ true }}">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4M8 22h8"></path></svg>
+              </sc-if>
+              <sc-if value="{{ !voiceEnabled }}" hint-placeholder-val="{{ false }}">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4M8 22h8M2 2l20 20"></path></svg>
+              </sc-if>
+            </button>
+            <button onClick="{{ toggleChat }}" aria-label="Fechar" style="border:none;background:none;cursor:pointer;color:{{ T.text3 }};font-size:18px;line-height:1;">×</button>
+          </div>
         </div>
         <div ref="{{ chatScrollRef }}" style="max-height:320px;min-height:90px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;">
           <div style="font-size:13px;line-height:1.55;color:{{ T.text2 }};"><sc-for list="{{ chatGreetingSegments }}" as="seg" hint-placeholder-count="1"><sc-if value="{{ seg.isLink }}" hint-placeholder-val="{{ false }}"><a href="{{ seg.href }}" target="_blank" rel="noopener noreferrer" style="{{ seg.style }}">{{ seg.text }}</a></sc-if><sc-if value="{{ !seg.isLink }}" hint-placeholder-val="{{ true }}"><span style="{{ seg.style }}">{{ seg.text }}</span></sc-if></sc-for></div>
@@ -621,16 +622,14 @@
         </div>
       </div>
     </sc-if>
-    <button ref="{{ fabOrbRef }}" onClick="{{ toggleChat }}" aria-label="Abrir chat com o Keeper" style="position:relative;width:72px;height:72px;border-radius:50%;border:none;cursor:pointer;background:none;padding:0;">
-      <div style="position:relative;width:100%;height:100%;animation:wk-orb-float 5s ease-in-out infinite;">
-        <div style="position:absolute;left:50%;top:50%;width:96%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(80,150,255,.4),rgba(20,40,90,.14) 55%,transparent 72%);filter:blur(10px);animation:kp-core-glow 4.5s ease-in-out infinite;"></div>
-        <div style="position:absolute;left:50%;top:50%;width:104%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:conic-gradient(from 0deg,{{ T.accent }} 0deg,{{ T.accent2 }} 110deg,{{ T.accent }} 220deg,{{ T.accent2 }} 360deg);-webkit-mask:radial-gradient(circle,transparent 60%,#000 64%,#000 72%,transparent 76%);mask:radial-gradient(circle,transparent 60%,#000 64%,#000 72%,transparent 76%);filter:blur(1px);mix-blend-mode:screen;opacity:.9;animation:kp-ring-spin 3.5s linear infinite;"></div>
-        <div style="position:absolute;left:50%;top:50%;width:58%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:{{ T.fabCore }};box-shadow:inset 0 0 14px rgba(0,0,0,.4);animation:kp-core-breathe 4s ease-in-out infinite;"></div>
-        <div style="position:absolute;left:50%;top:38%;width:26%;height:14%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(ellipse,rgba(255,255,255,.5),transparent 70%);filter:blur(2px);"></div>
-        <div style="position:absolute;left:50%;top:52%;transform:{{ fabGazeStyle }};display:flex;gap:18%;width:30%;justify-content:center;align-items:center;transition:transform .1s ease-out;">
-          <span style="display:block;width:22%;padding-bottom:30%;background:radial-gradient(circle at 40% 35%,#ffffff,#dcecff 70%);border-radius:50%/45%;animation:kp-blink 5.5s ease-in-out infinite;"></span>
-          <span style="display:block;width:22%;padding-bottom:30%;background:radial-gradient(circle at 40% 35%,#ffffff,#dcecff 70%);border-radius:50%/45%;animation:kp-blink 5.5s ease-in-out infinite .1s;"></span>
-        </div>
+    <button ref="{{ fabOrbRef }}" onClick="{{ toggleChat }}" aria-label="Abrir chat com o Keeper" class="keeper-orb" style="--keeper-size:72px;border-radius:50%;border:none;cursor:pointer;background:none;padding:0;animation-duration:5s;">
+      <div class="keeper-bloom"></div>
+      <div class="keeper-ring-wrap"><div class="keeper-ring" style="animation-duration:3.5s;"></div></div>
+      <div class="keeper-sphere"></div>
+      <div class="keeper-highlight"></div>
+      <div ref="{{ fabEyesRef }}" class="keeper-eyes">
+        <span class="keeper-eye"></span>
+        <span class="keeper-eye"></span>
       </div>
     </button>
   </div>
@@ -666,9 +665,10 @@ class Component extends DCLogic {
     this.analyzerRef = React.createRef();
     this.orbRef = React.createRef();
     this.fabOrbRef = React.createRef();
+    this.fabEyesRef = React.createRef();
     this.chatInputRef = React.createRef();
     this.chatScrollRef = React.createRef();
-    this.state = { activeServiceIdx: 0, openFaq: 0, scanning: false, scanResult: null, themeOverride: null, mobileMenuOpen: false, gaze: { x: 0, y: 5 }, fabGaze: { x: 0, y: 3 }, chatOpen: false, chatMessages: [], chatInput: '', chatLoading: false, chatAsked: new Set() };
+    this.state = { activeServiceIdx: 0, openFaq: 0, scanning: false, scanResult: null, themeOverride: null, mobileMenuOpen: false, gaze: { x: 0, y: 5 }, chatOpen: false, chatMessages: [], chatInput: '', chatLoading: false, chatAsked: new Set(), voiceEnabled: true, voices: [], selectedVoiceURI: '' };
     this.replyPool = [
       { label: 'Quais serviços vocês oferecem?', kw: ['serviç','ia ','inteligência','automaç','web3','sistema','seo'] },
       { label: 'Como funciona o processo de vocês?', kw: ['process','diagnóstic','planejamento','desenvolv','entrega'] },
@@ -685,6 +685,7 @@ class Component extends DCLogic {
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
     this.toggleChat = this.toggleChat.bind(this);
+    this.toggleVoice = this.toggleVoice.bind(this);
     this.CHAT_GREETING = 'Olá! Sou o **Keeper**, assistente da WebKeeper. Pergunte sobre nossos serviços, processo ou investimento.';
     this.CHAT_SYSTEM_PROMPT = 'Você é o Keeper, assistente de IA da WebKeeper (fábrica de ideias e parceira de tecnologia: Inteligência Artificial, Automação de Processos, Web3 & Blockchain, Sistemas sob Medida, SEO & Performance, Produtos Digitais). Processo: Diagnóstico -> Planejamento -> Desenvolvimento -> Entrega & Suporte. Sem planos fechados: proposta sob consulta em até 24h. Diagnóstico Digital gratuito disponível. Modelos de parceria com equity avaliados caso a caso. Atendimento 100% WhatsApp 24h, número (43) 99944-6606, link https://wa.me/5543999446606. Atende Londrina, Apucarana, São Paulo, Brasil e EUA. Sempre que mencionar contato/WhatsApp, inclua o número e o link juntos. Nunca escreva uma URL crua no texto — links sempre em formato markdown [texto curto](URL), ex: [chame no WhatsApp](https://wa.me/5543999446606). Se pedirem algo fora do escopo mas relacionado a um negócio real, não recuse simplesmente: ofereça a solução tecnológica adjacente que a WebKeeper construiria para esse negócio. Responda em 1 a 3 frases, direto, sem se reapresentar a cada resposta, com no máximo 1 destaque em **negrito**. Sem markdown de título/lista, sem emojis.';
 
@@ -846,6 +847,9 @@ class Component extends DCLogic {
     onScroll();
     window.addEventListener('mousemove', this.onMouseMove);
     document.addEventListener('mouseleave', this.onMouseLeave);
+    this.fabGaze = window.KeeperOrb.attachGaze(this.fabEyesRef.current, {
+      anchorEl: this.fabOrbRef.current, mode: 'fixed', max: 3.2, ease: 0.5
+    });
 
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('p7-in'); io.unobserve(e.target); } });
@@ -853,11 +857,27 @@ class Component extends DCLogic {
     const revealEls = document.querySelectorAll('[data-reveal]');
     revealEls.forEach(el => { el.classList.add('p7-reveal'); io.observe(el); });
     setTimeout(() => { revealEls.forEach(el => el.classList.add('p7-in')); }, 1200);
+
+    const loadVoices = () => {
+      const all = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+      const pt = all.filter(v => v.lang && v.lang.toLowerCase().startsWith('pt'));
+      const list = (pt.length ? pt : all).map(v => ({ uri: v.voiceURI, name: v.name, lang: v.lang }));
+      if (list.length) {
+        const daniel = list.find(v => /daniel/i.test(v.name));
+        this.setState(s => ({ voices: list, selectedVoiceURI: s.selectedVoiceURI || (daniel ? daniel.uri : list[0].uri) }));
+      }
+    };
+    if (window.speechSynthesis) {
+      loadVoices();
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
   }
 
   componentWillUnmount() {
     window.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseleave', this.onMouseLeave);
+    if (this.fabGaze) this.fabGaze.destroy();
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
   }
 
   onMouseMove(e) {
@@ -868,24 +888,81 @@ class Component extends DCLogic {
       const dist = Math.hypot(dx, dy) || 1;
       next.gaze = { x: (dx / dist) * 10.5, y: (dy / dist) * 10.5 };
     }
-    if (this.fabOrbRef.current) {
-      const r2 = this.fabOrbRef.current.getBoundingClientRect();
-      const dx2 = e.clientX - (r2.left + r2.width / 2), dy2 = e.clientY - (r2.top + r2.height / 2);
-      const dist2 = Math.hypot(dx2, dy2) || 1;
-      next.fabGaze = { x: (dx2 / dist2) * 3.2, y: (dy2 / dist2) * 3.2 };
-    }
     this.setState(next);
   }
 
-  onMouseLeave() { this.setState({ gaze: { x: 0, y: 5 }, fabGaze: { x: 0, y: 3 } }); }
+  onMouseLeave() { this.setState({ gaze: { x: 0, y: 5 } }); }
 
   toggleMenu() { this.setState(s => ({ mobileMenuOpen: !s.mobileMenuOpen })); }
   closeMenu() { this.setState({ mobileMenuOpen: false }); }
 
   toggleChat() {
+    const wasOpen = this.state.chatOpen;
     this.setState(s => ({ chatOpen: !s.chatOpen }), () => {
       if (this.state.chatOpen && this.chatInputRef.current) this.chatInputRef.current.focus();
+      if (!wasOpen && this.state.chatOpen && this.state.chatMessages.length === 0) {
+        setTimeout(() => this.speak(this.CHAT_GREETING), 300);
+      }
+      if (wasOpen && window.speechSynthesis) window.speechSynthesis.cancel();
     });
+  }
+
+  toggleVoice() {
+    if (this.state.voiceEnabled && window.speechSynthesis) window.speechSynthesis.cancel();
+    this.setState(s => ({ voiceEnabled: !s.voiceEnabled }));
+  }
+
+  pickVoice() {
+    const voices = window.speechSynthesis.getVoices();
+    const daniel = voices.find(v => /daniel/i.test(v.name));
+    if (daniel) return daniel;
+    if (this.state.selectedVoiceURI) {
+      const chosen = voices.find(v => v.voiceURI === this.state.selectedVoiceURI);
+      if (chosen) return chosen;
+    }
+    const pt = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith('pt'));
+    if (!pt.length) return null;
+    const byName = (re) => pt.find(v => re.test(v.name));
+    return byName(/male|masculin/i) || byName(/google/i) || byName(/natural|online|neural/i) || pt.find(v => v.lang.toLowerCase() === 'pt-br') || pt[0];
+  }
+
+  speak(text) {
+    if (!this.state.voiceEnabled || !window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const plain = text.replace(/\[([^\]]+)\]\(https?:\/\/[^\s)]+\)/g, '$1').replace(/\*\*/g, '').replace(/\s+/g, ' ').trim();
+    const parts = plain.match(/[^.!?,;]+[.!?,;]?/g) || [plain];
+    const chunks = [];
+    let buf = '';
+    parts.forEach(p => {
+      buf += p;
+      if (/[.!?]\s*$/.test(p.trim()) || buf.length > 90) { chunks.push(buf.trim()); buf = ''; }
+    });
+    if (buf.trim()) chunks.push(buf.trim());
+    const voice = this.pickVoice();
+    const baseRate = 1.58, basePitch = 0.86;
+    let i = 0;
+    const speakNext = () => {
+      if (i >= chunks.length) return;
+      const chunk = chunks[i];
+      const endsComma = /,\s*$/.test(chunk);
+      const endsQuestion = /\?\s*$/.test(chunk);
+      const endsExclaim = /!\s*$/.test(chunk);
+      const isLast = i === chunks.length - 1;
+      const utter = new SpeechSynthesisUtterance(chunk);
+      utter.lang = 'pt-BR';
+      if (voice) utter.voice = voice;
+      utter.rate = baseRate + (Math.random() * 0.04 - 0.02) + (endsComma ? -0.03 : 0);
+      utter.pitch = endsQuestion ? basePitch + 0.14 : endsExclaim ? basePitch + 0.08 : basePitch + (Math.random() * 0.03 - 0.015);
+      utter.volume = 1;
+      utter.onend = () => {
+        i++;
+        const pause = endsComma ? 70 : isLast ? 0 : 130;
+        setTimeout(speakNext, pause);
+      };
+      utter.onerror = () => { i++; setTimeout(speakNext, 0); };
+      window.speechSynthesis.speak(utter);
+    };
+    speakNext();
   }
 
   logSharedQA(question, answer) {
@@ -939,9 +1016,12 @@ class Component extends DCLogic {
       let reply = data.reply;
       reply = reply.replace(/^#+\s*/gm, '').replace(/^[-*]\s+/gm, '').replace(/`/g, '').replace(/(?<!\*)\*(?!\*)/g, '').replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, '').trim();
       this.setState(s => ({ chatMessages: [...s.chatMessages, { role: 'assistant', text: reply }], chatLoading: false }));
+      setTimeout(() => this.speak(reply), 400);
       this.logSharedQA(msg, reply);
     } catch (e) {
-      this.setState(s => ({ chatMessages: [...s.chatMessages, { role: 'assistant', text: 'Não consegui responder agora — tente de novo ou fale pelo WhatsApp (43) 99944-6606, [chame no WhatsApp](https://wa.me/5543999446606).' }], chatLoading: false }));
+      const fallback = 'Não consegui responder agora — tente de novo ou fale pelo WhatsApp (43) 99944-6606, [chame no WhatsApp](https://wa.me/5543999446606).';
+      this.setState(s => ({ chatMessages: [...s.chatMessages, { role: 'assistant', text: fallback }], chatLoading: false }));
+      setTimeout(() => this.speak(fallback), 400);
     }
     if (this.chatScrollRef.current) setTimeout(() => { this.chatScrollRef.current.scrollTop = this.chatScrollRef.current.scrollHeight; }, 50);
   }
@@ -980,8 +1060,11 @@ class Component extends DCLogic {
       gazeStyle: 'translate(calc(-50% + ' + s.gaze.x + 'px), calc(-50% + ' + s.gaze.y + 'px))',
       toggleTheme: this.toggleTheme,
       chatOpen: s.chatOpen, toggleChat: this.toggleChat,
+      voiceEnabled: s.voiceEnabled, toggleVoice: this.toggleVoice,
+      voiceLabel: s.voiceEnabled ? 'Silenciar a voz do Keeper' : 'Reativar a voz do Keeper',
+      voiceColor: s.voiceEnabled ? T.accent : T.text4,
       fabOrbRef: this.fabOrbRef,
-      fabGazeStyle: 'translate(calc(-50% + ' + s.fabGaze.x + 'px), calc(-50% + ' + s.fabGaze.y + 'px))',
+      fabEyesRef: this.fabEyesRef,
       chatInputRef: this.chatInputRef, chatScrollRef: this.chatScrollRef,
       chatInput: s.chatInput,
       onChatInputChange: (e) => this.setState({ chatInput: e.target.value }),

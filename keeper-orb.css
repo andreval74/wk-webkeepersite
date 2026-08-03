@@ -1,0 +1,236 @@
+/*
+  Keeper Orb — componente visual compartilhado (usado em keeper.html, Keeper.dc.html,
+  WebKeeper.dc.html e WebKeeper-Punk.html).
+
+  Uso: <div class="keeper-orb" style="--keeper-size:130px">
+         <div class="keeper-halo"></div>            (opcional, só no orbe "hero")
+         <div class="keeper-halo-warm"></div>        (opcional, só no orbe "hero")
+         <div class="keeper-bloom"></div>
+         <div class="keeper-ring-wrap"><div class="keeper-ring"></div></div>
+         <div class="keeper-sphere"></div>
+         <div class="keeper-highlight"></div>
+         <div class="keeper-eyes"><span class="keeper-eye"></span><span class="keeper-eye"></span></div>
+       </div>
+
+  Tamanho: definido só pela variável CSS --keeper-size no elemento .keeper-orb;
+  todo o resto (halos, blur, olhos, brilho) escala proporcionalmente a partir dela.
+
+  Estados (adicionar classe no .keeper-orb):
+    is-speaking  -> névoa pulsa como caixa de som + olhos piscam/brilham mais rápido
+    is-thinking  -> anel/esfera aceleram e olhos "pensam" (olhar de lado)
+    is-surprised -> olhos e esfera dão um "pulo" (animação única)
+*/
+
+.keeper-orb {
+  position: relative;
+  width: var(--keeper-size, 440px);
+  aspect-ratio: 1 / 1;
+  animation: keeper-float 6s ease-in-out infinite;
+}
+
+/* halo azul de fundo (só usado no orbe grande/hero) */
+.keeper-halo {
+  position: absolute;
+  width: calc(var(--keeper-size) * 1.090909);
+  height: calc(var(--keeper-size) * 0.818182);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 24px;
+  background: radial-gradient(ellipse at center, rgba(47,111,237,.30), transparent 68%);
+  filter: blur(calc(var(--keeper-size) * 0.036364));
+  z-index: 0;
+}
+
+/* halo laranja secundário (só usado no orbe grande/hero) */
+.keeper-halo-warm {
+  position: absolute;
+  right: -4%;
+  top: 10%;
+  width: 38%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,138,61,.22), transparent 70%);
+  filter: blur(calc(var(--keeper-size) * 0.022727));
+  z-index: 0;
+}
+
+/* bloom/névoa ambiente: parada em repouso, só "fala" quando .is-speaking */
+.keeper-bloom {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 96%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(80,150,255,.35), rgba(20,40,90,.12) 55%, transparent 72%);
+  filter: blur(calc(var(--keeper-size) * 0.063636));
+  z-index: 1;
+  opacity: .55;
+}
+.keeper-orb.is-speaking .keeper-bloom {
+  animation: keeper-fog-speaker .5s ease-in-out infinite, keeper-fog-drift 1.8s ease-in-out infinite;
+}
+
+/* anel de energia giratório — ritmo sempre constante, nunca muda com o estado */
+.keeper-ring-wrap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 104%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 5;
+}
+.keeper-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg,
+    transparent 0deg, rgba(74,134,255,.9) 55deg, transparent 130deg,
+    rgba(127,216,255,.75) 190deg, transparent 250deg,
+    rgba(255,138,61,.7) 310deg, transparent 360deg);
+  -webkit-mask: radial-gradient(circle, transparent 56%, #000 59%, #000 67%, transparent 70%);
+  mask: radial-gradient(circle, transparent 56%, #000 59%, #000 67%, transparent 70%);
+  filter: blur(calc(var(--keeper-size) * 0.004545));
+  mix-blend-mode: screen;
+  opacity: .9;
+  animation: keeper-ring-spin 7s linear infinite;
+}
+
+/* esfera / corpo */
+.keeper-sphere {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 60%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 32%, rgba(60,90,150,.55), rgba(10,16,30,.9) 60%, #05070d 100%);
+  box-shadow:
+    inset 0 0 calc(var(--keeper-size) * 0.090909) rgba(120,170,255,.35),
+    inset calc(var(--keeper-size) * 0.013636) calc(var(--keeper-size) * 0.018182) calc(var(--keeper-size) * 0.068182) rgba(0,0,0,.6),
+    0 0 calc(var(--keeper-size) * 0.136364) rgba(74,134,255,.25);
+  animation: keeper-core-breathe 5s ease-in-out infinite;
+}
+.keeper-orb.is-speaking .keeper-sphere {
+  animation: keeper-core-speak 1.1s ease-in-out infinite;
+}
+.keeper-orb.is-thinking .keeper-sphere {
+  animation: keeper-core-breathe 2.2s ease-in-out infinite;
+}
+.keeper-orb.is-surprised .keeper-sphere {
+  animation: keeper-core-surprise .5s ease-out both;
+}
+
+/* brilho superior */
+.keeper-highlight {
+  position: absolute;
+  left: 50%;
+  top: 38%;
+  width: 26%;
+  height: 14%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255,255,255,.5), transparent 70%);
+  filter: blur(calc(var(--keeper-size) * 0.006818));
+}
+
+/* olhos */
+.keeper-eyes {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+  display: flex;
+  gap: 18%;
+  width: 30%;
+  justify-content: center;
+  align-items: center;
+  transition: transform .05s ease-out;
+}
+.keeper-eye {
+  display: block;
+  width: 22%;
+  padding-bottom: 30%;
+  background: radial-gradient(circle at 40% 35%, #ffffff, #dcecff 70%);
+  border-radius: 50% / 45%;
+  animation: keeper-blink 5.5s ease-in-out infinite, keeper-eye-glow 3.2s ease-in-out infinite;
+}
+.keeper-eye + .keeper-eye {
+  animation: keeper-blink 5.5s ease-in-out infinite, keeper-eye-glow 3.2s ease-in-out infinite .1s;
+}
+.keeper-orb.is-speaking .keeper-eye {
+  animation: keeper-blink 2.4s ease-in-out infinite, keeper-eye-glow 1s ease-in-out infinite;
+}
+.keeper-orb.is-speaking .keeper-eye + .keeper-eye {
+  animation: keeper-blink 2.4s ease-in-out infinite, keeper-eye-glow 1s ease-in-out infinite .1s;
+}
+.keeper-orb.is-thinking .keeper-eye {
+  animation: keeper-think-eye 1.5s ease-in-out infinite;
+}
+.keeper-orb.is-thinking .keeper-eye + .keeper-eye {
+  animation: keeper-think-eye 1.5s ease-in-out infinite .12s;
+}
+.keeper-orb.is-surprised .keeper-eye {
+  animation: keeper-surprise-eye .5s ease-out both;
+}
+.keeper-orb.is-surprised .keeper-eye + .keeper-eye {
+  animation: keeper-surprise-eye .5s ease-out .05s both;
+}
+
+@keyframes keeper-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(calc(var(--keeper-size) * -0.027273)); }
+}
+@keyframes keeper-ring-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes keeper-core-breathe {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50%      { transform: translate(-50%, -50%) scale(1.06); }
+}
+@keyframes keeper-core-speak {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  25%      { transform: translate(-50%, -50%) scale(1.07); }
+  50%      { transform: translate(-50%, -50%) scale(.97); }
+  75%      { transform: translate(-50%, -50%) scale(1.09); }
+}
+@keyframes keeper-core-surprise {
+  0%   { transform: translate(-50%, -50%) scale(1); }
+  40%  { transform: translate(-50%, -50%) scale(1.1); }
+  100% { transform: translate(-50%, -50%) scale(1.03); }
+}
+@keyframes keeper-blink {
+  0%, 10%, 90%, 100% { transform: scaleY(1); }
+  5%                 { transform: scaleY(.14); }
+  95%                { transform: scaleY(.14); }
+}
+@keyframes keeper-eye-glow {
+  0%, 100% { opacity: .9; box-shadow: 0 0 calc(var(--keeper-size) * 0.027273) calc(var(--keeper-size) * 0.006818) rgba(180,220,255,.8); }
+  50%      { opacity: 1; box-shadow: 0 0 calc(var(--keeper-size) * 0.045455) calc(var(--keeper-size) * 0.013636) rgba(200,230,255,.95); }
+}
+@keyframes keeper-think-eye {
+  0%, 100% { transform: scaleY(.55) translateX(0); }
+  50%      { transform: scaleY(.55) translateX(calc(var(--keeper-size) * 0.006818)); }
+}
+@keyframes keeper-surprise-eye {
+  0%   { transform: scale(.7); }
+  55%  { transform: scale(1.4); }
+  100% { transform: scale(1.15); }
+}
+@keyframes keeper-fog-speaker {
+  0%, 100% { transform: translate(-50%, -50%) scale(1);    opacity: .55; }
+  50%      { transform: translate(-50%, -50%) scale(1.22); opacity: 1; }
+}
+@keyframes keeper-fog-drift {
+  0%, 100% { rotate: 0deg; }
+  30%      { rotate: 4deg; }
+  60%      { rotate: -3deg; }
+}

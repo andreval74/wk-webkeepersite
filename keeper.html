@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Keeper — Orbe</title>
+<link rel="stylesheet" href="./keeper-orb.css">
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: #050810;
+    overflow: hidden;
+  }
+
+  .keeper-stage {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .keeper-orb {
+    --keeper-size: 440px;
+    max-width: 90vw;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+  <div class="keeper-stage">
+    <div class="keeper-orb" id="keeperOrb">
+      <div class="keeper-halo"></div>
+      <div class="keeper-halo-warm"></div>
+      <div class="keeper-bloom"></div>
+      <div class="keeper-ring-wrap">
+        <div class="keeper-ring"></div>
+      </div>
+      <div class="keeper-sphere"></div>
+      <div class="keeper-highlight"></div>
+      <div class="keeper-eyes" id="keeperEyes">
+        <span class="keeper-eye"></span>
+        <span class="keeper-eye"></span>
+      </div>
+    </div>
+  </div>
+
+<script src="./keeper-orb.js"></script>
+<script>
+  (function () {
+    var orb = document.getElementById('keeperOrb');
+    var eyes = document.getElementById('keeperEyes');
+    if (!orb || !eyes) return;
+
+    KeeperOrb.attachGaze(eyes, { anchorEl: orb, mode: 'proportional', max: 8, divisor: 12, ease: 0.5 });
+
+    // demonstração automática: fala por ~2.6s a cada ~3.8s de silêncio
+    var autoTimer = null;
+    (function loopDemo() {
+      KeeperOrb.setMood(orb, 'speaking');
+      autoTimer = setTimeout(function () {
+        KeeperOrb.setMood(orb, 'idle');
+        autoTimer = setTimeout(loopDemo, 3800);
+      }, 2600);
+    })();
+
+    orb.addEventListener('click', function () {
+      clearTimeout(autoTimer);
+      KeeperOrb.setMood(orb, orb.classList.contains('is-speaking') ? 'idle' : 'speaking');
+    });
+  })();
+</script>
+</body>
+</html>

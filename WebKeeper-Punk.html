@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<script src="support.js"></script>
 </head>
 <body>
 <x-dc>
@@ -78,21 +78,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <link rel="stylesheet" href="./keeper-orb.css">
+  <script src="./keeper-orb.js"></script>
   <style id="__om-base">
     @keyframes wk-marquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
     @keyframes wk-pulse { 0%,100% { opacity:.5; } 50% { opacity:1; } }
     @keyframes wk-twinkle { 0%,100% { opacity:.25; transform:scale(1); } 50% { opacity:.9; transform:scale(1.3); } }
     @keyframes wk-ring-spin { to { transform:rotate(360deg); } }
     @keyframes wk-ring-spin-reverse { to { transform:rotate(-360deg); } }
-    @keyframes wk-hero-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-12px); } }
     @keyframes wk-loader-pop { 0% { opacity:0; transform:scale(.7); } 100% { opacity:1; transform:scale(1); } }
     @keyframes wk-node-blink { 0%,100% { opacity:.2; } 50% { opacity:1; } }
-    @keyframes wk-core-glow { 0%,100% { opacity:.55; } 50% { opacity:1; } }
-    @keyframes wk-core-breathe { 0%,100% { transform:translate(-50%,-50%) scale(1); } 50% { transform:translate(-50%,-50%) scale(1.06); } }
     @keyframes wk-core-hue { to { filter:hue-rotate(360deg); } }
     @keyframes wk-core-wobble { 0%,100% { transform:translate(-50%,-50%) rotate(0deg); } 50% { transform:translate(-50%,-50%) rotate(8deg); } }
-    @keyframes wk-blink { 0%,10%,90%,100% { transform:scaleY(1); } 5% { transform:scaleY(.14); } 95% { transform:scaleY(.14); } }
-    @keyframes wk-eye-glow { 0%,100% { opacity:.9; box-shadow:0 0 12px 3px rgba(180,220,255,.8); } 50% { opacity:1; box-shadow:0 0 20px 6px rgba(200,230,255,.95); } }
     @keyframes wk-eye-look { 0%,100% { transform:translate(0,0); } 25% { transform:translate(10%,0); } 55% { transform:translate(-8%,4%); } 80% { transform:translate(0,-4%); } }
     @keyframes wk-dash { to { stroke-dashoffset:-400; } }
     @keyframes wk-draw { to { stroke-dashoffset:0; } }
@@ -238,29 +235,15 @@
         <div style="position:absolute;width:480px;height:360px;border-radius:24px;background:radial-gradient(ellipse at center,rgba(47,111,237,.30),transparent 68%);filter:blur(16px);"></div>
         <div style="position:absolute;right:12%;top:16%;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,rgba(255,138,61,.22),transparent 70%);filter:blur(10px);"></div>
 
-        <div style="position:relative;z-index:2;width:100%;max-width:440px;aspect-ratio:1 / 1;animation:wk-hero-float 6s ease-in-out infinite;">
-          <!-- AI CORE :: orb (parallax follows mouse) -->
-          <div ref="{{ orbRef }}" style="position:absolute;inset:0;">
-          <!-- ambient bloom -->
-          <div style="position:absolute;left:50%;top:50%;width:96%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(80,150,255,.35),rgba(20,40,90,.12) 55%,transparent 72%);filter:blur(28px);z-index:1;animation:wk-core-glow 4.5s ease-in-out infinite;"></div>
-
-          <!-- single circulating energy ring around the ball -->
-          <div style="position:absolute;left:50%;top:50%;width:104%;transform:translate(-50%,-50%);aspect-ratio:1;pointer-events:none;z-index:5;">
-            <div style="position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,transparent 0deg,rgba(74,134,255,.9) 55deg,transparent 130deg,rgba(127,216,255,.75) 190deg,transparent 250deg,rgba(255,138,61,.7) 310deg,transparent 360deg);-webkit-mask:radial-gradient(circle,transparent 56%,#000 59%,#000 67%,transparent 70%);mask:radial-gradient(circle,transparent 56%,#000 59%,#000 67%,transparent 70%);filter:blur(2px);mix-blend-mode:screen;opacity:.9;animation:wk-ring-spin 7s linear infinite;"></div>
+        <div ref="{{ orbRef }}" class="keeper-orb" style="--keeper-size:440px;position:relative;z-index:2;max-width:100%;">
+          <div class="keeper-bloom"></div>
+          <div class="keeper-ring-wrap"><div class="keeper-ring"></div></div>
+          <div class="keeper-sphere"></div>
+          <div class="keeper-highlight"></div>
+          <div ref="{{ eyesRef }}" class="keeper-eyes">
+            <span class="keeper-eye"></span>
+            <span class="keeper-eye"></span>
           </div>
-
-          <!-- glossy dark sphere body -->
-          <div style="position:absolute;left:50%;top:50%;width:60%;aspect-ratio:1;transform:translate(-50%,-50%);z-index:3;border-radius:50%;background:radial-gradient(circle at 38% 32%,rgba(60,90,150,.55),rgba(10,16,30,.9) 60%,#05070d 100%);box-shadow:inset 0 0 40px rgba(120,170,255,.35),inset 6px 8px 30px rgba(0,0,0,.6),0 0 60px rgba(74,134,255,.25);animation:wk-core-breathe 5s ease-in-out infinite;"></div>
-          <!-- top gloss highlight -->
-          <div style="position:absolute;left:50%;top:38%;width:26%;height:14%;transform:translate(-50%,-50%);z-index:4;border-radius:50%;background:radial-gradient(ellipse,rgba(255,255,255,.5),transparent 70%);filter:blur(3px);"></div>
-
-          <!-- friendly curious eyes (follow the mouse + blink) -->
-          <div ref="{{ eyesRef }}" style="position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);z-index:6;display:flex;gap:18%;width:30%;justify-content:center;align-items:center;transition:transform .18s ease-out;">
-            <span style="display:block;width:22%;padding-bottom:30%;background:radial-gradient(circle at 40% 35%,#ffffff,#dcecff 70%);border-radius:50%/45%;animation:wk-blink 5.5s ease-in-out infinite,wk-eye-glow 3.2s ease-in-out infinite;"></span>
-            <span style="display:block;width:22%;padding-bottom:30%;background:radial-gradient(circle at 40% 35%,#ffffff,#dcecff 70%);border-radius:50%/45%;animation:wk-blink 5.5s ease-in-out infinite,wk-eye-glow 3.2s ease-in-out infinite .1s;"></span>
-          </div>
-          </div>
-
         </div>
 
       </div>
@@ -670,7 +653,17 @@
       <div style="width:min(360px,calc(100vw - 44px));border-radius:18px;border:1px solid rgba(74,134,255,.25);background:#0b0f1a;box-shadow:0 24px 60px -20px rgba(0,0,0,.5);overflow:hidden;">
         <div style="padding:14px 16px;border-bottom:1px solid rgba(74,134,255,.18);display:flex;align-items:center;justify-content:space-between;">
           <span style="font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:#f2f4fa;">Keeper · assistente WebKeeper</span>
-          <button onClick="{{ toggleChat }}" aria-label="Fechar" style="border:none;background:none;cursor:pointer;color:#5b6280;font-size:18px;line-height:1;">×</button>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <button onClick="{{ toggleVoice }}" aria-label="{{ voiceLabel }}" title="{{ voiceLabel }}" style="border:none;background:none;cursor:pointer;color:{{ voiceColor }};display:flex;align-items:center;">
+              <sc-if value="{{ voiceEnabled }}" hint-placeholder-val="{{ true }}">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4M8 22h8"></path></svg>
+              </sc-if>
+              <sc-if value="{{ !voiceEnabled }}" hint-placeholder-val="{{ false }}">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4M8 22h8M2 2l20 20"></path></svg>
+              </sc-if>
+            </button>
+            <button onClick="{{ toggleChat }}" aria-label="Fechar" style="border:none;background:none;cursor:pointer;color:#5b6280;font-size:18px;line-height:1;">×</button>
+          </div>
         </div>
         <div ref="{{ chatScrollRef }}" style="max-height:320px;min-height:90px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;">
           <div style="font-size:13px;line-height:1.55;color:#c4cae0;"><sc-for list="{{ chatGreetingSegments }}" as="seg" hint-placeholder-count="1"><sc-if value="{{ seg.isLink }}" hint-placeholder-val="{{ false }}"><a href="{{ seg.href }}" target="_blank" rel="noopener noreferrer" style="{{ seg.style }}">{{ seg.text }}</a></sc-if><sc-if value="{{ !seg.isLink }}" hint-placeholder-val="{{ true }}"><span style="{{ seg.style }}">{{ seg.text }}</span></sc-if></sc-for></div>
@@ -698,16 +691,14 @@
         </div>
       </div>
     </sc-if>
-    <button ref="{{ fabOrbRef }}" onClick="{{ toggleChat }}" aria-label="Abrir chat com o Keeper" style="position:relative;width:72px;height:72px;border-radius:50%;border:none;cursor:pointer;background:none;padding:0;">
-      <div style="position:relative;width:100%;height:100%;animation:wk-hero-float 5s ease-in-out infinite;">
-        <div style="position:absolute;left:50%;top:50%;width:96%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(80,150,255,.4),rgba(20,40,90,.14) 55%,transparent 72%);filter:blur(10px);animation:wk-core-glow 4.5s ease-in-out infinite;"></div>
-        <div style="position:absolute;left:50%;top:50%;width:104%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:conic-gradient(from 0deg,#4a86ff 0deg,#7fd8ff 110deg,#4a86ff 220deg,#7fd8ff 360deg);-webkit-mask:radial-gradient(circle,transparent 60%,#000 64%,#000 72%,transparent 76%);mask:radial-gradient(circle,transparent 60%,#000 64%,#000 72%,transparent 76%);filter:blur(1px);mix-blend-mode:screen;opacity:.9;animation:wk-ring-spin 3.5s linear infinite;"></div>
-        <div style="position:absolute;left:50%;top:50%;width:58%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 38% 32%,rgba(60,90,150,.55),rgba(10,16,30,.9) 60%,#05070d 100%);box-shadow:inset 0 0 14px rgba(0,0,0,.4);animation:wk-core-breathe 4s ease-in-out infinite;"></div>
-        <div style="position:absolute;left:50%;top:38%;width:26%;height:14%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(ellipse,rgba(255,255,255,.5),transparent 70%);filter:blur(2px);"></div>
-        <div ref="{{ fabEyesRef }}" style="position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);display:flex;gap:18%;width:30%;justify-content:center;align-items:center;">
-          <span style="display:block;width:22%;padding-bottom:30%;background:radial-gradient(circle at 40% 35%,#ffffff,#dcecff 70%);border-radius:50%/45%;animation:wk-blink 5.5s ease-in-out infinite;"></span>
-          <span style="display:block;width:22%;padding-bottom:30%;background:radial-gradient(circle at 40% 35%,#ffffff,#dcecff 70%);border-radius:50%/45%;animation:wk-blink 5.5s ease-in-out infinite .1s;"></span>
-        </div>
+    <button ref="{{ fabOrbRef }}" onClick="{{ toggleChat }}" aria-label="Abrir chat com o Keeper" class="keeper-orb" style="--keeper-size:72px;border-radius:50%;border:none;cursor:pointer;background:none;padding:0;animation-duration:5s;">
+      <div class="keeper-bloom"></div>
+      <div class="keeper-ring-wrap"><div class="keeper-ring" style="animation-duration:3.5s;"></div></div>
+      <div class="keeper-sphere"></div>
+      <div class="keeper-highlight"></div>
+      <div ref="{{ fabEyesRef }}" class="keeper-eyes">
+        <span class="keeper-eye"></span>
+        <span class="keeper-eye"></span>
       </div>
     </button>
   </div>
@@ -754,7 +745,7 @@ class Component extends DCLogic {
     this.fabEyesRef = React.createRef();
     this.chatInputRef = React.createRef();
     this.chatScrollRef = React.createRef();
-    this.state = { activeFilter: null, activeServiceIdx: 0, openFaq: -1, scanning: false, scanResult: null, barsIn: false, chatOpen: false, chatMessages: [], chatInput: '', chatLoading: false, chatAsked: new Set() };
+    this.state = { activeFilter: null, activeServiceIdx: 0, openFaq: -1, scanning: false, scanResult: null, barsIn: false, chatOpen: false, chatMessages: [], chatInput: '', chatLoading: false, chatAsked: new Set(), voiceEnabled: true, voices: [], selectedVoiceURI: '' };
     this.replyPool = [
       { label: 'Quais serviços vocês oferecem?', kw: ['serviç','ia ','inteligência','automaç','web3','sistema','seo'] },
       { label: 'Como funciona o processo de vocês?', kw: ['process','diagnóstic','planejamento','desenvolv','entrega'] },
@@ -766,6 +757,7 @@ class Component extends DCLogic {
       { label: 'Vocês atendem minha região?', kw: ['londrina','apucarana','são paulo','regi','remoto'] }
     ];
     this.toggleChat = this.toggleChat.bind(this);
+    this.toggleVoice = this.toggleVoice.bind(this);
     this.CHAT_GREETING = 'Olá! Sou o **Keeper**, assistente da WebKeeper. Pergunte sobre nossos serviços, processo ou investimento.';
     this.CHAT_SYSTEM_PROMPT = 'Você é o Keeper, assistente de IA da WebKeeper (fábrica de ideias e parceira de tecnologia: Inteligência Artificial, Automação de Processos, Web3 & Blockchain, Sistemas sob Medida, SEO & Performance, Produtos Digitais). Processo: Diagnóstico -> Planejamento -> Desenvolvimento -> Entrega & Suporte. Sem planos fechados: proposta sob consulta em até 24h. Diagnóstico Digital gratuito disponível. Modelos de parceria com equity avaliados caso a caso. Atendimento 100% WhatsApp 24h, número (43) 99944-6606, link https://wa.me/5543999446606. Atende Londrina, Apucarana, São Paulo, Brasil e EUA. Sempre que mencionar contato/WhatsApp, inclua o número e o link juntos. Nunca escreva uma URL crua no texto — links sempre em formato markdown [texto curto](URL), ex: [chame no WhatsApp](https://wa.me/5543999446606). Se pedirem algo fora do escopo mas relacionado a um negócio real, não recuse simplesmente: ofereça a solução tecnológica adjacente que a WebKeeper construiria para esse negócio. Responda em 1 a 3 frases, direto, sem se reapresentar a cada resposta, com no máximo 1 destaque em **negrito**. Sem markdown de título/lista, sem emojis.';
 
@@ -899,6 +891,19 @@ class Component extends DCLogic {
     this.initEyes();
     this.initFabOrb();
     window.addEventListener('resize', this.handleResize = () => this.resizeAll());
+    const loadVoices = () => {
+      const all = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+      const pt = all.filter(v => v.lang && v.lang.toLowerCase().startsWith('pt'));
+      const list = (pt.length ? pt : all).map(v => ({ uri: v.voiceURI, name: v.name, lang: v.lang }));
+      if (list.length) {
+        const daniel = list.find(v => /daniel/i.test(v.name));
+        this.setState(s => ({ voices: list, selectedVoiceURI: s.selectedVoiceURI || (daniel ? daniel.uri : list[0].uri) }));
+      }
+    };
+    if (window.speechSynthesis) {
+      loadVoices();
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
   }
 
   toggleFilter(key) {
@@ -906,54 +911,84 @@ class Component extends DCLogic {
   }
 
   initEyes() {
-    const eyes = this.eyesRef.current;
-    if (!eyes) return;
-    let etx = 0, ety = 0, ecx = 0, ecy = 0, raf;
-    const onMove = (e) => {
-      const r = eyes.getBoundingClientRect();
-      const ex = r.left + r.width / 2, ey = r.top + r.height / 2;
-      const dx = e.clientX - ex, dy = e.clientY - ey;
-      const dist = Math.hypot(dx, dy) || 1;
-      etx = (dx / dist) * Math.min(13, dist / 12);
-      ety = (dy / dist) * Math.min(13, dist / 12);
-    };
-    const tick = () => {
-      ecx += (etx - ecx) * 0.12; ecy += (ety - ecy) * 0.12;
-      eyes.style.transform = `translate(calc(-50% + ${ecx.toFixed(2)}px), calc(-50% + ${ecy.toFixed(2)}px))`;
-      raf = requestAnimationFrame(tick);
-    };
-    window.addEventListener('mousemove', onMove);
-    this.eyesMove = onMove; this.eyesRaf = () => cancelAnimationFrame(raf);
-    tick();
+    this.eyesGaze = window.KeeperOrb.attachGaze(this.eyesRef.current, {
+      anchorEl: this.eyesRef.current, mode: 'proportional', max: 13, divisor: 12, ease: 0.5
+    });
   }
 
   initFabOrb() {
-    const eyes = this.fabEyesRef.current;
-    if (!eyes) return;
-    let etx = 0, ety = 0, ecx = 0, ecy = 0, raf;
-    const onMove = (e) => {
-      const orb = this.fabOrbRef.current;
-      if (!orb) return;
-      const r = orb.getBoundingClientRect();
-      const ex = r.left + r.width / 2, ey = r.top + r.height / 2;
-      const dx = e.clientX - ex, dy = e.clientY - ey;
-      const dist = Math.hypot(dx, dy) || 1;
-      etx = (dx / dist) * 3.2; ety = (dy / dist) * 3.2;
-    };
-    const tick = () => {
-      ecx += (etx - ecx) * 0.12; ecy += (ety - ecy) * 0.12;
-      eyes.style.transform = `translate(calc(-50% + ${ecx.toFixed(2)}px), calc(-50% + ${ecy.toFixed(2)}px))`;
-      raf = requestAnimationFrame(tick);
-    };
-    window.addEventListener('mousemove', onMove);
-    this.fabOrbMove = onMove; this.fabOrbRaf = () => cancelAnimationFrame(raf);
-    tick();
+    this.fabGaze = window.KeeperOrb.attachGaze(this.fabEyesRef.current, {
+      anchorEl: this.fabOrbRef.current, mode: 'fixed', max: 3.2, ease: 0.5
+    });
   }
 
   toggleChat() {
+    const wasOpen = this.state.chatOpen;
     this.setState(s => ({ chatOpen: !s.chatOpen }), () => {
       if (this.state.chatOpen && this.chatInputRef.current) this.chatInputRef.current.focus();
+      if (!wasOpen && this.state.chatOpen && this.state.chatMessages.length === 0) {
+        setTimeout(() => this.speak(this.CHAT_GREETING), 300);
+      }
+      if (wasOpen && window.speechSynthesis) window.speechSynthesis.cancel();
     });
+  }
+
+  toggleVoice() {
+    if (this.state.voiceEnabled && window.speechSynthesis) window.speechSynthesis.cancel();
+    this.setState(s => ({ voiceEnabled: !s.voiceEnabled }));
+  }
+
+  pickVoice() {
+    const voices = window.speechSynthesis.getVoices();
+    const daniel = voices.find(v => /daniel/i.test(v.name));
+    if (daniel) return daniel;
+    if (this.state.selectedVoiceURI) {
+      const chosen = voices.find(v => v.voiceURI === this.state.selectedVoiceURI);
+      if (chosen) return chosen;
+    }
+    const pt = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith('pt'));
+    if (!pt.length) return null;
+    const byName = (re) => pt.find(v => re.test(v.name));
+    return byName(/male|masculin/i) || byName(/google/i) || byName(/natural|online|neural/i) || pt.find(v => v.lang.toLowerCase() === 'pt-br') || pt[0];
+  }
+
+  speak(text) {
+    if (!this.state.voiceEnabled || !window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const plain = text.replace(/\[([^\]]+)\]\(https?:\/\/[^\s)]+\)/g, '$1').replace(/\*\*/g, '').replace(/\s+/g, ' ').trim();
+    const parts = plain.match(/[^.!?,;]+[.!?,;]?/g) || [plain];
+    const chunks = [];
+    let buf = '';
+    parts.forEach(p => {
+      buf += p;
+      if (/[.!?]\s*$/.test(p.trim()) || buf.length > 90) { chunks.push(buf.trim()); buf = ''; }
+    });
+    if (buf.trim()) chunks.push(buf.trim());
+    const voice = this.pickVoice();
+    const baseRate = 1.58, basePitch = 0.86;
+    let i = 0;
+    const speakNext = () => {
+      if (i >= chunks.length) return;
+      const chunk = chunks[i];
+      const endsComma = /,\s*$/.test(chunk);
+      const endsQuestion = /\?\s*$/.test(chunk);
+      const endsExclaim = /!\s*$/.test(chunk);
+      const isLast = i === chunks.length - 1;
+      const utter = new SpeechSynthesisUtterance(chunk);
+      utter.lang = 'pt-BR';
+      if (voice) utter.voice = voice;
+      utter.rate = baseRate + (Math.random() * 0.04 - 0.02) + (endsComma ? -0.03 : 0);
+      utter.pitch = endsQuestion ? basePitch + 0.14 : endsExclaim ? basePitch + 0.08 : basePitch + (Math.random() * 0.03 - 0.015);
+      utter.volume = 1;
+      utter.onend = () => {
+        i++;
+        const pause = endsComma ? 70 : isLast ? 0 : 130;
+        setTimeout(speakNext, pause);
+      };
+      utter.onerror = () => { i++; setTimeout(speakNext, 0); };
+      window.speechSynthesis.speak(utter);
+    };
+    speakNext();
   }
 
   logSharedQA(question, answer) {
@@ -1007,9 +1042,12 @@ class Component extends DCLogic {
       let reply = data.reply;
       reply = reply.replace(/^#+\s*/gm, '').replace(/^[-*]\s+/gm, '').replace(/`/g, '').replace(/(?<!\*)\*(?!\*)/g, '').replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, '').trim();
       this.setState(s => ({ chatMessages: [...s.chatMessages, { role: 'assistant', text: reply }], chatLoading: false }));
+      setTimeout(() => this.speak(reply), 400);
       this.logSharedQA(msg, reply);
     } catch (e) {
-      this.setState(s => ({ chatMessages: [...s.chatMessages, { role: 'assistant', text: 'Não consegui responder agora — tente de novo ou fale pelo WhatsApp (43) 99944-6606, [chame no WhatsApp](https://wa.me/5543999446606).' }], chatLoading: false }));
+      const fallback = 'Não consegui responder agora — tente de novo ou fale pelo WhatsApp (43) 99944-6606, [chame no WhatsApp](https://wa.me/5543999446606).';
+      this.setState(s => ({ chatMessages: [...s.chatMessages, { role: 'assistant', text: fallback }], chatLoading: false }));
+      setTimeout(() => this.speak(fallback), 400);
     }
     if (this.chatScrollRef.current) setTimeout(() => { this.chatScrollRef.current.scrollTop = this.chatScrollRef.current.scrollHeight; }, 50);
   }
@@ -1041,6 +1079,9 @@ class Component extends DCLogic {
   componentWillUnmount() {
     cancelAnimationFrame(this._particleRAF);
     window.removeEventListener('resize', this.handleResize);
+    if (this.eyesGaze) this.eyesGaze.destroy();
+    if (this.fabGaze) this.fabGaze.destroy();
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
   }
 
   resizeAll() {
@@ -1227,6 +1268,9 @@ class Component extends DCLogic {
       waProjetos: wa('Olá! Cliquei em "Ver todos os projetos" no site da WebKeeper.'),
       waFloat: wa('Olá! Vim pelo site da WebKeeper e gostaria de conversar.'),
       chatOpen: this.state.chatOpen, toggleChat: this.toggleChat, chatLoading: this.state.chatLoading,
+      voiceEnabled: this.state.voiceEnabled, toggleVoice: this.toggleVoice,
+      voiceLabel: this.state.voiceEnabled ? 'Silenciar a voz do Keeper' : 'Reativar a voz do Keeper',
+      voiceColor: this.state.voiceEnabled ? '#9fdc6e' : '#5b6280',
       fabOrbRef: this.fabOrbRef, fabEyesRef: this.fabEyesRef,
       chatInputRef: this.chatInputRef, chatScrollRef: this.chatScrollRef,
       chatInput: this.state.chatInput,

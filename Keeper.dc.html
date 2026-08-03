@@ -30,6 +30,8 @@
   <meta name="twitter:image" content="https://www.webkeeper.com.br/images/wk-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./keeper-orb.css">
+  <script src="./keeper-orb.js"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -46,17 +48,7 @@
     ::-webkit-scrollbar { width:8px; }
     ::-webkit-scrollbar-track { background:transparent; }
     ::-webkit-scrollbar-thumb { background:#1c2338; border-radius:999px; }
-    @keyframes kp-core-glow { 0%,100% { opacity:.75; } 50% { opacity:1; } }
-    @keyframes kp-ring-spin { from { transform:translate(-50%,-50%) rotate(0deg); } to { transform:translate(-50%,-50%) rotate(360deg); } }
-    @keyframes kp-core-breathe { 0%,100% { transform:translate(-50%,-50%) scale(1); } 50% { transform:translate(-50%,-50%) scale(1.045); } }
-    @keyframes kp-core-speak { 0%,100% { transform:translate(-50%,-50%) scale(1); } 25% { transform:translate(-50%,-50%) scale(1.07); } 50% { transform:translate(-50%,-50%) scale(.97); } 75% { transform:translate(-50%,-50%) scale(1.09); } }
-    @keyframes kp-blink { 0%,92%,100% { transform:scaleY(1); } 96% { transform:scaleY(.1); } }
-    @keyframes kp-eye-glow { 0%,100% { filter:brightness(1); } 50% { filter:brightness(1.35); } }
-    @keyframes kp-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
     @keyframes kp-in { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes kp-think-eye { 0%,100% { transform:scaleY(.55) translateX(0); } 50% { transform:scaleY(.55) translateX(3px); } }
-    @keyframes kp-surprise-eye { 0% { transform:scale(.7); } 55% { transform:scale(1.4); } 100% { transform:scale(1.15); } }
-    @keyframes kp-surprise-core { 0% { transform:translate(-50%,-50%) scale(1); } 40% { transform:translate(-50%,-50%) scale(1.1); } 100% { transform:translate(-50%,-50%) scale(1.03); } }
     @keyframes kp-cursor { 0%,50% { opacity:1; } 51%,100% { opacity:0; } }
     @keyframes kp-burst-out { 0% { transform:translateX(0) scale(.4); opacity:0; } 15% { opacity:1; } 80% { opacity:1; transform:translateX(190px) scale(1.5); } 100% { transform:translateX(210px) scale(1.5); opacity:0; } }
     .kp-msg { animation:kp-in .35s ease both; }
@@ -76,7 +68,7 @@
   <main style="position:relative;z-index:2;flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 24px 24px;max-width:720px;margin:0 auto;width:100%;box-sizing:border-box;overflow:hidden;">
 
     <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;">
-      <div onClick="{{ toggleVoice }}" role="button" aria-label="{{ orbAriaLabel }}" title="{{ orbAriaLabel }}" ref="{{ orbRef }}" style="position:relative;width:{{ M.px }};height:{{ M.px }};flex-shrink:0;animation:kp-float 6s ease-in-out infinite;cursor:pointer;">
+      <div onClick="{{ toggleVoice }}" role="button" aria-label="{{ orbAriaLabel }}" title="{{ orbAriaLabel }}" ref="{{ orbRef }}" class="keeper-orb {{ M.moodClass }}" style="--keeper-size:130px;flex-shrink:0;cursor:pointer;">
         <sc-if value="{{ bursting }}" hint-placeholder-val="{{ false }}">
           <div style="position:absolute;inset:0;pointer-events:none;">
             <sc-for list="{{ burstIcons }}" as="ic" hint-placeholder-count="6">
@@ -88,13 +80,13 @@
             </sc-for>
           </div>
         </sc-if>
-        <div style="position:absolute;left:50%;top:50%;width:{{ M.glowPx }};height:{{ M.glowPx }};transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(80,150,255,.4),rgba(20,40,90,.14) 55%,transparent 72%);filter:blur(22px);animation:kp-core-glow {{ M.glowDur }} ease-in-out infinite;"></div>
-        <div style="position:absolute;left:50%;top:50%;width:{{ M.ringPx }};height:{{ M.ringPx }};transform:translate(-50%,-50%);border-radius:50%;background:conic-gradient(from 0deg,rgba(74,134,255,.85) 0deg,rgba(127,216,255,.8) 110deg,rgba(255,138,61,.75) 220deg,rgba(74,134,255,.85) 360deg);-webkit-mask:radial-gradient(circle,transparent 60%,#000 64%,#000 72%,transparent 76%);mask:radial-gradient(circle,transparent 60%,#000 64%,#000 72%,transparent 76%);filter:blur(1.5px);mix-blend-mode:screen;opacity:.9;animation:kp-ring-spin {{ M.ringDur }} linear infinite;"></div>
-        <div style="position:absolute;left:50%;top:50%;width:{{ M.corePx }};height:{{ M.corePx }};transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 38% 32%,rgba(60,90,150,.55),rgba(10,16,30,.9) 60%,#05070d 100%);box-shadow:inset 0 0 40px rgba(120,170,255,.35),inset 6px 8px 30px rgba(0,0,0,.6),0 0 60px rgba(74,134,255,.25);animation:{{ M.coreAnim }};"></div>
-        <div style="position:absolute;left:50%;top:38%;width:26%;height:14%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(ellipse,rgba(255,255,255,.5),transparent 70%);filter:blur(3px);"></div>
-        <div style="position:absolute;left:50%;top:52%;transform:{{ gazeStyle }};display:flex;gap:18%;width:30%;justify-content:center;align-items:center;transition:transform .12s ease-out;">
-          <span style="display:block;width:22%;padding-bottom:30%;background:radial-gradient(circle at 40% 35%,#ffffff,#dcecff 70%);border-radius:{{ M.eyeShape }};animation:{{ M.eyeAnim }};"></span>
-          <span style="display:block;width:22%;padding-bottom:30%;background:radial-gradient(circle at 40% 35%,#ffffff,#dcecff 70%);border-radius:{{ M.eyeShape }};animation:{{ M.eyeAnim2 }};"></span>
+        <div class="keeper-bloom"></div>
+        <div class="keeper-ring-wrap"><div class="keeper-ring"></div></div>
+        <div class="keeper-sphere"></div>
+        <div class="keeper-highlight"></div>
+        <div class="keeper-eyes" style="transform:{{ gazeStyle }};">
+          <span class="keeper-eye"></span>
+          <span class="keeper-eye"></span>
         </div>
         <div style="position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);width:26px;height:26px;border-radius:50%;background:rgba(5,7,13,.92);border:1px solid rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;">
           <sc-if value="{{ voiceEnabled }}" hint-placeholder-val="{{ true }}">
@@ -207,12 +199,11 @@ class Component extends DCLogic {
       'Vocês fazem sistemas com Web3 ou blockchain?',
       'Como funciona o diagnóstico gratuito?'
     ];
-    const dims = (n) => ({ px: n + 'px', glowPx: Math.round(n*.96) + 'px', ringPx: Math.round(n*1.04) + 'px', corePx: Math.round(n*.58) + 'px' });
     this.MOODS = {
-      idle: { ...dims(130), glowDur:'4.5s', ringDur:'7s', coreAnim:'kp-core-breathe 5s ease-in-out infinite', eyeShape:'50%/45%', eyeAnim:'kp-blink 5.5s ease-in-out infinite, kp-eye-glow 3.2s ease-in-out infinite', eyeAnim2:'kp-blink 5.5s ease-in-out infinite, kp-eye-glow 3.2s ease-in-out infinite .1s', caption:'' },
-      surprised: { ...dims(130), glowDur:'1.4s', ringDur:'3s', coreAnim:'kp-surprise-core .5s ease-out both', eyeShape:'50%', eyeAnim:'kp-surprise-eye .5s ease-out both', eyeAnim2:'kp-surprise-eye .5s ease-out .05s both', caption:'Ótima pergunta!' },
-      thinking: { ...dims(130), glowDur:'1.6s', ringDur:'2.2s', coreAnim:'kp-core-breathe 2.4s ease-in-out infinite', eyeShape:'50%/32%', eyeAnim:'kp-think-eye 1.5s ease-in-out infinite', eyeAnim2:'kp-think-eye 1.5s ease-in-out infinite .12s', caption:'Pensando…' },
-      speaking: { ...dims(130), glowDur:'.9s', ringDur:'2.6s', coreAnim:'kp-core-speak 1.1s ease-in-out infinite', eyeShape:'50%/45%', eyeAnim:'kp-eye-glow 1s ease-in-out infinite', eyeAnim2:'kp-eye-glow 1s ease-in-out infinite .1s', caption:'Falando…' }
+      idle: { moodClass: '', caption: '' },
+      surprised: { moodClass: 'is-surprised', caption: 'Ótima pergunta!' },
+      thinking: { moodClass: 'is-thinking', caption: 'Pensando…' },
+      speaking: { moodClass: 'is-speaking', caption: 'Falando…' }
     };
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
@@ -222,7 +213,7 @@ class Component extends DCLogic {
   componentDidMount() {
     window.addEventListener('mousemove', this.onMouseMove);
     document.addEventListener('mouseleave', this.onMouseLeave);
-    setTimeout(() => { this.burst(); setTimeout(() => this.speak(GREETING), 3900); }, 500);
+    setTimeout(() => { this.burst(); setTimeout(() => this.speak(GREETING), 400); }, 300);
     const loadVoices = () => {
       const all = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
       const pt = all.filter(v => v.lang && v.lang.toLowerCase().startsWith('pt'));
@@ -301,7 +292,7 @@ class Component extends DCLogic {
     });
     if (buf.trim()) chunks.push(buf.trim());
     const voice = this.pickVoice();
-    const baseRate = 1.38, basePitch = 0.86;
+    const baseRate = 1.58, basePitch = 0.86;
     let i = 0;
     const speakNext = () => {
       if (i >= chunks.length) { this.setState({ speaking: false }); return; }
@@ -319,7 +310,7 @@ class Component extends DCLogic {
       utter.onstart = () => this.setState({ speaking: true });
       utter.onend = () => {
         i++;
-        const pause = endsComma ? 130 : isLast ? 0 : 260;
+        const pause = endsComma ? 70 : isLast ? 0 : 130;
         setTimeout(speakNext, pause);
       };
       utter.onerror = () => { i++; setTimeout(speakNext, 0); };
@@ -384,13 +375,13 @@ class Component extends DCLogic {
       reply = reply.replace(/^#+\s*/gm, '').replace(/^[-*]\s+/gm, '').replace(/`/g, '').replace(/(?<!\*)\*(?!\*)/g, '').replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, '').trim();
       this.setState(s => ({ messages: [...s.messages, { role: 'assistant', text: reply }], loading: false, mood: 'idle' }));
       this.burst();
-      setTimeout(() => this.speak(reply), 3900);
+      setTimeout(() => this.speak(reply), 400);
       this.logQA(msg, reply);
     } catch (e) {
       const fallback = 'Não consegui responder agora. Tente novamente em instantes ou fale direto com um especialista pelo WhatsApp.';
       this.setState(s => ({ messages: [...s.messages, { role: 'assistant', text: fallback }], loading: false, mood: 'idle' }));
       this.burst();
-      setTimeout(() => this.speak(fallback), 900);
+      setTimeout(() => this.speak(fallback), 400);
     }
   }
 
