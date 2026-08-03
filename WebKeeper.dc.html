@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>WebKeeper | Sistemas Inteligentes sob Medida com IA, Automação e Web3</title>
+  <meta name="description" content="A WebKeeper transforma sua ideia em sistemas inteligentes: Inteligência Artificial, automação, Web3, sistemas sob medida e SEO. Fale com um especialista e receba um diagnóstico gratuito.">
+  <meta name="keywords" content="webkeeper, criação de sites, desenvolvimento de sistemas, inteligência artificial para empresas, automação de processos, web3, blockchain, SEO, diagnóstico digital gratuito, agência de tecnologia Londrina">
+  <meta name="author" content="WebKeeper">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="language" content="pt-BR">
+  <meta name="theme-color" content="#f6f7fc">
+  <link rel="canonical" href="https://www.webkeeper.com.br/">
+  <link rel="icon" href="./images/wk-shield.png" type="image/png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="WebKeeper">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="WebKeeper | Sistemas Inteligentes sob Medida com IA, Automação e Web3">
+  <meta property="og:description" content="Você traz a ideia, nós entramos como parceiros: IA, automação, desenvolvimento, Web3 e SEO que geram resultados reais.">
+  <meta property="og:image" content="https://www.webkeeper.com.br/images/wk-logo.png">
+  <meta property="og:url" content="https://www.webkeeper.com.br/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WebKeeper | Sistemas Inteligentes sob Medida com IA, Automação e Web3">
+  <meta name="twitter:description" content="A WebKeeper transforma sua ideia em sistemas inteligentes com IA, automação, Web3 e SEO.">
+  <meta name="twitter:image" content="https://www.webkeeper.com.br/images/wk-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "WebKeeper",
+    "description": "Fábrica de ideias e parceira de tecnologia especializada em Inteligência Artificial, automação de processos, Web3, sistemas sob medida e SEO.",
+    "url": "https://www.webkeeper.com.br/",
+    "logo": "https://www.webkeeper.com.br/images/wk-logo.png",
+    "image": "https://www.webkeeper.com.br/images/wk-logo.png",
+    "telephone": "+5543999446606",
+    "areaServed": ["Londrina", "Apucarana", "São Paulo", "Brasil", "Estados Unidos"],
+    "address": { "@type": "PostalAddress", "addressLocality": "Londrina", "addressRegion": "PR", "addressCountry": "BR" },
+    "sameAs": ["https://www.facebook.com/webkeeperia/", "https://www.instagram.com/webkeeperia", "https://www.linkedin.com/company/webkeeper"],
+    "makesOffer": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Inteligência Artificial aplicada" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Automação de Processos" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web3 & Blockchain" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sistemas sob Medida" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SEO & Performance" } }
+    ]
+  }
+  </script>
+  <style id="__om-base">
+    html { scroll-behavior:smooth; scroll-padding-top:96px; }
+    body { margin:0; font-family:'Inter',sans-serif; }
+    a { text-decoration:none; color:inherit; }
+    ::-webkit-scrollbar { width:10px; }
+    ::-webkit-scrollbar-track { background:#eceefa; }
+    ::-webkit-scrollbar-thumb { background:linear-gradient(180deg,#6ab03b,#10253d); border-radius:999px; }
+    @keyframes p7-float { 0%,100% { transform:translateY(0) rotate(0deg); } 50% { transform:translateY(-14px) rotate(1deg); } }
+    @keyframes p7-aurora { 0%,100% { transform:translate(0,0) scale(1); } 33% { transform:translate(4%,-6%) scale(1.08); } 66% { transform:translate(-4%,4%) scale(.96); } }
+    @keyframes p7-marquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+    @keyframes wk-orb-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
+    @keyframes kp-core-glow { 0%,100% { opacity:.75; } 50% { opacity:1; } }
+    @keyframes kp-ring-spin { from { transform:translate(-50%,-50%) rotate(0deg); } to { transform:translate(-50%,-50%) rotate(360deg); } }
+    @keyframes kp-core-breathe { 0%,100% { transform:translate(-50%,-50%) scale(1); } 50% { transform:translate(-50%,-50%) scale(1.045); } }
+    @keyframes kp-blink { 0%,92%,100% { transform:scaleY(1); } 96% { transform:scaleY(.1); } }
+    @keyframes kp-eye-glow { 0%,100% { filter:brightness(1); } 50% { filter:brightness(1.35); } }
+    @keyframes p7-shimmer { 0% { background-position:-200% 0; } 100% { background-position:200% 0; } }
+    @keyframes p7-ping { 0% { transform:scale(1); opacity:.75; } 75%,100% { transform:scale(2); opacity:0; } }
+    @keyframes wk-core-glow { 0%,100% { opacity:.75; } 50% { opacity:1; } }
+    @keyframes wk-ring-spin { from { transform:translate(-50%,-50%) rotate(0deg); } to { transform:translate(-50%,-50%) rotate(360deg); } }
+    @keyframes wk-core-breathe { 0%,100% { transform:translate(-50%,-50%) scale(1); } 50% { transform:translate(-50%,-50%) scale(1.04); } }
+    @keyframes wk-blink { 0%,92%,100% { transform:scaleY(1); } 96% { transform:scaleY(.1); } }
+    @keyframes wk-eye-glow { 0%,100% { filter:brightness(1); } 50% { filter:brightness(1.3); } }
+    .p7-reveal { opacity:0; transform:translateY(26px); transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+    .p7-reveal.p7-in { opacity:1; transform:translateY(0); }
+    @media (min-width:961px) { [data-r7="navlinks"] { display:flex !important; } }
+    [data-r7="hamburger"] { display:none; }
+    @media (max-width:960px) {
+      [data-r7="hamburger"] { display:inline-flex !important; }
+      [data-r7="hero-grid"] { grid-template-columns:1fr !important; }
+      [data-r7="feat-grid"] { grid-template-columns:1fr !important; }
+      [data-r7="stats4"] { grid-template-columns:repeat(2,1fr) !important; }
+      [data-r7="why6"] { grid-template-columns:repeat(2,1fr) !important; }
+      [data-r7="testi3"] { grid-template-columns:1fr !important; }
+      [data-r7="pricing3"] { grid-template-columns:1fr !important; }
+      [data-r7="process4"] { grid-template-columns:repeat(2,1fr) !important; }
+      [data-r7="footer4"] { grid-template-columns:1fr 1fr !important; }
+      [data-r7="diag2"] { grid-template-columns:1fr !important; }
+      [data-r7="about2"] { grid-template-columns:1fr !important; }
+    }
+    @media (max-width:640px) {
+      [data-r7="stats4"] { grid-template-columns:1fr 1fr !important; }
+      [data-r7="why6"] { grid-template-columns:1fr !important; }
+      [data-r7="process4"] { grid-template-columns:1fr !important; }
+      [data-r7="footer4"] { grid-template-columns:1fr !important; }
+      section[data-screen-label] { padding-left:20px !important; padding-right:20px !important; }
+    }
+  </style>
+</helmet>
+
+<div style="position:relative;background:{{ T.bg }};min-height:100vh;overflow-x:clip;color:{{ T.text1 }};transition:background .3s ease;">
+
+  <header data-screen-label="Nav" ref="{{ headerRef }}" style="position:sticky;top:0;z-index:500;padding:14px 24px;transition:background .4s ease,box-shadow .4s ease;">
+    <div style="max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:10px 18px;border-radius:18px;background:transparent;border:1px solid transparent;transition:all .4s ease;" ref="{{ navShellRef }}">
+      <a href="#top" style="display:inline-flex;align-items:center;gap:10px;">
+        <img src="./images/wk-shield.png" alt="WebKeeper" style="width:34px;height:40px;object-fit:contain;flex-shrink:0;filter:{{ T.iconFilter }};">
+        <span style="display:flex;flex-direction:column;line-height:1;">
+          <span style="font-family:'Sora',sans-serif;font-size:16.5px;font-weight:600;color:{{ T.text1 }};">webkeeper</span>
+          <span style="margin-top:3px;font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:{{ T.text3 }};">Tecnologia que gera resultados</span>
+        </span>
+      </a>
+      <nav style="display:none;align-items:center;gap:4px;" data-r7="navlinks">
+        <sc-for list="{{ navLinks }}" as="link" hint-placeholder-count="7">
+          <a href="{{ link.href }}" style="padding:9px 15px;border-radius:9px;font-size:13.5px;font-weight:500;color:{{ T.text2 }};">{{ link.label }}</a>
+        </sc-for>
+      </nav>
+      <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+        <button onClick="{{ toggleTheme }}" aria-label="Alternar tema" title="Alternar tema (business / tech)" style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:11px;border:1px solid {{ T.inputBorder }};background:{{ T.cardBg }};cursor:pointer;color:{{ T.accent }};">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"></path><circle cx="12" cy="12" r="4.2"></circle></svg>
+        </button>
+        <a href="#contato" style="display:inline-flex;align-items:center;gap:7px;padding:11px 18px;border-radius:11px;background:{{ T.gradBtn }};color:#fff;font-weight:600;font-size:13.5px;box-shadow:0 12px 26px -12px {{ T.accentSoftShadow }};">
+          Solicitar Orçamento
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"></path></svg>
+        </a>
+        <button onClick="{{ toggleMenu }}" data-r7="hamburger" aria-label="Abrir menu" style="align-items:center;justify-content:center;width:38px;height:38px;border-radius:11px;border:1px solid {{ T.inputBorder }};background:{{ T.cardBg }};cursor:pointer;color:{{ T.text1 }};">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <sc-if value="{{ mobileMenuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:600;background:{{ T.bg }};display:flex;flex-direction:column;padding:20px 24px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <span style="font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:{{ T.text1 }};">Menu</span>
+        <button onClick="{{ toggleMenu }}" aria-label="Fechar menu" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:11px;border:1px solid {{ T.inputBorder }};background:{{ T.cardBg }};cursor:pointer;color:{{ T.text1 }};">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+        </button>
+      </div>
+      <sc-for list="{{ mobileNavLinks }}" as="link" hint-placeholder-count="6">
+        <a href="{{ link.href }}" onClick="{{ link.close }}" style="padding:16px 4px;border-bottom:1px solid {{ T.cardBorder }};font-family:'Sora',sans-serif;font-size:18px;font-weight:600;color:{{ T.text1 }};">{{ link.label }}</a>
+      </sc-for>
+      <a href="#contato" onClick="{{ toggleMenu }}" style="margin-top:24px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 18px;border-radius:12px;background:{{ T.gradBtn }};color:#fff;font-weight:600;font-size:14.5px;">Solicitar Orçamento</a>
+    </div>
+  </sc-if>
+
+  <section id="top" data-screen-label="Hero" style="position:relative;padding:96px 24px 70px;overflow:hidden;">
+    <div style="pointer-events:none;position:absolute;left:50%;top:-160px;width:560px;height:560px;transform:translateX(-50%);border-radius:50%;background:{{ T.auroraA }};filter:blur(120px);animation:p7-aurora 18s ease-in-out infinite;"></div>
+    <div style="pointer-events:none;position:absolute;right:-120px;top:30%;width:400px;height:400px;border-radius:50%;background:{{ T.auroraB }};filter:blur(110px);animation:p7-aurora 26s ease-in-out infinite reverse;"></div>
+    <div data-r7="hero-grid" style="position:relative;max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;">
+      <div>
+        <div data-reveal style="display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:100px;background:{{ T.badgeBg }};border:1px solid {{ T.badgeBorder }};font-size:11.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:{{ T.accent }};">
+          <span style="position:relative;display:inline-flex;width:8px;height:8px;">
+            <span style="position:absolute;inset:0;border-radius:50%;background:{{ T.accent }};animation:p7-ping 1.8s cubic-bezier(0,0,.2,1) infinite;"></span>
+            <span style="position:relative;width:8px;height:8px;border-radius:50%;background:{{ T.accent }};"></span>
+          </span>
+          Fábrica de Ideias · Parceira em Tecnologia
+        </div>
+        <h1 data-reveal style="font-family:'Sora',sans-serif;font-size:clamp(34px,4vw,52px);line-height:1.1;font-weight:800;letter-spacing:-1px;color:{{ T.text1 }};margin:22px 0 20px;">
+          Transformamos sua <span style="background-image:{{ T.gradHeading }};display:inline-block;-webkit-background-clip:text;background-clip:text;color:transparent;">ideia</span> em sistemas inteligentes que vendem.
+        </h1>
+        <p data-reveal style="font-size:16.5px;line-height:1.65;color:{{ T.text2 }};max-width:480px;margin:0 0 32px;">Você traz o desafio, nós entramos como parceiros: IA, automação, Web3, sistemas sob medida e SEO — tudo pensado para tirar sua ideia do papel e converter visitantes em clientes reais.</p>
+        <div data-reveal style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:40px;">
+          <a href="#contato" style="display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:12px;background:{{ T.gradBtnHero }};color:#fff;font-weight:600;font-size:14.5px;box-shadow:0 16px 32px -14px {{ T.accentSoftShadow }};">
+            Solicitar Orçamento
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+          </a>
+          <a href="#diagnostico" style="display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:12px;border:1px solid {{ T.inputBorder }};background:{{ T.cardBg }};color:{{ T.text1 }};font-weight:600;font-size:14.5px;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="{{ T.accent }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M10 9l5 3-5 3z"></path></svg>
+            Diagnóstico Grátis
+          </a>
+        </div>
+        <div data-reveal style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;border-top:1px solid {{ T.cardBorder }};padding-top:26px;max-width:480px;">
+          <sc-for list="{{ heroStats }}" as="s" hint-placeholder-count="3">
+            <div>
+              <p style="font-family:'Sora',sans-serif;font-size:24px;font-weight:700;color:{{ T.text1 }};margin:0;">{{ s.value }}</p>
+              <p style="font-size:11.5px;color:{{ T.text3 }};margin:5px 0 0;">{{ s.label }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div data-reveal style="position:relative;">
+        <div style="position:relative;background:{{ T.cardBgSolid }};border:1px solid {{ T.cardBorder }};border-radius:2rem;padding:12px;box-shadow:0 24px 60px -34px rgba(0,0,0,.35);">
+          <img src="./images/p07-hero.png" alt="Ilustração abstrata representando sistemas inteligentes e IA da WebKeeper" style="width:100%;border-radius:1.5rem;display:block;object-fit:cover;">
+          <div style="position:absolute;left:-14px;top:28px;display:flex;align-items:center;gap:10px;padding:11px 15px;border-radius:16px;background:{{ T.cardBgSolid }};backdrop-filter:blur(14px);border:1px solid {{ T.cardBorder }};box-shadow:0 18px 44px -26px rgba(0,0,0,.5);animation:p7-float 7s ease-in-out infinite;">
+            <span style="display:flex;width:34px;height:34px;border-radius:10px;background:{{ T.accentSoftBg }};color:{{ T.accent }};align-items:center;justify-content:center;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a5 5 0 0 0-5 5v1a4 4 0 0 0-2 7v1a3 3 0 0 0 3 3h1a5 5 0 0 0 10 0h1a3 3 0 0 0 3-3v-1a4 4 0 0 0-2-7V7a5 5 0 0 0-5-5z"></path></svg></span>
+            <div><p style="font-size:12px;font-weight:600;color:{{ T.text1 }};margin:0;">IA aplicada</p><p style="font-size:10.5px;color:{{ T.text3 }};margin:2px 0 0;">Automação 24/7</p></div>
+          </div>
+          <div style="position:absolute;right:-16px;top:50%;display:flex;align-items:center;gap:10px;padding:11px 15px;border-radius:16px;background:{{ T.cardBgSolid }};backdrop-filter:blur(14px);border:1px solid {{ T.cardBorder }};box-shadow:0 18px 44px -26px rgba(0,0,0,.5);animation:p7-float 9s ease-in-out infinite 1.5s;">
+            <span style="display:flex;width:34px;height:34px;border-radius:10px;background:{{ T.badgeBg }};color:{{ T.navy }};align-items:center;justify-content:center;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 4l-5 8 5 8M16 4l5 8-5 8"></path></svg></span>
+            <div><p style="font-size:12px;font-weight:600;color:{{ T.text1 }};margin:0;">Fluxos automatizados</p><p style="font-size:10.5px;color:{{ T.text3 }};margin:2px 0 0;">Zero retrabalho</p></div>
+          </div>
+          <div style="position:absolute;left:36px;bottom:-16px;display:flex;align-items:center;gap:10px;padding:11px 15px;border-radius:16px;background:{{ T.cardBgSolid }};backdrop-filter:blur(14px);border:1px solid {{ T.cardBorder }};box-shadow:0 18px 44px -26px rgba(0,0,0,.5);animation:p7-float 11s ease-in-out infinite;">
+            <span style="display:flex;width:34px;height:34px;border-radius:10px;background:rgba(16,163,74,.15);color:#059669;align-items:center;justify-content:center;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l7 2.6v4.9c0 4.4-2.9 7.4-7 8.9-4.1-1.5-7-4.5-7-8.9V4.6z"></path></svg></span>
+            <div><p style="font-size:12px;font-weight:600;color:{{ T.text1 }};margin:0;">Sistema próprio</p><p style="font-size:10.5px;color:{{ T.text3 }};margin:2px 0 0;">Sem mensalidade SaaS</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cenario" data-screen-label="Cenario" style="padding:96px 24px;max-width:1240px;margin:0 auto;scroll-margin-top:96px;">
+    <div style="max-width:680px;margin:0 auto;text-align:center;">
+      <span data-reveal style="font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:{{ T.accent }};">O Cenário Digital</span>
+      <h2 data-reveal style="font-family:'Sora',sans-serif;font-size:clamp(28px,3vw,42px);font-weight:700;letter-spacing:-.5px;color:{{ T.text1 }};margin:16px 0;">Quem não se moderniza, <span style="background-image:{{ T.gradHeading }};display:inline-block;-webkit-background-clip:text;background-clip:text;color:transparent;">fica invisível.</span></h2>
+      <p data-reveal style="font-size:16px;line-height:1.65;color:{{ T.text2 }};margin:0 0 26px;">Seus concorrentes já estão na onda da IA, das redes sociais e dos sites que convertem. Cada dia sem presença digital forte é cliente que vai para outro.</p>
+      <a data-reveal href="#contato" style="display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:11px;border:1px solid {{ T.inputBorder }};background:{{ T.cardBg }};font-weight:600;font-size:13.5px;color:{{ T.text1 }};">Falar com Especialista</a>
+    </div>
+    <div data-r7="stats4" style="margin-top:56px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;">
+      <sc-for list="{{ scenarioStats }}" as="st" hint-placeholder-count="4">
+        <div data-reveal style="position:relative;overflow:hidden;background:{{ T.cardBg }};border:1px solid {{ T.cardBorder }};border-radius:16px;padding:24px;transition:transform .35s ease,border-color .3s ease;" style-hover="transform:translateY(-5px);border-color:{{ T.cardBorderHover }};">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ T.accent }}" stroke-width="1.8"><path d="{{ st.icon }}"></path></svg>
+          <p style="font-family:'Sora',sans-serif;font-size:28px;font-weight:800;color:{{ T.text1 }};margin:16px 0 0;">{{ st.value }}</p>
+          <p style="font-size:13.5px;color:{{ T.text3 }};line-height:1.55;margin:8px 0 0;">{{ st.label }}</p>
+        </div>
+      </sc-for>
+    </div>
+    <p data-reveal style="text-align:center;font-size:11px;color:{{ T.text4 }};margin-top:28px;">Fontes: Sebrae/ABDI, MDIC, PwC, Serasa Experian e Opinion Box (2024–2026).</p>
+  </section>
+
+  <section id="servicos" data-screen-label="Servicos" style="position:relative;padding:96px 24px;max-width:1240px;margin:0 auto;scroll-margin-top:96px;">
+    <div style="pointer-events:none;position:absolute;left:50%;top:30%;width:480px;height:480px;transform:translateX(-50%);border-radius:50%;background:{{ T.accentSoftBg }};filter:blur(130px);"></div>
+    <div style="position:relative;max-width:680px;margin:0 auto;text-align:center;">
+      <span data-reveal style="font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:{{ T.accent }};">Nossos Serviços</span>
+      <h2 data-reveal style="font-family:'Sora',sans-serif;font-size:clamp(28px,3vw,42px);font-weight:700;letter-spacing:-.5px;color:{{ T.text1 }};margin:16px 0;">Soluções completas para elevar o seu negócio</h2>
+      <p data-reveal style="font-size:16px;color:{{ T.text2 }};margin:0;">Tecnologia, criatividade e estratégia para criar sistemas inteligentes que geram resultados reais.</p>
+    </div>
+    <div data-r7="feat-grid" style="position:relative;margin-top:56px;display:grid;grid-template-columns:.85fr 1.2fr;gap:22px;">
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <sc-for list="{{ services }}" as="s" hint-placeholder-count="6">
+          <button onClick="{{ s.select }}" style="display:flex;align-items:center;gap:14px;width:100%;box-sizing:border-box;text-align:left;padding:15px 18px;border-radius:16px;border:1px solid {{ s.borderColor }};background:{{ s.bgColor }};cursor:pointer;transition:all .3s ease;font-family:inherit;">
+            <span style="display:flex;flex-shrink:0;width:42px;height:42px;border-radius:12px;align-items:center;justify-content:center;background:{{ s.iconBg }};color:{{ s.iconColor }};">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="{{ s.icon }}"></path></svg>
+            </span>
+            <span style="min-width:0;flex:1;">
+              <p style="font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:{{ T.text1 }};margin:0;">{{ s.title }}</p>
+              <p style="font-size:12px;color:{{ T.text3 }};margin:2px 0 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ s.intro }}</p>
+            </span>
+          </button>
+        </sc-for>
+      </div>
+      <div style="position:relative;overflow:hidden;background:{{ T.cardBg }};border:1px solid {{ T.cardBorder }};border-radius:26px;padding:36px;">
+        <div style="pointer-events:none;position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:{{ T.accentSoftBg }};filter:blur(80px);"></div>
+        <span style="position:relative;font-family:'Sora',sans-serif;font-size:56px;font-weight:800;color:{{ T.accentSoftBg }};">{{ activeService.num }}</span>
+        <div style="position:relative;display:flex;align-items:center;gap:12px;margin-top:6px;">
+          <span style="display:flex;width:48px;height:48px;border-radius:14px;align-items:center;justify-content:center;background:{{ T.gradBtn }};color:#fff;box-shadow:0 10px 24px -8px {{ T.accentSoftShadow }};">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="{{ activeService.icon }}"></path></svg>
+          </span>
+          <h3 style="font-family:'Sora',sans-serif;font-size:22px;font-weight:700;color:{{ T.text1 }};margin:0;">{{ activeService.title }}</h3>
+        </div>
+        <p style="position:relative;color:{{ T.text2 }};margin:16px 0 0;">{{ activeService.intro }}</p>
+        <div style="position:relative;margin-top:26px;display:flex;flex-direction:column;gap:14px;">
+          <sc-for list="{{ activeService.items }}" as="it" hint-placeholder-count="2">
+            <div style="background:{{ T.cardBgSolid }};border:1px solid {{ T.cardBorder }};border-radius:16px;padding:17px;">
+              <p style="font-weight:600;color:{{ T.text1 }};margin:0;font-size:14px;">{{ it.title }}</p>
+              <p style="font-size:13px;color:{{ T.text3 }};margin:5px 0 0;line-height:1.55;">{{ it.desc }}</p>
+            </div>
+          </sc-for>
+        </div>
+        <a href="#contato" style="position:relative;margin-top:26px;display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:12px;background:{{ T.darkBtn }};color:#fff;font-weight:600;font-size:13.5px;">
+          Quero essa solução
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="ia" style="padding:96px 24px;max-width:1240px;margin:0 auto;">
+    <div data-r7="about2" style="display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center;">
+      <div data-reveal style="position:relative;">
+        <div style="position:absolute;inset:-24px;z-index:-1;border-radius:2.5rem;background:{{ T.accentSoftBg }};filter:blur(40px);opacity:.4;"></div>
+        <div style="overflow:hidden;border-radius:2rem;border:1px solid {{ T.cardBorder }};box-shadow:0 40px 90px -50px rgba(0,0,0,.65);">
+          <img src="./images/p07-ai.png" alt="Dashboard futurista representando IA aplicada da WebKeeper" style="width:100%;display:block;object-fit:cover;">
+        </div>
+        <div style="position:absolute;bottom:-20px;right:-14px;display:flex;align-items:center;gap:8px;padding:11px 15px;border-radius:16px;background:{{ T.cardBgSolid }};backdrop-filter:blur(14px);border:1px solid {{ T.cardBorder }};box-shadow:0 18px 44px -26px rgba(0,0,0,.5);animation:p7-float 7s ease-in-out infinite;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{ T.text1 }}" stroke-width="1.8"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"></path></svg>
+          <span style="font-size:12px;font-weight:600;color:{{ T.text1 }};">Insights em tempo real</span>
+        </div>
+      </div>
+      <div>
+        <span data-reveal style="font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:{{ T.accent }};">Inteligência Artificial</span>
+        <h2 data-reveal style="font-family:'Sora',sans-serif;font-size:clamp(26px,2.8vw,36px);font-weight:700;letter-spacing:-.5px;color:{{ T.text1 }};margin:16px 0;">IA aplicada para transformar seu negócio.</h2>
+        <p data-reveal style="font-size:16px;line-height:1.65;color:{{ T.text2 }};margin:0 0 30px;">Utilizamos o poder da Inteligência Artificial para automatizar processos, gerar insights e criar experiências inteligentes — com retorno mensurável em cada etapa da jornada.</p>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <sc-for list="{{ aiTimeline }}" as="t" hint-placeholder-count="3">
+            <div data-reveal style="display:flex;gap:16px;background:{{ T.cardBg }};border:1px solid {{ T.cardBorder }};border-radius:16px;padding:18px;transition:border-color .3s ease;" style-hover="border-color:{{ T.cardBorderHover }};">
+              <span style="flex-shrink:0;display:flex;width:44px;height:44px;border-radius:12px;align-items:center;justify-content:center;background:{{ T.accentSoftBg }};color:{{ T.accent }};">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="{{ t.icon }}"></path></svg>
+              </span>
+              <div><p style="font-family:'Sora',sans-serif;font-weight:700;font-size:14px;color:{{ T.text1 }};margin:0;">{{ t.title }}</p><p style="font-size:13px;color:{{ T.text3 }};margin:4px 0 0;line-height:1.55;">{{ t.desc }}</p></div>
+            </div>
+          </sc-for>
+        </div>
+        <a href="#contato" style="margin-top:28px;display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:12px;background:{{ T.gradBtnHero }};color:#fff;font-weight:600;font-size:14px;box-shadow:0 14px 30px -14px {{ T.accentSoftShadow }};">Explorar Soluções de IA</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="processo" data-screen-label="Processo" style="padding:96px 24px;max-width:1240px;margin:0 auto;scroll-margin-top:96px;">
+    <div style="max-width:680px;margin:0 auto;text-align:center;">
+      <span data-reveal style="font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:{{ T.accent }};">Nosso Processo</span>
+      <h2 data-reveal style="font-family:'Sora',sans-serif;font-size:clamp(28px,3vw,42px);font-weight:700;letter-spacing:-.5px;color:{{ T.text1 }};margin:16px 0;">Um processo claro para resultados extraordinários.</h2>
+    </div>
+    <div data-r7="process4" style="position:relative;margin-top:66px;display:grid;grid-template-columns:repeat(4,1fr);gap:30px;">
+      <div style="position:absolute;left:0;right:0;top:32px;height:1px;background:linear-gradient(90deg,transparent,{{ T.accent }},transparent);opacity:.4;"></div>
+      <sc-for list="{{ processSteps }}" as="step" hint-placeholder-count="4">
+        <div data-reveal style="position:relative;">
+          <div style="position:relative;z-index:2;display:flex;width:64px;height:64px;border-radius:18px;background:{{ T.cardBgSolid }};border:1px solid {{ T.cardBorder }};align-items:center;justify-content:center;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ T.accent }}" stroke-width="1.8"><path d="{{ step.icon }}"></path></svg>
+          </div>
+          <span style="display:block;margin-top:18px;font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:{{ T.text4 }};">{{ step.n }}</span>
+          <h3 style="font-family:'Sora',sans-serif;font-size:17px;font-weight:700;color:{{ T.text1 }};margin:4px 0 8px;">{{ step.title }}</h3>
+          <p style="font-size:13px;color:{{ T.text3 }};line-height:1.55;margin:0;">{{ step.desc }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="sobre" data-screen-label="Sobre" style="padding:96px 24px;max-width:1240px;margin:0 auto;scroll-margin-top:96px;">
+    <div data-r7="about2" style="display:grid;grid-template-columns:1fr .9fr;gap:56px;align-items:center;">
+      <div>
+        <span data-reveal style="font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:{{ T.accent }};">Sobre a WebKeeper</span>
+        <h2 data-reveal style="font-family:'Sora',sans-serif;font-size:clamp(26px,2.8vw,36px);font-weight:700;letter-spacing:-.5px;color:{{ T.text1 }};margin:16px 0;">Uma fábrica de ideias, parceira do seu projeto.</h2>
+        <p data-reveal style="font-size:16px;line-height:1.65;color:{{ T.text2 }};margin:0 0 22px;">A WebKeeper nasceu para ser mais do que uma prestadora de serviços: somos parceiros de tecnologia. Analisamos cada desafio a fundo e entregamos soluções sob medida — com IA, automação, Web3 e sistemas próprios.</p>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <sc-for list="{{ aboutPoints }}" as="p" hint-placeholder-count="3">
+            <div data-reveal style="display:flex;gap:11px;align-items:flex-start;">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="{{ T.accent }}" stroke-width="1.8" style="flex-shrink:0;margin-top:2px;"><path d="M20 6L9 17l-5-5"></path></svg>
+              <p style="font-size:14px;color:{{ T.text2 }};line-height:1.6;margin:0;">{{ p }}</p>
+            </div>
+          </sc-for>
+        </div>
+        <a href="#contato" style="margin-top:28px;display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:12px;border:1px solid {{ T.inputBorder }};background:{{ T.cardBg }};font-weight:600;font-size:14px;color:{{ T.text1 }};">Trazer minha ideia</a>
+      </div>
+      <div data-reveal style="position:relative;">
+        <div style="position:absolute;inset:-20px;z-index:-1;border-radius:2.5rem;background:{{ T.accentSoftBg }};filter:blur(36px);opacity:.4;"></div>
+        <div style="overflow:hidden;border-radius:2rem;border:1px solid {{ T.cardBorder }};box-shadow:0 40px 90px -50px rgba(0,0,0,.65);">
+          <img src="./images/p07-about.png" alt="Representação visual de parceria e sistemas conectados da WebKeeper" style="width:100%;display:block;object-fit:cover;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:96px 24px;max-width:1240px;margin:0 auto;">
+    <div style="max-width:680px;margin:0 auto;text-align:center;">
+      <span data-reveal style="font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:{{ T.accent }};">Por que a WebKeeper</span>
+      <h2 data-reveal style="font-family:'Sora',sans-serif;font-size:clamp(26px,2.8vw,36px);font-weight:700;letter-spacing:-.5px;color:{{ T.text1 }};margin:16px 0;">Mais que um fornecedor. Um parceiro de verdade.</h2>
+    </div>
+    <div data-r7="why6" style="margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;">
+      <sc-for list="{{ whyCards }}" as="w" hint-placeholder-count="6">
+        <div data-reveal style="background:{{ T.cardBg }};border:1px solid {{ T.cardBorder }};border-radius:18px;padding:24px;transition:transform .35s ease,border-color .3s ease;" style-hover="transform:translateY(-5px);border-color:{{ T.cardBorderHover }};">
+          <span style="display:inline-flex;width:44px;height:44px;border-radius:12px;align-items:center;justify-content:center;background:{{ T.accentSoftBg }};color:{{ T.accent }};">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="{{ w.icon }}"></path></svg>
+          </span>
+          <h3 style="font-family:'Sora',sans-serif;font-size:16.5px;font-weight:700;color:{{ T.text1 }};margin:16px 0 8px;">{{ w.title }}</h3>
+          <p style="font-size:13.5px;color:{{ T.text3 }};line-height:1.55;margin:0;">{{ w.desc }}</p>
+        </div>
+      </sc-for>
+    </div>
+    <sc-if value="{{ showEquityBlock }}" hint-placeholder-val="{{ true }}">
+      <div data-reveal style="position:relative;overflow:hidden;margin-top:44px;border-radius:24px;padding:40px;background:{{ T.ctaBg }};border:1px solid {{ T.ctaBorder }};">
+        <div style="pointer-events:none;position:absolute;left:-40px;top:-40px;width:220px;height:220px;border-radius:50%;background:{{ T.accentSoftBg }};filter:blur(60px);"></div>
+        <div style="position:relative;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;">
+          <div style="max-width:640px;">
+            <h3 style="font-family:'Sora',sans-serif;font-size:clamp(19px,2vw,25px);font-weight:700;color:{{ T.text1 }};margin:0 0 12px;">Prefere um modelo de parceria?</h3>
+            <p style="font-size:14.5px;color:{{ T.text2 }};line-height:1.65;margin:0;">Atendemos em dois formatos: prestamos serviço direto quando sua empresa já sabe o problema; ou entramos como parceiros de desenvolvimento quando você tem uma ideia mas não tem o time técnico. Nesses casos, avaliamos modelos de parceria com equity a combinar.</p>
+          </div>
+          <a href="#contato" style="flex-shrink:0;display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border-radius:12px;background:{{ T.darkBtn }};color:#fff;font-weight:600;font-size:14px;white-space:nowrap;">Quero propor uma parceria</a>
+        </div>
+      </div>
+    </sc-if>
+  </section>
+
+  <section id="clientes" data-screen-label="Clientes" style="padding:96px 0;max-width:1240px;margin:0 auto;scroll-margin-top:96px;">
+    <div style="max-width:680px;margin:0 auto;text-align:center;padding:0 24px;">
+      <span data-reveal style="font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:{{ T.accent }};">Clientes</span>
+      <h2 data-reveal style="font-family:'Sora',sans-serif;font-size:clamp(26px,2.8vw,36px);font-weight:700;letter-spacing:-.5px;color:{{ T.text1 }};margin:16px 0;">Empresas que já confiaram no nosso trabalho.</h2>
+    </div>
+    <div style="position:relative;overflow:hidden;margin-top:44px;">
+      <div style="position:absolute;inset-y:0;left:0;z-index:10;width:90px;background:linear-gradient(to right,{{ T.bg }},transparent);"></div>
+      <div style="position:absolute;inset-y:0;right:0;z-index:10;width:90px;background:linear-gradient(to left,{{ T.bg }},transparent);"></div>
+      <div style="display:flex;width:max-content;gap:20px;animation:p7-marquee 38s linear infinite;">
+        <sc-for list="{{ clientsLoop }}" as="cl" hint-placeholder-count="32">
+          <div style="display:flex;align-items:center;justify-content:center;height:76px;width:180px;flex-shrink:0;padding:14px 18px;border-radius:14px;background:{{ cl.bg }};border:1px solid {{ cl.border }};">
+            <img src="{{ cl.logo }}" alt="{{ cl.name }}" title="{{ cl.name }}" style="max-width:100%;max-height:100%;object-fit:contain;">
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <p data-reveal style="text-align:center;font-size:11.5px;color:{{ T.text4 }};margin-top:24px;padding:0 24px;">Outras empresas em Londrina, Apucarana, São Paulo, Brasil e nos EUA.</p>
+  </section>
+
+  <section id="diagnostico" data-screen-label="Diagnostico" style="padding:96px 24px;max-width:1050px;margin:0 auto;scroll-margin-top:96px;">
+    <div style="max-width:600px;margin:0 auto;text-align:center;">
+      <span data-reveal style="font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:{{ T.accent }};">Diagnóstico Digital · Grátis</span>
+      <h2 data-reveal style="font-family:'Sora',sans-serif;font-size:clamp(26px,2.8vw,36px);font-weight:700;letter-spacing:-.5px;color:{{ T.text1 }};margin:16px 0;">O seu site está deixando dinheiro na mesa.</h2>
+      <p data-reveal style="font-size:16px;line-height:1.65;color:{{ T.text2 }};margin:0;">Faça agora o raio-x da sua presença digital. Em segundos você vê exatamente onde está perdendo clientes.</p>
+    </div>
+    <div data-reveal style="position:relative;overflow:hidden;margin-top:44px;background:{{ T.cardBgSolid }};border:1px solid {{ T.cardBorder }};border-radius:24px;padding:34px;">
+      <div style="pointer-events:none;position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:{{ T.accentSoftBg }};filter:blur(70px);"></div>
+
+      <sc-if value="{{ !hasResult }}" hint-placeholder-val="{{ true }}">
+        <div style="position:relative;">
+          <p style="text-align:center;font-family:'Sora',sans-serif;font-size:17px;font-weight:700;color:{{ T.text1 }};margin:0;">Analise agora, é grátis</p>
+          <p style="text-align:center;font-size:13px;color:{{ T.text3 }};margin:5px 0 0;">Digite seu site ou o nome da sua empresa e receba seu resultado na hora.</p>
+          <div style="max-width:480px;margin:22px auto 0;display:flex;gap:10px;flex-wrap:wrap;">
+            <input ref="{{ analyzerRef }}" onKeyDown="{{ onScanKey }}" placeholder="www.suaempresa.com.br" style="flex:1;min-width:200px;background:{{ T.cardBgSolid }};border:1px solid {{ T.inputBorder }};border-radius:12px;padding:13px 16px;color:{{ T.text1 }};font-size:14px;font-family:inherit;outline:none;transition:border-color .2s ease;" style-focus="border-color:{{ T.inputFocus }};">
+            <button onClick="{{ runScan }}" style="border:none;cursor:pointer;flex-shrink:0;background:{{ T.gradBtn }};color:#fff;font-weight:600;font-size:13.5px;padding:0 22px;border-radius:12px;box-shadow:0 12px 26px -12px {{ T.accentSoftShadow }};">
+              <sc-if value="{{ scanning }}" hint-placeholder-val="{{ false }}">Analisando…</sc-if>
+              <sc-if value="{{ !scanning }}" hint-placeholder-val="{{ true }}">Analisar</sc-if>
+            </button>
+          </div>
+          <sc-if value="{{ scanning }}" hint-placeholder-val="{{ false }}">
+            <div style="max-width:480px;margin:22px auto 0;">
+              <div style="height:6px;width:100%;overflow:hidden;border-radius:100px;background:{{ T.cardBorder }};"><div style="height:100%;width:35%;border-radius:100px;background:linear-gradient(90deg,transparent,{{ T.accent }},transparent);background-size:200% 100%;animation:p7-shimmer 1.4s linear infinite;"></div></div>
+              <p style="text-align:center;font-size:11.5px;color:{{ T.text3 }};margin:12px 0 0;">Verificando SEO, velocidade, mobile, conversão e IA.</p>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ hasResult }}" hint-placeholder-val="{{ false }}">
+        <div style="position:relative;" data-r7="diag2">
+          <div style="display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center;">
+            <div style="display:flex;flex-direction:column;align-items:center;">
+              <div style="position:relative;display:flex;width:150px;height:150px;border-radius:50%;border:4px solid {{ T.cardBorder }};align-items:center;justify-content:center;">
+                <div style="position:absolute;inset:0;border-radius:50%;background:conic-gradient({{ T.accent }} {{ scanConic }}, {{ T.cardBorder }} 0deg);-webkit-mask:radial-gradient(circle,transparent 62%,#000 63%);mask:radial-gradient(circle,transparent 62%,#000 63%);"></div>
+                <div style="text-align:center;"><p style="font-family:'Sora',sans-serif;font-size:32px;font-weight:800;color:{{ T.text1 }};margin:0;">{{ scanOverall }}</p><p style="font-size:11px;color:{{ T.text4 }};margin:0;">/100</p></div>
+              </div>
+              <p style="margin-top:14px;padding:5px 14px;border-radius:100px;background:rgba(255,84,112,.14);color:#e11d48;font-size:12px;font-weight:600;">Desempenho: {{ scanGrade }}</p>
+            </div>
+            <div>
+              <p style="font-size:14px;color:{{ T.text2 }};line-height:1.6;margin:0;">Encontramos oportunidades claras de melhoria em <strong style="color:{{ T.text1 }};">{{ scanLabel }}</strong>. Corrigindo esses pontos, sua presença digital pode converter significativamente mais visitantes.</p>
+              <div style="margin-top:20px;display:flex;flex-direction:column;gap:11px;">
+                <sc-for list="{{ scanMetrics }}" as="m" hint-placeholder-count="5">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <span style="width:120px;flex-shrink:0;font-size:12px;color:{{ T.text3 }};">{{ m.label }}</span>
+                    <div style="flex:1;height:8px;border-radius:100px;background:{{ T.cardBorder }};overflow:hidden;"><div style="height:100%;border-radius:100px;width:{{ m.width }};background:{{ T.gradBtn }};transition:width 1s ease;"></div></div>
+                    <span style="width:34px;flex-shrink:0;text-align:right;font-size:12px;font-weight:700;color:{{ T.text1 }};">{{ m.score }}%</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:30px;border-top:1px solid {{ T.cardBorder }};padding-top:26px;display:flex;flex-direction:column;align-items:center;gap:12px;">
+            <a href="{{ waFix }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:12px;background:{{ T.gradBtn }};color:#fff;font-weight:600;font-size:14px;box-shadow:0 14px 30px -12px {{ T.accentSoftShadow }};">Quero melhorar meu site com a WebKeeper</a>
+            <button onClick="{{ resetScan }}" style="border:none;background:none;cursor:pointer;font-size:12px;color:{{ T.accent }};font-weight:500;">Analisar outro site</button>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <section id="faq" data-screen-label="FAQ" style="padding:96px 24px;max-width:820px;margin:0 auto;scroll-margin-top:96px;">
+    <div style="text-align:center;">
+      <span data-reveal style="font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:{{ T.accent }};">Dúvidas frequentes</span>
+      <h2 data-reveal style="font-family:'Sora',sans-serif;font-size:clamp(26px,2.8vw,36px);font-weight:700;letter-spacing:-.5px;color:{{ T.text1 }};margin:16px 0;">Perguntas que mais recebemos.</h2>
+    </div>
+    <div style="margin-top:44px;display:flex;flex-direction:column;gap:11px;">
+      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+        <div data-reveal style="overflow:hidden;border-radius:16px;border:1px solid {{ f.border }};background:{{ f.bg }};transition:border-color .3s ease;">
+          <button onClick="{{ f.toggle }}" style="display:flex;width:100%;box-sizing:border-box;align-items:center;justify-content:space-between;gap:16px;padding:19px 22px;text-align:left;border:none;background:none;cursor:pointer;font-family:inherit;">
+            <span style="font-family:'Sora',sans-serif;font-size:14.5px;font-weight:700;color:{{ T.text1 }};">{{ f.q }}</span>
+            <span style="flex-shrink:0;font-size:22px;line-height:1;color:{{ T.accent }};font-weight:300;transition:transform .3s ease;transform:{{ f.chev }};">+</span>
+          </button>
+          <div style="overflow:hidden;transition:max-height .4s ease,opacity .3s ease;max-height:{{ f.bodyMaxH }};opacity:{{ f.bodyOpacity }};">
+            <p style="margin:0;padding:0 22px 20px;font-size:13.5px;color:{{ T.text2 }};line-height:1.6;">{{ f.a }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="contato" data-screen-label="CTA" style="padding:20px 24px 96px;max-width:1080px;margin:0 auto;scroll-margin-top:96px;">
+    <div data-reveal style="position:relative;overflow:hidden;border-radius:28px;padding:64px 40px;text-align:center;background-image:{{ T.ctaBg }};background-color:{{ T.cardBgSolid }};border:1px solid {{ T.ctaBorder }};">
+      <div style="pointer-events:none;position:absolute;left:-70px;top:-70px;width:260px;height:260px;border-radius:50%;background:{{ T.auroraA }};filter:blur(90px);animation:p7-aurora 18s ease-in-out infinite;"></div>
+      <div style="pointer-events:none;position:absolute;right:-70px;bottom:-70px;width:260px;height:260px;border-radius:50%;background:{{ T.auroraB }};filter:blur(90px);animation:p7-aurora 26s ease-in-out infinite reverse;"></div>
+      <div style="position:relative;">
+        <span style="display:inline-flex;padding:7px 16px;border-radius:100px;background:{{ T.badgeBg }};border:1px solid {{ T.badgeBorder }};font-size:11.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:{{ T.accent }};">Vamos construir juntos</span>
+        <h2 style="max-width:640px;margin:22px auto 0;font-family:'Sora',sans-serif;font-size:clamp(26px,3.2vw,42px);font-weight:800;line-height:1.15;letter-spacing:-.5px;color:{{ T.text1 }};">Sua ideia merece sair do papel. Vamos conversar hoje.</h2>
+        <p style="max-width:480px;margin:18px auto 0;font-size:16px;line-height:1.65;color:{{ T.text2 }};">Solicite um orçamento sem compromisso ou peça seu diagnóstico gratuito. Resposta direto pelo WhatsApp, em até 24 horas.</p>
+        <div style="margin-top:32px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap;">
+          <a href="{{ waOrcamento }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:9px;padding:15px 28px;border-radius:12px;background:{{ T.darkBtn }};color:#fff;font-weight:700;font-size:14.5px;">
+            Solicitar Orçamento
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+          </a>
+          <a href="#diagnostico" style="display:inline-flex;align-items:center;gap:9px;padding:15px 28px;border-radius:12px;border:1px solid {{ T.inputBorder }};background:{{ T.cardBg }};color:{{ T.text1 }};font-weight:600;font-size:14.5px;">Diagnóstico Grátis</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:{{ T.footerBg }};border-top:1px solid {{ T.footerBorder }};padding:64px 24px 0;">
+    <div data-r7="footer4" style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:44px;padding-bottom:44px;">
+      <div>
+        <a href="#top" style="display:inline-flex;align-items:center;gap:10px;">
+          <img src="./images/wk-shield.png" alt="WebKeeper" style="width:28px;height:33px;object-fit:contain;flex-shrink:0;filter:{{ T.iconFilter }};">
+          <span style="font-family:'Sora',sans-serif;font-size:15.5px;font-weight:600;color:{{ T.text1 }};">webkeeper</span>
+        </a>
+        <p style="max-width:270px;margin:16px 0 0;font-size:13px;color:{{ T.text3 }};line-height:1.6;">Fábrica de ideias e parceira em tecnologia. Transformamos desafios em sistemas inteligentes com IA, automação, Web3 e sistemas sob medida.</p>
+        <div style="display:flex;gap:10px;margin-top:22px;">
+          <sc-for list="{{ socials }}" as="s" hint-placeholder-count="4">
+            <a href="{{ s.url }}" target="_blank" rel="noopener" aria-label="{{ s.label }}" style="display:flex;width:38px;height:38px;border-radius:11px;align-items:center;justify-content:center;background:{{ T.cardBg }};border:1px solid {{ T.cardBorder }};color:{{ T.text2 }};">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="{{ s.icon }}"></path></svg>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+      <sc-for list="{{ footerCols }}" as="col" hint-placeholder-count="3">
+        <div>
+          <h4 style="font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:{{ T.text1 }};margin:0;">{{ col.title }}</h4>
+          <div style="margin-top:16px;display:flex;flex-direction:column;gap:10px;">
+            <sc-for list="{{ col.links }}" as="l" hint-placeholder-count="5">
+              <a href="{{ l.href }}" style="font-size:13px;color:{{ T.text3 }};">{{ l.label }}</a>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;border-top:1px solid {{ T.footerBorder }};padding:26px 0;font-size:12px;color:{{ T.text4 }};">
+      <p style="margin:0;">© 2026 WebKeeper. Todos os direitos reservados.</p>
+      <div style="display:flex;gap:22px;">
+        <a href="./politica-de-privacidade.html" style="color:{{ T.text4 }};">Política de Privacidade</a>
+        <a href="./termos-de-uso.html" style="color:{{ T.text4 }};">Termos de Uso</a>
+      </div>
+    </div>
+  </footer>
+
+  <div style="position:fixed;right:22px;bottom:22px;z-index:800;display:flex;flex-direction:column;align-items:flex-end;gap:14px;">
+    <sc-if value="{{ chatOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="width:min(360px,calc(100vw - 44px));border-radius:18px;border:1px solid {{ T.cardBorder }};background:{{ T.cardBgSolid }};box-shadow:0 24px 60px -20px rgba(0,0,0,.35);overflow:hidden;">
+        <div style="padding:14px 16px;border-bottom:1px solid {{ T.cardBorder }};display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:{{ T.text1 }};">Keeper · assistente WebKeeper</span>
+          <button onClick="{{ toggleChat }}" aria-label="Fechar" style="border:none;background:none;cursor:pointer;color:{{ T.text3 }};font-size:18px;line-height:1;">×</button>
+        </div>
+        <div ref="{{ chatScrollRef }}" style="max-height:320px;min-height:90px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;">
+          <div style="font-size:13px;line-height:1.55;color:{{ T.text2 }};"><sc-for list="{{ chatGreetingSegments }}" as="seg" hint-placeholder-count="1"><span style="{{ seg.style }}">{{ seg.text }}</span></sc-for></div>
+          <sc-for list="{{ chatTurns }}" as="turn" hint-placeholder-count="2">
+            <div style="display:flex;{{ turn.rowStyle }}">
+              <div style="max-width:85%;padding:10px 13px;border-radius:13px;font-size:13px;line-height:1.5;{{ turn.bubbleStyle }}"><sc-for list="{{ turn.segments }}" as="seg" hint-placeholder-count="1"><span style="{{ seg.style }}">{{ seg.text }}</span></sc-for></div>
+            </div>
+          </sc-for>
+          <sc-if value="{{ chatLoading }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:12px;color:{{ T.text4 }};">Keeper está digitando…</div>
+          </sc-if>
+          <sc-if value="{{ chatShowQuickReplies }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-direction:column;gap:6px;margin-top:2px;">
+              <sc-for list="{{ chatQuickReplies }}" as="q" hint-placeholder-count="4">
+                <button onClick="{{ q.send }}" style="text-align:left;padding:9px 12px;border-radius:10px;border:1px solid {{ T.accentSoftBorder }};background:{{ T.accentSoftBg }};color:{{ T.accent }};font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;">{{ q.label }}</button>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+        <div style="border-top:1px solid {{ T.cardBorder }};display:flex;gap:8px;align-items:center;padding:8px 8px 8px 14px;">
+          <input ref="{{ chatInputRef }}" value="{{ chatInput }}" onChange="{{ onChatInputChange }}" onKeyDown="{{ onChatKeyDown }}" placeholder="Pergunte sobre a WebKeeper…" style="flex:1;min-width:0;background:none;border:none;outline:none;color:{{ T.text1 }};font-size:13.5px;font-family:inherit;">
+          <button onClick="{{ sendChat }}" aria-label="Enviar" style="display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:9px;border:none;cursor:pointer;background:{{ T.accent }};color:#fff;flex-shrink:0;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
+          </button>
+        </div>
+      </div>
+    </sc-if>
+    <button ref="{{ fabOrbRef }}" onClick="{{ toggleChat }}" aria-label="Abrir chat com o Keeper" style="position:relative;width:72px;height:72px;border-radius:50%;border:none;cursor:pointer;background:none;padding:0;">
+      <div style="position:relative;width:100%;height:100%;animation:wk-orb-float 5s ease-in-out infinite;">
+        <div style="position:absolute;left:50%;top:50%;width:96%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(80,150,255,.4),rgba(20,40,90,.14) 55%,transparent 72%);filter:blur(10px);animation:kp-core-glow 4.5s ease-in-out infinite;"></div>
+        <div style="position:absolute;left:50%;top:50%;width:104%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:conic-gradient(from 0deg,{{ T.accent }} 0deg,{{ T.accent2 }} 110deg,{{ T.accent }} 220deg,{{ T.accent2 }} 360deg);-webkit-mask:radial-gradient(circle,transparent 60%,#000 64%,#000 72%,transparent 76%);mask:radial-gradient(circle,transparent 60%,#000 64%,#000 72%,transparent 76%);filter:blur(1px);mix-blend-mode:screen;opacity:.9;animation:kp-ring-spin 3.5s linear infinite;"></div>
+        <div style="position:absolute;left:50%;top:50%;width:58%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:{{ T.fabCore }};box-shadow:inset 0 0 14px rgba(0,0,0,.4);animation:kp-core-breathe 4s ease-in-out infinite;"></div>
+        <div style="position:absolute;left:50%;top:38%;width:26%;height:14%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(ellipse,rgba(255,255,255,.5),transparent 70%);filter:blur(2px);"></div>
+        <div style="position:absolute;left:50%;top:52%;transform:{{ fabGazeStyle }};display:flex;gap:18%;width:30%;justify-content:center;align-items:center;transition:transform .1s ease-out;">
+          <span style="display:block;width:22%;padding-bottom:30%;background:radial-gradient(circle at 40% 35%,#ffffff,#dcecff 70%);border-radius:50%/45%;animation:kp-blink 5.5s ease-in-out infinite;"></span>
+          <span style="display:block;width:22%;padding-bottom:30%;background:radial-gradient(circle at 40% 35%,#ffffff,#dcecff 70%);border-radius:50%/45%;animation:kp-blink 5.5s ease-in-out infinite .1s;"></span>
+        </div>
+      </div>
+    </button>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;business&quot;,&quot;options&quot;:[&quot;business&quot;,&quot;tech&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Tema&quot;},&quot;showEquityBlock&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Tema&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.headerRef = React.createRef();
+    this.navShellRef = React.createRef();
+    this.analyzerRef = React.createRef();
+    this.orbRef = React.createRef();
+    this.fabOrbRef = React.createRef();
+    this.chatInputRef = React.createRef();
+    this.chatScrollRef = React.createRef();
+    this.state = { activeServiceIdx: 0, openFaq: 0, scanning: false, scanResult: null, themeOverride: null, mobileMenuOpen: false, gaze: { x: 0, y: 5 }, fabGaze: { x: 0, y: 3 }, chatOpen: false, chatMessages: [], chatInput: '', chatLoading: false, chatAsked: new Set() };
+    this.replyPool = [
+      { label: 'Quais serviços vocês oferecem?', kw: ['serviç','ia ','inteligência','automaç','web3','sistema','seo'] },
+      { label: 'Como funciona o processo de vocês?', kw: ['process','diagnóstic','planejamento','desenvolv','entrega'] },
+      { label: 'Quanto custa um projeto?', kw: ['custa','preço','investimento','proposta','orçamento'] },
+      { label: 'Como faço contato / falar com humano?', kw: ['whatsapp','contato','falar com'] },
+      { label: 'Existe parceria com equity?', kw: ['parceria','equity','sócio'] },
+      { label: 'Quero fazer o diagnóstico gratuito', kw: ['diagnóstic','grátis','gratuito'] },
+      { label: 'O sistema fica sendo meu ou é assinatura?', kw: ['saas','assinatura','próprio','ativo'] },
+      { label: 'Vocês atendem minha região?', kw: ['londrina','apucarana','são paulo','regi','remoto'] }
+    ];
+    this.toggleTheme = this.toggleTheme.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
+    this.onMouseMove = this.onMouseMove.bind(this);
+    this.onMouseLeave = this.onMouseLeave.bind(this);
+    this.toggleChat = this.toggleChat.bind(this);
+    this.CHAT_GREETING = 'Olá! Sou o **Keeper**, assistente da WebKeeper. Pergunte sobre nossos serviços, processo ou investimento.';
+    this.CHAT_SYSTEM_PROMPT = 'Você é o Keeper, assistente de IA da WebKeeper (fábrica de ideias e parceira de tecnologia: Inteligência Artificial, Automação de Processos, Web3 & Blockchain, Sistemas sob Medida, SEO & Performance, Produtos Digitais). Processo: Diagnóstico -> Planejamento -> Desenvolvimento -> Entrega & Suporte. Sem planos fechados: proposta sob consulta em até 24h. Diagnóstico Digital gratuito disponível. Modelos de parceria com equity avaliados caso a caso. Atendimento 100% WhatsApp 24h, número (43) 99944-6606, link https://wa.me/5543999446606. Atende Londrina, Apucarana, São Paulo, Brasil e EUA. Sempre que mencionar contato/WhatsApp, inclua o número e o link juntos. Se pedirem algo fora do escopo mas relacionado a um negócio real, não recuse simplesmente: ofereça a solução tecnológica adjacente que a WebKeeper construiria para esse negócio. Responda em 1 a 3 frases, direto, sem se reapresentar a cada resposta, com no máximo 1 destaque em **negrito**. Sem markdown de título/lista, sem emojis.';
+
+    this.THEMES = {
+      business: {
+        bg:'#f7f8fb', text1:'#10253d', text2:'#495667', text3:'#677280', text4:'#97a0ad',
+        accent:'#5ca128', accent2:'#7cc242', navy:'#10253d',
+        accentSoftBg:'rgba(92,161,40,.16)', accentSoftBorder:'rgba(92,161,40,.22)', accentSoftShadow:'rgba(92,161,40,.4)',
+        cardBg:'rgba(255,255,255,.78)', cardBgSolid:'#fff', cardBorder:'rgba(11,16,32,.08)', cardBorderHover:'rgba(92,161,40,.35)',
+        badgeBg:'rgba(255,255,255,.88)', badgeBorder:'rgba(92,161,40,.22)',
+        gradBtn:'linear-gradient(100deg,#69b13b,#4f962b)', gradBtnHero:'linear-gradient(100deg,#69b13b,#5ca128,#10253d)',
+        gradHeading:'linear-gradient(90deg,#10253d,#5ca128 55%,#7cc242)',
+        auroraA:'rgba(106,176,59,.24)', auroraB:'rgba(16,37,61,.14)',
+        inputBorder:'rgba(11,16,32,.12)', inputFocus:'rgba(92,161,40,.5)',
+        darkBtn:'#0b1020', ctaBg:'linear-gradient(135deg,rgba(92,161,40,.13),rgba(255,255,255,.74) 45%,rgba(16,37,61,.08))', ctaBorder:'rgba(92,161,40,.2)',
+        footerBg:'#f0f3f0', footerBorder:'rgba(11,16,32,.09)', iconFilter:'none',
+        fabCore:'radial-gradient(circle at 38% 32%,#7cc242,#10253d 70%)'
+      },
+      tech: {
+        bg:'#05070d', text1:'#f2f4fa', text2:'#9aa2ba', text3:'#8b93ab', text4:'#5b6280',
+        accent:'#4a86ff', accent2:'#7fd8ff', navy:'#ff8a3d',
+        accentSoftBg:'rgba(74,134,255,.14)', accentSoftBorder:'rgba(74,134,255,.3)', accentSoftShadow:'rgba(74,134,255,.5)',
+        cardBg:'linear-gradient(160deg,rgba(30,48,86,.28),rgba(10,16,32,.5))', cardBgSolid:'#0b111f', cardBorder:'rgba(255,255,255,.08)', cardBorderHover:'rgba(74,134,255,.5)',
+        badgeBg:'rgba(74,134,255,.1)', badgeBorder:'rgba(74,134,255,.35)',
+        gradBtn:'linear-gradient(135deg,#2f6fed,#4a86ff)', gradBtnHero:'linear-gradient(100deg,#2f6fed,#4a86ff,#7fd8ff)',
+        gradHeading:'linear-gradient(90deg,#4a86ff,#7fd8ff 55%,#ff8a3d)',
+        auroraA:'rgba(74,134,255,.28)', auroraB:'rgba(255,138,61,.16)',
+        inputBorder:'rgba(255,255,255,.12)', inputFocus:'rgba(74,134,255,.55)',
+        darkBtn:'#000000', ctaBg:'linear-gradient(135deg,rgba(74,134,255,.16),rgba(10,16,32,.5) 45%,rgba(255,138,61,.12))', ctaBorder:'rgba(74,134,255,.28)',
+        footerBg:'#080b14', footerBorder:'rgba(255,255,255,.08)', iconFilter:'hue-rotate(95deg) saturate(1.6) brightness(1.15)',
+        fabCore:'radial-gradient(circle at 38% 32%,rgba(60,90,150,.55),rgba(10,16,30,.9) 60%,#05070d 100%)'
+      }
+    };
+
+    this.navLinks = [
+      { label: 'Serviços', href: '#servicos' }, { label: 'IA', href: '#ia' }, { label: 'Processo', href: '#processo' }, { label: 'Sobre', href: '#sobre' },
+      { label: 'Clientes', href: '#clientes' }, { label: 'Diagnóstico', href: '#diagnostico' }
+    ];
+    this.heroStats = [
+      { value: 'R$67 bi', label: 'Faturamento online PMEs 2024 (MDIC)' },
+      { value: '24h', label: 'Resposta de proposta personalizada' },
+      { value: '100%', label: 'Atendimento direto, sem intermediários' }
+    ];
+    this.scenarioStats = [
+      { icon: 'M3 17l6-6 4 4 8-8M15 7h6v6', value: 'R$ 67 bi', label: 'Faturamento online de micro e pequenas empresas em 2024 — saltou de R$5 bi em 2019.' },
+      { icon: 'M21 21l-4.3-4.3M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14z', value: '81%', label: 'Dos consumidores pesquisam online antes de decidir uma compra.' },
+      { icon: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M12.5 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75', value: '3x', label: 'Mais chances de conversão para empresas com presença digital otimizada.' },
+      { icon: 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM12 7v5l3 3', value: '24h', label: 'É o tempo médio que seu concorrente leva para responder um lead — você já respondeu?' }
+    ];
+    this.servicesData = [
+      { num: '01', title: 'Inteligência Artificial', intro: 'IA aplicada de verdade ao seu negócio.', icon: 'M12 2a5 5 0 0 0-5 5v1a4 4 0 0 0-2 7v1a3 3 0 0 0 3 3h1a5 5 0 0 0 10 0h1a3 3 0 0 0 3-3v-1a4 4 0 0 0-2-7V7a5 5 0 0 0-5-5z',
+        items: [{ title: 'Agentes de atendimento', desc: 'Chatbots e assistentes que respondem, qualificam e vendem 24h.' }, { title: 'Análise preditiva', desc: 'Insights e relatórios automáticos para decisões mais rápidas.' }] },
+      { num: '02', title: 'Automação de Processos', intro: 'Elimine tarefas manuais e repetitivas.', icon: 'M8 4l-5 8 5 8M16 4l5 8-5 8',
+        items: [{ title: 'Integrações entre sistemas', desc: 'ERP, CRM, planilhas e APIs conversando sem esforço humano.' }, { title: 'Fluxos inteligentes', desc: 'Workflows que executam regras de negócio sozinhos.' }] },
+      { num: '03', title: 'Web3 & Blockchain', intro: 'Soluções descentralizadas sob medida.', icon: 'M12 2 3 7v10l9 5 9-5V7zM12 2v20M3 7l9 5 9-5',
+        items: [{ title: 'Smart contracts', desc: 'Contratos auditáveis para transações seguras e transparentes.' }, { title: 'Tokenização', desc: 'Novos modelos de negócio com ativos digitais.' }] },
+      { num: '04', title: 'Sistemas sob Medida', intro: 'Software feito para o seu processo.', icon: 'M4 4h16v16H4zM4 9h16M9 13l2 2 4-4',
+        items: [{ title: 'Plataformas web e apps', desc: 'Sistemas próprios, escaláveis e sem mensalidade de terceiros.' }, { title: 'Dashboards e painéis', desc: 'Gestão visual e dados em tempo real para sua operação.' }] },
+      { num: '05', title: 'SEO & Performance', intro: 'Seja encontrado por quem já quer comprar.', icon: 'M11 5a6 6 0 1 0 0 12 6 6 0 0 0 0-12zM20 20l-4.35-4.35',
+        items: [{ title: 'SEO técnico e de conteúdo', desc: 'Rankeamento orgânico sustentável no Google.' }, { title: 'Velocidade e conversão', desc: 'Sites rápidos, otimizados para transformar visitas em vendas.' }] },
+      { num: '06', title: 'Produtos Digitais', intro: 'Do MVP ao produto pronto para escalar.', icon: 'M7 2h10a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zM11 18h2',
+        items: [{ title: 'Landing pages de alta conversão', desc: 'Design premium orientado a resultado.' }, { title: 'Apps e plataformas SaaS', desc: 'Produtos digitais completos, do zero ao lançamento.' }] }
+    ];
+    this.aiTimeline = [
+      { icon: 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM12 7v5l3 3', title: 'Curto prazo', desc: 'Elimina retrabalho manual e horas perdidas em tarefas repetitivas.' },
+      { icon: 'M3 17l9 4 9-4M3 12l9 4 9-4M3 7l9 4 9-4', title: 'Médio prazo', desc: 'Reduz a necessidade de contratar para funções operacionais que a automação substitui.' },
+      { icon: 'M2 12h6l3-9 4 18 3-9h4', title: 'Longo prazo', desc: 'Sistema próprio elimina mensalidades de SaaS — o custo migra de assinatura para ativo que você possui.' }
+    ];
+    this.processSteps = [
+      { n: '01', title: 'Diagnóstico', desc: 'Entendemos seu desafio e onde sua presença digital está perdendo dinheiro.', icon: 'M21 21l-4.3-4.3M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14z' },
+      { n: '02', title: 'Planejamento', desc: 'Desenhamos a solução ideal com escopo e prazos claros.', icon: 'M9 3h6l2 4H7z M4 7h16v14H4z' },
+      { n: '03', title: 'Desenvolvimento', desc: 'Construímos com tecnologia de ponta, validando cada etapa com você.', icon: 'M8 4l-5 8 5 8M16 4l5 8-5 8' },
+      { n: '04', title: 'Entrega & Suporte', desc: 'Lançamos, acompanhamos os resultados e evoluímos o produto continuamente.', icon: 'M4.5 16.5c-1.5 1.5-2 5-2 5s3.5-.5 5-2c.9-.9 1-2 1-2.5a1.5 1.5 0 0 0-1.5-1.5c-.5 0-1.6.1-2.5 1zM12 15l-3-3 9-9 3 3z' }
+    ];
+    this.aboutPoints = [
+      'Atendimento 100% pelo WhatsApp, 24 horas por dia — direto comigo, sem intermediários.',
+      'Cada projeto é único: nada de pacotes engessados ou soluções genéricas.',
+      'Parceria real: entramos no problema junto com você, do diagnóstico ao suporte contínuo.'
+    ];
+    this.whyCards = [
+      { title: 'Parceria, não fornecimento', desc: 'Entramos no seu desafio como sócios de tecnologia, não apenas prestadores.', icon: 'M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4zM8 13a3.5 3.5 0 1 0-3.5-3.5A3.5 3.5 0 0 0 8 13zM2 20a6 6 0 0 1 12 0M14 20a6 6 0 0 1 8-5.2' },
+      { title: 'Soluções sob medida', desc: 'Nada de templates genéricos. Cada sistema é desenhado para seu processo.', icon: 'M13 2 3 14h7l-1 8 10-12h-7z' },
+      { title: 'Velocidade com qualidade', desc: 'Metodologia ágil que entrega valor rápido sem abrir mão de solidez técnica.', icon: 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM12 7v5l3 3' },
+      { title: 'Você é dono do ativo', desc: 'Sistemas próprios eliminam mensalidades eternas de SaaS de terceiros.', icon: 'M12 2l7 2.6v4.9c0 4.4-2.9 7.4-7 8.9-4.1-1.5-7-4.5-7-8.9V4.6z' },
+      { title: 'Suporte contínuo', desc: 'Acompanhamos a evolução do produto muito além do lançamento.', icon: 'M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.6z' },
+      { title: 'Foco em conversão', desc: 'Cada decisão de design e tecnologia é orientada a gerar resultado mensurável.', icon: 'M3 3v18h18M7 15l4-6 3 4 5-8' }
+    ];
+    const lightBadge = { bg: 'rgba(255,255,255,.92)', border: 'transparent' };
+    const darkBadge = { bg: 'rgba(13,19,34,.92)', border: 'rgba(255,255,255,.14)' };
+    this.clientLogos = [
+      { name: 'Antonio Hercules Odontologia', logo: './images/clients/antonio-hercules-odontologia.png', ...darkBadge },
+      { name: 'CEOPET', logo: './images/clients/ceopet.png', ...lightBadge },
+      { name: 'Mixer Instrumentos Musicais', logo: './images/clients/mixer-instrumentos.png', ...lightBadge },
+      { name: 'Quattro Participações', logo: './images/clients/quattro-participacoes.png', ...darkBadge },
+      { name: 'Estofados Premium', logo: './images/clients/estofados-premium.png', ...lightBadge },
+      { name: 'Studio 108', logo: './images/clients/studio-108.png', ...lightBadge },
+      { name: 'Megga Work', logo: './images/clients/megga-work.png', ...darkBadge },
+      { name: 'Globex Import', logo: './images/clients/globex-import.png', ...lightBadge },
+      { name: 'Vox Gospel', logo: './images/clients/vox-gospel.png', ...lightBadge },
+      { name: 'Rekamil Pisos Laminados', logo: './images/clients/rekamil-pisos-laminados.png', ...darkBadge },
+      { name: 'Misael Hair', logo: './images/clients/misael-hair.png', ...lightBadge },
+      { name: 'Deisi Val Massoterapia', logo: './images/clients/deisi-val-massoterapia.png', ...lightBadge },
+      { name: 'Silva Advocacia & Assessoria Jurídica', logo: './images/clients/marcos-silva-advogado.png', ...darkBadge },
+      { name: 'BigShine Clean', logo: './images/clients/bigshine-clean.png', ...lightBadge },
+      { name: 'CK Engenharia e Construções', logo: './images/clients/ck-engenharia.png', ...lightBadge },
+      { name: 'Bracia Participações & Empreendimentos', logo: './images/clients/bracia-participacoes.png', ...darkBadge }
+    ];
+    this.faqData = [
+      { q: 'Como funciona o diagnóstico gratuito?', a: 'Você compartilha o endereço do seu site e nossa análise verifica SEO, velocidade, mobile, conversão e potencial de automação com IA. O resultado sai na hora, e um especialista entra em contato para detalhar as melhorias.' },
+      { q: 'Quanto custa um projeto com a WebKeeper?', a: 'Não trabalhamos com pacotes fechados. Cada proposta é personalizada de acordo com o escopo real do seu desafio — você paga exatamente pelo que precisa. Enviamos a proposta em até 24 horas.' },
+      { q: 'Vocês atendem empresas fora de Londrina e Apucarana?', a: 'Sim. Já atendemos empresas em São Paulo, em diversas cidades do Brasil e também nos Estados Unidos, tudo remotamente.' },
+      { q: 'O que significa o modelo de parceria com equity?', a: 'Para ideias em estágio inicial sem verba para desenvolvimento completo, avaliamos entrar como parceiros técnicos em troca de participação (equity), em vez de — ou além de — pagamento tradicional.' },
+      { q: 'Depois de pronto, o sistema é meu?', a: 'Sim. Diferente de assinar um SaaS de terceiros para sempre, ao desenvolvermos um sistema sob medida, o código e o ativo são seus — sem mensalidades recorrentes.' },
+      { q: 'Como funciona o suporte após a entrega?', a: 'O atendimento é 100% direto pelo WhatsApp, sem intermediários, 24 horas por dia. Continuamos acompanhando o projeto após o lançamento.' }
+    ];
+    this.socials = [
+      { label: 'Facebook', url: 'https://www.facebook.com/webkeeperia/', icon: 'M13.5 21v-8h2.5l.4-3h-2.9V8.1c0-.9.3-1.5 1.6-1.5H16.5V4c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3V10H7.3v3H9.8v8h3.7z' },
+      { label: 'Instagram', url: 'https://www.instagram.com/webkeeperia', icon: 'M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 8.9a4.9 4.9 0 1 0 0 9.8 4.9 4.9 0 0 0 0-9.8z' },
+      { label: 'LinkedIn', url: 'https://www.linkedin.com/company/webkeeper', icon: 'M6.9 8.8H3.6V21h3.3V8.8zM5.2 3.4a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8zM21 21h-3.3v-6c0-1.5-.5-2.5-1.8-2.5-1 0-1.6.7-1.9 1.3-.1.3-.1.6-.1.9V21H10.6s.1-11 0-12.2h3.3v1.7c.4-.7 1.2-1.7 3-1.7 2.2 0 3.9 1.4 3.9 4.5V21z' },
+      { label: 'WhatsApp', url: 'https://wa.me/5543999446606', icon: 'M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .9.9-2.9-.2-.3A8 8 0 1 1 12 20z' }
+    ];
+    this.footerCols = [
+      { title: 'Serviços', links: [{ label: 'Inteligência Artificial', href: '#servicos' }, { label: 'Automação de Processos', href: '#servicos' }, { label: 'Web3 & Blockchain', href: '#servicos' }, { label: 'Sistemas sob Medida', href: '#servicos' }, { label: 'SEO & Performance', href: '#servicos' }] },
+      { title: 'Empresa', links: [{ label: 'Sobre', href: '#sobre' }, { label: 'Processo', href: '#processo' }, { label: 'Clientes', href: '#clientes' }, { label: 'FAQ', href: '#faq' }] },
+      { title: 'Contato', links: [{ label: 'WhatsApp', href: 'https://wa.me/5543999446606' }, { label: 'contato@webkeeper.com.br', href: 'mailto:contato@webkeeper.com.br' }, { label: 'Londrina · PR', href: '#' }, { label: 'Atendimento 24h', href: '#' }] }
+    ];
+  }
+
+  componentDidMount() {
+    const onScroll = () => {
+      const shell = this.navShellRef.current;
+      if (!shell) return;
+      const T = this.THEMES[this.state.themeOverride || (this.props.theme === 'tech' ? 'tech' : 'business')];
+      if (window.scrollY > 24) {
+        shell.style.background = T === this.THEMES.tech ? 'rgba(6,9,17,.85)' : 'rgba(255,255,255,.9)';
+        shell.style.borderColor = T === this.THEMES.tech ? 'rgba(74,134,255,.16)' : 'rgba(16,37,61,.08)';
+        shell.style.boxShadow = '0 10px 40px -22px rgba(0,0,0,.25)';
+        shell.style.backdropFilter = 'blur(18px)';
+      } else {
+        shell.style.background = 'transparent';
+        shell.style.borderColor = 'transparent';
+        shell.style.boxShadow = 'none';
+        shell.style.backdropFilter = 'none';
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    window.addEventListener('mousemove', this.onMouseMove);
+    document.addEventListener('mouseleave', this.onMouseLeave);
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('p7-in'); io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    const revealEls = document.querySelectorAll('[data-reveal]');
+    revealEls.forEach(el => { el.classList.add('p7-reveal'); io.observe(el); });
+    setTimeout(() => { revealEls.forEach(el => el.classList.add('p7-in')); }, 1200);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('mousemove', this.onMouseMove);
+    document.removeEventListener('mouseleave', this.onMouseLeave);
+  }
+
+  onMouseMove(e) {
+    const next = {};
+    if (this.orbRef.current) {
+      const r = this.orbRef.current.getBoundingClientRect();
+      const dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+      const dist = Math.hypot(dx, dy) || 1;
+      next.gaze = { x: (dx / dist) * 10.5, y: (dy / dist) * 10.5 };
+    }
+    if (this.fabOrbRef.current) {
+      const r2 = this.fabOrbRef.current.getBoundingClientRect();
+      const dx2 = e.clientX - (r2.left + r2.width / 2), dy2 = e.clientY - (r2.top + r2.height / 2);
+      const dist2 = Math.hypot(dx2, dy2) || 1;
+      next.fabGaze = { x: (dx2 / dist2) * 3.2, y: (dy2 / dist2) * 3.2 };
+    }
+    this.setState(next);
+  }
+
+  onMouseLeave() { this.setState({ gaze: { x: 0, y: 5 }, fabGaze: { x: 0, y: 3 } }); }
+
+  toggleMenu() { this.setState(s => ({ mobileMenuOpen: !s.mobileMenuOpen })); }
+  closeMenu() { this.setState({ mobileMenuOpen: false }); }
+
+  toggleChat() {
+    this.setState(s => ({ chatOpen: !s.chatOpen }), () => {
+      if (this.state.chatOpen && this.chatInputRef.current) this.chatInputRef.current.focus();
+    });
+  }
+
+  logSharedQA(question, answer) {
+    try {
+      const key = 'keeper_qa_log';
+      const log = JSON.parse(localStorage.getItem(key) || '[]');
+      log.push({ q: question, a: answer, t: new Date().toISOString(), src: 'webkeeper-widget' });
+      localStorage.setItem(key, JSON.stringify(log.slice(-200)));
+    } catch (e) {}
+  }
+
+  buildChatSystemPrompt() {
+    try {
+      const log = JSON.parse(localStorage.getItem('keeper_qa_log') || '[]');
+      if (!log.length) return this.CHAT_SYSTEM_PROMPT;
+      const uniq = []; const seen = new Set();
+      for (let i = log.length - 1; i >= 0 && uniq.length < 20; i--) {
+        const k = log[i].q.trim().toLowerCase();
+        if (seen.has(k)) continue;
+        seen.add(k); uniq.push(log[i]);
+      }
+      const learned = uniq.reverse().map(e => '- P: ' + e.q + '\n  R aprovada: ' + e.a.replace(/\n+/g, ' ')).join('\n');
+      return this.CHAT_SYSTEM_PROMPT + '\n\nAPRENDIZADO DE CONVERSAS ANTERIORES (referência de padrão, adapte ao contexto):\n' + learned;
+    } catch (e) { return this.CHAT_SYSTEM_PROMPT; }
+  }
+
+  pickFollowUps(lastReply, asked) {
+    const low = (lastReply || '').toLowerCase();
+    const scored = this.replyPool
+      .filter(r => !asked.has(r.label))
+      .map(r => ({ r, hit: r.kw.some(k => low.includes(k)) }));
+    const top = scored.filter(x => x.hit).map(x => x.r);
+    const rest = scored.filter(x => !x.hit).map(x => x.r);
+    return [...top, ...rest].slice(0, 3);
+  }
+
+  async sendChat(text) {
+    const msg = (typeof text === 'string' ? text : this.state.chatInput || '').trim();
+    if (!msg || this.state.chatLoading) return;
+    const history = [...this.state.chatMessages, { role: 'user', text: msg }];
+    this.setState(s => ({ chatMessages: history, chatInput: '', chatLoading: true, chatAsked: new Set([...s.chatAsked, msg]) }));
+    try {
+      const apiMessages = history.map(m => ({ role: m.role, content: m.text }));
+      let reply = await window.claude.complete({ system: this.buildChatSystemPrompt(), messages: apiMessages, max_tokens: 160 });
+      reply = reply.replace(/^#+\s*/gm, '').replace(/^[-*]\s+/gm, '').replace(/`/g, '').replace(/(?<!\*)\*(?!\*)/g, '').replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, '').trim();
+      this.setState(s => ({ chatMessages: [...s.chatMessages, { role: 'assistant', text: reply }], chatLoading: false }));
+      this.logSharedQA(msg, reply);
+    } catch (e) {
+      this.setState(s => ({ chatMessages: [...s.chatMessages, { role: 'assistant', text: 'Não consegui responder agora — tente de novo ou fale pelo WhatsApp (43) 99944-6606, https://wa.me/5543999446606.' }], chatLoading: false }));
+    }
+    if (this.chatScrollRef.current) setTimeout(() => { this.chatScrollRef.current.scrollTop = this.chatScrollRef.current.scrollHeight; }, 50);
+  }
+
+  toggleTheme() {
+    const current = this.state.themeOverride || (this.props.theme === 'tech' ? 'tech' : 'business');
+    this.setState({ themeOverride: current === 'tech' ? 'business' : 'tech' });
+  }
+
+  runScan() {
+    const raw = (this.analyzerRef.current && this.analyzerRef.current.value || '').trim();
+    if (!raw) { if (this.analyzerRef.current) this.analyzerRef.current.focus(); return; }
+    this.setState({ scanning: true, scanResult: null });
+    setTimeout(() => {
+      let h = 0; for (const c of raw.toLowerCase()) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+      const pick = (min, max, salt) => Math.round(min + ((h * (salt * 97 + 13)) % 997) / 997 * (max - min));
+      const metrics = [
+        { label: 'SEO', score: pick(14, 38, 1) }, { label: 'Velocidade', score: pick(22, 47, 2) },
+        { label: 'Mobile', score: pick(18, 44, 3) }, { label: 'Conversão', score: pick(11, 33, 4) }, { label: 'IA & Automação', score: pick(4, 26, 5) }
+      ];
+      const overall = Math.round(metrics.reduce((a, m) => a + m.score, 0) / metrics.length);
+      const label = raw.replace(/^https?:\/\//i, '').replace(/\/.*$/, '');
+      this.setState({ scanning: false, scanResult: { metrics, overall, label } });
+    }, 1900);
+  }
+
+  renderVals() {
+    const theme = this.state.themeOverride || (this.props.theme === 'tech' ? 'tech' : 'business');
+    const T = this.THEMES[theme];
+    const wa = (m) => 'https://wa.me/5543999446606?text=' + encodeURIComponent(m);
+    const s = this.state;
+    const active = this.servicesData[s.activeServiceIdx];
+    return {
+      T, isBusiness: theme === 'business',
+      orbRef: this.orbRef,
+      gazeStyle: 'translate(calc(-50% + ' + s.gaze.x + 'px), calc(-50% + ' + s.gaze.y + 'px))',
+      toggleTheme: this.toggleTheme,
+      chatOpen: s.chatOpen, toggleChat: this.toggleChat,
+      fabOrbRef: this.fabOrbRef,
+      fabGazeStyle: 'translate(calc(-50% + ' + s.fabGaze.x + 'px), calc(-50% + ' + s.fabGaze.y + 'px))',
+      chatInputRef: this.chatInputRef, chatScrollRef: this.chatScrollRef,
+      chatInput: s.chatInput,
+      onChatInputChange: (e) => this.setState({ chatInput: e.target.value }),
+      onChatKeyDown: (e) => { if (e.key === 'Enter') this.sendChat(); },
+      sendChat: () => this.sendChat(),
+      chatGreetingSegments: this.CHAT_GREETING.split(/\*\*(.+?)\*\*/g).map((t, i) => ({ text: t, style: i % 2 === 1 ? 'font-weight:700;color:' + T.accent + ';' : '' })),
+      chatTurns: s.chatMessages.map(m => ({
+        rowStyle: m.role === 'user' ? 'justify-content:flex-end;' : 'justify-content:flex-start;',
+        bubbleStyle: m.role === 'user' ? 'background:' + T.accent + ';color:#fff;' : 'background:' + T.accentSoftBg + ';color:' + T.text1 + ';',
+        segments: m.text.split(/\*\*(.+?)\*\*/g).map((t, i) => ({ text: t, style: i % 2 === 1 ? 'font-weight:700;' : '' }))
+      })),
+      chatShowQuickReplies: !s.chatLoading,
+      chatQuickReplies: (() => {
+        const last = [...s.chatMessages].reverse().find(m => m.role === 'assistant');
+        return this.pickFollowUps(last ? last.text : '', s.chatAsked).map(r => ({ label: r.label, send: () => this.sendChat(r.label) }));
+      })(),
+      mobileMenuOpen: s.mobileMenuOpen, toggleMenu: this.toggleMenu,
+      mobileNavLinks: this.navLinks.map(l => ({ ...l, close: this.closeMenu })),
+      headerRef: this.headerRef, navShellRef: this.navShellRef,
+      navLinks: this.navLinks, heroStats: this.heroStats, scenarioStats: this.scenarioStats,
+      services: this.servicesData.map((sv, i) => ({
+        ...sv, select: () => this.setState({ activeServiceIdx: i }),
+        borderColor: i === s.activeServiceIdx ? T.cardBorderHover : T.cardBorder,
+        bgColor: i === s.activeServiceIdx ? T.accentSoftBg : T.cardBg,
+        iconBg: i === s.activeServiceIdx ? T.gradBtn : T.accentSoftBg,
+        iconColor: i === s.activeServiceIdx ? '#fff' : T.accent
+      })),
+      activeService: active,
+      aiTimeline: this.aiTimeline, processSteps: this.processSteps, aboutPoints: this.aboutPoints, whyCards: this.whyCards,
+      clientsLoop: [...this.clientLogos, ...this.clientLogos],
+      socials: this.socials, footerCols: this.footerCols,
+      showEquityBlock: this.props.showEquityBlock ?? true,
+      waOrcamento: wa('Olá! Cliquei em "Solicitar Orçamento" no site da WebKeeper.'),
+      waProposta: wa('Olá! Quero solicitar uma proposta personalizada com a WebKeeper.'),
+      waFix: wa('Olá! Fiz o Diagnóstico Digital no site da WebKeeper e quero melhorar a estrutura do meu site.'),
+      analyzerRef: this.analyzerRef,
+      scanning: s.scanning,
+      runScan: () => this.runScan(),
+      resetScan: () => this.setState({ scanResult: null }),
+      onScanKey: (e) => { if (e.key === 'Enter') this.runScan(); },
+      hasResult: !!s.scanResult && !s.scanning,
+      scanOverall: s.scanResult ? s.scanResult.overall : 0,
+      scanConic: (s.scanResult ? s.scanResult.overall : 0) * 3.6 + 'deg',
+      scanLabel: s.scanResult ? s.scanResult.label : '',
+      scanGrade: (() => { const o = s.scanResult ? s.scanResult.overall : 0; return o < 25 ? 'Crítico' : o < 45 ? 'Regular' : 'Bom'; })(),
+      scanMetrics: (s.scanResult ? s.scanResult.metrics : []).map(m => ({ label: m.label, score: m.score, width: m.score + '%' })),
+      faqs: this.faqData.map((f, i) => {
+        const open = s.openFaq === i;
+        return { ...f, chev: open ? 'rotate(45deg)' : 'rotate(0deg)', bodyMaxH: open ? '260px' : '0px', bodyOpacity: open ? '1' : '0',
+          border: open ? T.cardBorderHover : T.cardBorder, bg: open ? T.cardBgSolid : T.cardBg,
+          toggle: () => this.setState(st => ({ openFaq: st.openFaq === i ? -1 : i })) };
+      })
+    };
+  }
+}
+
+</script>
+</body>
+</html>
