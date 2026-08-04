@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Abrir site local XAMPP",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost/wk-webkeepersite/index.html",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Listen for Xdebug",
+      "type": "php",
+      "request": "launch",
+      "port": 9003,
+      "pathMappings": {
+        "${workspaceFolder}": "C:/xampp/htdocs/wk-webkeepersite"
+      },
+      "log": true
+    }
+  ]
+}
