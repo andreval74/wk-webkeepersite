@@ -52,6 +52,10 @@
     @keyframes kp-cursor { 0%,50% { opacity:1; } 51%,100% { opacity:0; } }
     @keyframes kp-burst-out { 0% { transform:translateX(0) scale(.4); opacity:0; } 15% { opacity:1; } 80% { opacity:1; transform:translateX(190px) scale(1.5); } 100% { transform:translateX(210px) scale(1.5); opacity:0; } }
     .kp-msg { animation:kp-in .35s ease both; }
+    .kp-site-link { transition:border-color .25s ease, background .25s ease, color .25s ease, transform .25s ease, box-shadow .25s ease; }
+    .kp-site-link:hover, .kp-site-link:focus-visible { border-color:rgba(56,224,123,.55) !important; background:rgba(56,224,123,.12) !important; color:#8ef5b0 !important; transform:translateY(-2px); box-shadow:0 6px 18px rgba(56,224,123,.22); }
+    .kp-site-link:hover .kp-site-dot { background:#38e07b !important; }
+    .kp-site-link:hover .kp-site-desc { color:#8fe8b0 !important; }
   </style>
 </helmet>
 
@@ -60,8 +64,8 @@
 
   <header style="position:relative;z-index:3;display:flex;align-items:center;justify-content:center;padding:26px 28px 4px;flex-shrink:0;">
     <div style="display:flex;align-items:center;gap:9px;">
-      <img src="./images/wk-shield.png" alt="WebKeeper" style="width:26px;height:31px;object-fit:contain;filter:hue-rotate(95deg) saturate(1.6) brightness(1.15);">
-      <span style="font-family:'Sora',sans-serif;font-size:13.5px;font-weight:600;color:#c4cae0;letter-spacing:.02em;">webkeeper</span>
+      <img src="./images/wk-shield.png" alt="WebKeeper" style="width:26px;height:31px;object-fit:contain;">
+      <span style="font-family:'Sora',sans-serif;font-size:13.5px;font-weight:600;letter-spacing:.02em;color:#f2f4fa;">web<span style="color:#5FA625;">keeper</span></span>
     </div>
   </header>
 
@@ -119,19 +123,11 @@
       </div>
     </div>
 
-    <p style="font-size:11.5px;color:#5b6280;margin:18px 0 8px;text-align:center;">Prefere navegar? Conheça as versões do nosso site:</p>
+    <p style="font-size:11.5px;color:#5b6280;margin:18px 0 8px;text-align:center;">Prefere navegar? Conheça nosso site:</p>
     <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;flex-shrink:0;">
-      <a href="./WebKeeper.dc.html?theme=business" style="display:inline-flex;flex-direction:column;gap:2px;padding:9px 16px;border-radius:14px;border:1px solid rgba(92,161,40,.35);color:#9fdc6e;background:rgba(92,161,40,.08);">
-        <span style="display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;"><span style="width:6px;height:6px;border-radius:50%;background:#7cc242;"></span>Versão Business</span>
-        <span style="font-size:10.5px;color:#8bb377;">Visão institucional dos serviços</span>
-      </a>
-      <a href="./WebKeeper.dc.html?theme=tech" style="display:inline-flex;flex-direction:column;gap:2px;padding:9px 16px;border-radius:14px;border:1px solid rgba(74,134,255,.35);color:#9dc0ff;background:rgba(74,134,255,.08);">
-        <span style="display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;"><span style="width:6px;height:6px;border-radius:50%;background:#4a86ff;"></span>Versão Tech</span>
-        <span style="font-size:10.5px;color:#7f9fcf;">Visão técnica dos serviços</span>
-      </a>
-      <a href="./WebKeeper-Punk.html" style="display:inline-flex;flex-direction:column;gap:2px;padding:9px 16px;border-radius:14px;border:1px solid rgba(255,138,61,.35);color:#ffc199;background:rgba(255,138,61,.08);">
-        <span style="display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;"><span style="width:6px;height:6px;border-radius:50%;background:#ff8a3d;"></span>Versão Animada</span>
-        <span style="font-size:10.5px;color:#cf9c78;">Modelo com efeitos de animação</span>
+      <a href="./WebKeeper-Punk.html" class="kp-site-link" style="display:inline-flex;flex-direction:column;gap:2px;padding:9px 16px;border-radius:14px;border:1px solid rgba(255,138,61,.35);color:#ffc199;background:rgba(255,138,61,.08);">
+        <span style="display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;"><span class="kp-site-dot" style="width:6px;height:6px;border-radius:50%;background:#ff8a3d;transition:background .25s ease;"></span>Versão Animada</span>
+        <span class="kp-site-desc" style="font-size:10.5px;color:#cf9c78;transition:color .25s ease;">Modelo com efeitos de animação</span>
       </a>
     </div>
   </main>
@@ -151,7 +147,7 @@ REGRA DE PIVÔ COMERCIAL: se o usuário pedir algo que não é um serviço da We
 Responda SOMENTE perguntas relacionadas à WebKeeper, seus serviços, processo, diagnóstico, parcerias ou tecnologia aplicada ao negócio do usuário (aplicando a regra de pivô acima quando fizer sentido).
 Vá direto ao ponto que foi perguntado, sem rodeios. NÃO se reapresente, não repita "eu sou o Keeper" nem "assistente da WebKeeper" — isso já foi dito na saudação inicial, o usuário já sabe. Responda em no máximo 1 a 2 frases curtas, com a confiança de um negociador sênior: direto, com leve humor seco e, quando couber, uma provocação sutil que empurre para o fechamento (ex.: quanto custa NÃO ter isso, o que o concorrente já está fazendo). Só ocasionalmente, e nunca dois turnos seguidos, termine com uma pergunta curta para entender se o perfil é mais institucional (indique "Versão Business") ou técnico (indique "Versão Tech") — na maioria das respostas nem precisa perguntar nada, só responder. Nunca invente preços exatos — diga que é sob consulta. Responda em prosa simples, sem títulos, sem listas com hífen e sem emojis. No máximo 1 destaque em **negrito** por resposta, só se for realmente o dado central.`;
 
-const GREETING = 'Olá! Seja bem-vindo. Eu sou o **Keeper**, o assistente virtual da empresa **WebKeeper**. Digite a sua pergunta ou selecione uma das opções abaixo para entrar e no nosso site.';
+const GREETING = 'Olá! Seja bem-vindo. Eu sou o **Keeper**, o assistente virtual da empresa **WebKeeper**. Digite a sua pergunta ou selecione uma das opções abaixo para entrar no nosso site.';
 
 const SERVICE_ICONS = [
   'M12 2a5 5 0 0 0-5 5v1a4 4 0 0 0-2 7v1a3 3 0 0 0 3 3h1a5 5 0 0 0 10 0h1a3 3 0 0 0 3-3v-1a4 4 0 0 0-2-7V7a5 5 0 0 0-5-5z',
@@ -378,7 +374,7 @@ class Component extends DCLogic {
       setTimeout(() => this.speak(reply), 400);
       this.logQA(msg, reply);
     } catch (e) {
-      const fallback = 'Não consegui responder agora. Tente novamente em instantes ou fale direto com um especialista pelo WhatsApp.';
+      const fallback = 'Não consegui responder agora. Tente de novo ou fale pelo WhatsApp (43) 99944-6606, [chame no WhatsApp](https://wa.me/5543999446606).';
       this.setState(s => ({ messages: [...s.messages, { role: 'assistant', text: fallback }], loading: false, mood: 'idle' }));
       this.burst();
       setTimeout(() => this.speak(fallback), 400);
@@ -399,7 +395,7 @@ class Component extends DCLogic {
     const moodKey = s.speaking ? 'speaking' : s.mood;
     const M = this.MOODS[moodKey] || this.MOODS.idle;
     const ghost = this.getGhost(s.input);
-    const voiceHint = s.voiceEnabled ? 'Toque no Keeper para silenciar a voz' : 'Voz silenciada — toque para reativar';
+    const voiceHint = s.voiceEnabled ? 'Toque no Keeper para silenciar a voz' : 'Voz silenciada, toque para reativar';
     return {
       M, orbRef: this.orbRef,
       gazeStyle: 'translate(calc(-50% + ' + s.gaze.x + 'px), calc(-50% + ' + s.gaze.y + 'px))',
