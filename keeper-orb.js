@@ -1,7 +1,7 @@
 /*
   Keeper Orb — script compartilhado (gaze dos olhos + troca de humor/estado).
-  Usado junto com keeper-orb.css em keeper.html, Keeper.dc.html, WebKeeper.dc.html
-  e WebKeeper-Punk.html.
+  O CSS do orbe vive em styles.css (seção "Keeper Orb").
+  Usado em: WebKeeper.html, WebKeeper-site.html e keeper-orb.html.
 */
 (function (window) {
   'use strict';

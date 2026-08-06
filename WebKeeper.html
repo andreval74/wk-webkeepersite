@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
 </head>
-<body>
+<body class="keeper-page-body">
 <x-dc>
 
 <helmet>
@@ -30,7 +30,7 @@
   <meta name="twitter:image" content="https://www.webkeeper.com.br/images/wk-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./keeper-orb.css">
+  <link rel="stylesheet" href="./styles.css">
   <script src="./keeper-orb.js"></script>
   <script type="application/ld+json">
   {
@@ -42,43 +42,28 @@
     "sameAs": ["https://www.facebook.com/webkeeperia/", "https://www.instagram.com/webkeeperia", "https://www.linkedin.com/company/webkeeper"]
   }
   </script>
-  <style id="__om-base">
-    html,body { margin:0; height:100%; overflow:hidden; font-family:'Inter',sans-serif; background:#05070d; }
-    a { text-decoration:none; color:inherit; }
-    ::-webkit-scrollbar { width:8px; }
-    ::-webkit-scrollbar-track { background:transparent; }
-    ::-webkit-scrollbar-thumb { background:#1c2338; border-radius:999px; }
-    @keyframes kp-in { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes kp-cursor { 0%,50% { opacity:1; } 51%,100% { opacity:0; } }
-    @keyframes kp-burst-out { 0% { transform:translateX(0) scale(.4); opacity:0; } 15% { opacity:1; } 80% { opacity:1; transform:translateX(190px) scale(1.5); } 100% { transform:translateX(210px) scale(1.5); opacity:0; } }
-    .kp-msg { animation:kp-in .35s ease both; }
-    .kp-site-link { transition:border-color .25s ease, background .25s ease, color .25s ease, transform .25s ease, box-shadow .25s ease; }
-    .kp-site-link:hover, .kp-site-link:focus-visible { border-color:rgba(56,224,123,.55) !important; background:rgba(56,224,123,.12) !important; color:#8ef5b0 !important; transform:translateY(-2px); box-shadow:0 6px 18px rgba(56,224,123,.22); }
-    .kp-site-link:hover .kp-site-dot { background:#38e07b !important; }
-    .kp-site-link:hover .kp-site-desc { color:#8fe8b0 !important; }
-  </style>
 </helmet>
 
-<div style="position:relative;height:100vh;height:100dvh;background:#05070d;color:#f2f4fa;overflow:hidden;display:flex;flex-direction:column;">
-  <div style="pointer-events:none;position:absolute;left:50%;top:-10%;width:700px;height:700px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(74,134,255,.20),transparent 70%);filter:blur(40px);"></div>
+<div class="keeper-page">
+  <div class="keeper-bg-spot"></div>
 
-  <header style="position:relative;z-index:3;display:flex;align-items:center;justify-content:center;padding:26px 28px 4px;flex-shrink:0;">
-    <div style="display:flex;align-items:center;gap:9px;">
-      <img src="./images/wk-shield.png" alt="WebKeeper" style="width:26px;height:31px;object-fit:contain;">
-      <span style="font-family:'Sora',sans-serif;font-size:13.5px;font-weight:600;letter-spacing:.02em;color:#f2f4fa;">web<span style="color:#5FA625;">keeper</span></span>
+  <header class="keeper-header">
+    <div class="keeper-brand">
+      <img src="./images/wk-shield.png" alt="WebKeeper">
+      <span class="keeper-brand-text">web<span style="color:#5FA625;">keeper</span></span>
     </div>
   </header>
 
-  <main style="position:relative;z-index:2;flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 24px 24px;max-width:720px;margin:0 auto;width:100%;box-sizing:border-box;overflow:hidden;">
+  <main class="keeper-main">
 
     <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;">
-      <div onClick="{{ toggleVoice }}" role="button" aria-label="{{ orbAriaLabel }}" title="{{ orbAriaLabel }}" ref="{{ orbRef }}" class="keeper-orb {{ M.moodClass }}" style="--keeper-size:130px;flex-shrink:0;cursor:pointer;">
+      <div onClick="{{ toggleVoice }}" role="button" aria-label="{{ orbAriaLabel }}" title="{{ orbAriaLabel }}" ref="{{ orbRef }}" class="keeper-orb keeper-orb-wrapper {{ M.moodClass }}">
         <sc-if value="{{ bursting }}" hint-placeholder-val="{{ false }}">
           <div style="position:absolute;inset:0;pointer-events:none;">
             <sc-for list="{{ burstIcons }}" as="ic" hint-placeholder-count="6">
               <div style="position:absolute;left:50%;top:50%;width:0;height:0;transform:translate(-50%,-50%) rotate({{ ic.angle }}deg);">
                 <div style="width:26px;height:26px;margin-top:-13px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(10,16,32,.85);border:1px solid rgba(255,255,255,.12);animation:kp-burst-out 1.3s ease-out {{ ic.delay }}s both;">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9dc0ff" stroke-width="1.8" style="transform:rotate({{ ic.counterAngle }}deg);"><path d="{{ ic.path }}"></path></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9fdc6e" stroke-width="1.8" style="transform:rotate({{ ic.counterAngle }}deg);"><path d="{{ ic.path }}"></path></svg>
                 </div>
               </div>
             </sc-for>
@@ -101,12 +86,12 @@
           </sc-if>
         </div>
       </div>
-      <h1 style="font-family:'Sora',sans-serif;font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-1px;margin:16px 0 0;">Keeper</h1>
-      <p style="font-size:12.5px;color:#7f88a0;margin:4px 0 0;text-align:center;min-height:16px;">{{ statusLine }}</p>
+      <h1 class="keeper-title">Keeper</h1>
+      <p class="keeper-status">{{ statusLine }}</p>
     </div>
 
-    <div style="width:100%;max-width:640px;margin-top:20px;border-radius:20px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);overflow:hidden;flex-shrink:0;">
-      <div ref="{{ scrollRef }}" style="max-height:220px;min-height:60px;overflow-y:auto;overflow-x:hidden;padding:18px 20px;display:flex;flex-direction:column;gap:10px;">
+    <div class="keeper-panel">
+      <div ref="{{ scrollRef }}" class="keeper-messages">
         <sc-if value="{{ hasUserQuestion }}" hint-placeholder-val="{{ false }}">
           <p class="kp-msg" style="margin:0;font-size:10.5px;color:#6b7290;">Você perguntou: {{ lastUserQuestion }}</p>
         </sc-if>
@@ -115,19 +100,18 @@
       <div style="border-top:1px solid rgba(255,255,255,.08);display:flex;gap:10px;align-items:center;padding:10px 10px 10px 18px;">
         <div style="position:relative;flex:1;min-width:0;">
           <div aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;pointer-events:none;font-size:14.5px;font-family:inherit;white-space:pre;overflow:hidden;"><span style="color:transparent;">{{ input }}</span><span style="color:#4d5573;">{{ ghostRemainder }}</span></div>
-          <input ref="{{ inputRef }}" value="{{ input }}" onChange="{{ onInputChange }}" onKeyDown="{{ onKeyDown }}" placeholder="Pergunte sobre a WebKeeper…" style="position:relative;width:100%;box-sizing:border-box;background:none;border:none;outline:none;color:#f2f4fa;font-size:14.5px;font-family:inherit;">
+          <input ref="{{ inputRef }}" value="{{ input }}" onChange="{{ onInputChange }}" onKeyDown="{{ onKeyDown }}" placeholder="Pergunte sobre a WebKeeper…" class="keeper-chat-input">
         </div>
-        <button onClick="{{ send }}" aria-label="Enviar" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:10px;border:none;cursor:pointer;background:linear-gradient(135deg,#2f6fed,#4a86ff);color:#fff;flex-shrink:0;">
+        <button onClick="{{ send }}" aria-label="Enviar" class="kp-send-btn">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
         </button>
       </div>
     </div>
 
-    <p style="font-size:11.5px;color:#5b6280;margin:18px 0 8px;text-align:center;">Prefere navegar? Conheça nosso site:</p>
-    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;flex-shrink:0;">
-      <a href="./WebKeeper-Punk.html" class="kp-site-link" style="display:inline-flex;flex-direction:column;gap:2px;padding:9px 16px;border-radius:14px;border:1px solid rgba(255,138,61,.35);color:#ffc199;background:rgba(255,138,61,.08);">
-        <span style="display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;"><span class="kp-site-dot" style="width:6px;height:6px;border-radius:50%;background:#ff8a3d;transition:background .25s ease;"></span>Versão Animada</span>
-        <span class="kp-site-desc" style="font-size:10.5px;color:#cf9c78;transition:color .25s ease;">Modelo com efeitos de animação</span>
+    <p class="keeper-quote">Prefere navegar? Conheça nosso site:</p>
+    <div class="keeper-site-links">
+      <a href="./WebKeeper-site.html" class="keeper-site-link">
+        Entrar no site
       </a>
     </div>
   </main>
@@ -172,9 +156,9 @@ function parseSegments(text) {
   const segments = [];
   chunks.forEach(c => {
     if (c.href) {
-      segments.push({ text: c.label, href: c.href, isLink: true, style: 'color:#8fc4ff;text-decoration:underline;cursor:pointer;' });
+      segments.push({ text: c.label, href: c.href, isLink: true, style: 'color:#9fdc6e;text-decoration:underline;cursor:pointer;' });
     } else {
-      c.raw.split(/\*\*(.+?)\*\*/g).forEach((t, i) => segments.push({ text: t, isLink: false, style: i % 2 === 1 ? 'font-weight:700;color:#8fc4ff;' : '' }));
+      c.raw.split(/\*\*(.+?)\*\*/g).forEach((t, i) => segments.push({ text: t, isLink: false, style: i % 2 === 1 ? 'font-weight:700;color:#9fdc6e;' : '' }));
     }
   });
   return segments;
@@ -403,10 +387,6 @@ class Component extends DCLogic {
       toggleVoice: this.toggleVoice,
       orbAriaLabel: s.voiceEnabled ? 'Silenciar o Keeper' : 'Reativar a voz do Keeper',
       statusLine: M.caption || voiceHint,
-      hasVoiceOptions: s.voices.length > 1,
-      voiceOptions: s.voices.map(v => ({ uri: v.uri, label: v.name.replace(/^Microsoft |^Google /, '') + (v.lang ? ' · ' + v.lang : '') })),
-      selectedVoiceURI: s.selectedVoiceURI,
-      onVoiceChange: (e) => { this.setState({ selectedVoiceURI: e.target.value }); if (window.speechSynthesis) window.speechSynthesis.cancel(); },
       bursting: s.bursting,
       burstIcons: Array.from({ length: 6 }).map((_, i) => ({ angle: i * 60, counterAngle: -(i * 60), delay: (i * 0.07).toFixed(2), path: SERVICE_ICONS[i] })),
       hasUserQuestion: s.messages.some(m => m.role === 'user'),
