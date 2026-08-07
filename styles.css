@@ -402,12 +402,14 @@ html:has(body.keeper-page-body), .keeper-page-body { height: 100%; overflow: hid
 }
 @media (max-width: 600px) {
   .hero { padding-top: 60px; }
-  .site-header { padding: 12px 10px !important; gap: 6px !important; flex-wrap: wrap; row-gap: 10px; }
-  .site-header > div:first-child { gap: 6px !important; }
-  .site-header > div:last-child { gap: 6px !important; }
+  .site-header { padding: 10px 8px !important; gap: 4px !important; flex-wrap: nowrap !important; }
+  .site-header > div:first-child { gap: 5px !important; min-width: 0; }
+  .site-header > div:last-child { gap: 4px !important; flex-shrink: 0; }
+  .site-header > div:first-child img { width: 28px !important; height: 33px !important; }
+  .site-header > div:first-child span:first-of-type { font-size: 15px !important; white-space: nowrap; }
   .site-header .btn svg { display: none; }
-  .site-header button.btn { padding: 10px 11px !important; }
-  .wk-menu-btn { width: 32px; height: 32px; }
+  .site-header button.btn { padding: 8px 10px !important; font-size: 12px !important; }
+  .wk-menu-btn { width: 30px; height: 30px; flex-shrink: 0; }
   .wk-nav-dropdown { right: auto; left: 50%; transform: translateX(-50%); }
   section { padding-left: 16px !important; padding-right: 16px !important; }
   footer { padding-left: 16px !important; padding-right: 16px !important; }
