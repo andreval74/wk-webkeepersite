@@ -56,7 +56,7 @@ button { font: inherit; }
 /* Buttons */
 .btn,
 a.btn,
-button:not(.keeper-orb):not(.kp-icon-btn):not(.kp-send-btn):not(.wk-pillar-btn),
+button:not(.keeper-orb):not(.kp-icon-btn):not(.kp-send-btn):not(.wk-pillar-btn):not(.wk-menu-btn),
 input[type="button"],
 input[type="submit"],
 a[role="button"],
@@ -78,7 +78,7 @@ a[style*="padding"] {
 .btn:hover,
 button:hover,
 a.btn:hover,
-button:not(.keeper-orb):not(.kp-icon-btn):not(.kp-send-btn):not(.wk-pillar-btn):hover,
+button:not(.keeper-orb):not(.kp-icon-btn):not(.kp-send-btn):not(.wk-pillar-btn):not(.wk-menu-btn):hover,
 input[type="button"]:hover,
 input[type="submit"]:hover,
 a[role="button"]:hover,
@@ -89,7 +89,7 @@ a[style*="padding"]:hover {
   transform: translateY(-2px);
   box-shadow: 0 0 0 1px rgba(95,166,37,.8), 0 0 18px 3px rgba(95,166,37,.9), 0 0 40px 8px rgba(95,166,37,.55), 0 14px 34px -12px rgba(95,166,37,.5);
 }
-.btn--small { padding: 10px 18px; font-size: 13.5px; }
+.btn--small { padding: 10px 18px !important; font-size: 13.5px !important; }
 .btn--outline { background: transparent; }
 
 /* wk-btn: variante outline usada em links de destaque (ex: "Diagnóstico Grátis") */
@@ -158,14 +158,50 @@ a[style*="padding"]:hover {
   border-bottom: 1px solid rgba(95,166,37,0);
   transition: background .35s ease, box-shadow .35s ease, border-color .35s ease;
 }
-.site-nav { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: center; flex: 1; }
-.site-nav-link,
 .wk-nav-link,
 header nav a {
   font-size: 13.5px;
   font-weight: 500;
   white-space: nowrap;
 }
+
+/* Menu hamburguer: botão + dropdown com todos os links, ao lado do "Solicitar Orçamento" */
+.wk-menu-wrap { position: relative; }
+.wk-menu-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: border-color .2s ease, background .2s ease;
+}
+.wk-menu-btn:hover, .wk-menu-btn:focus { border-color: var(--green); background: rgba(95,166,37,.1); }
+.wk-menu-btn span { display: block; width: 18px; height: 2px; border-radius: 2px; background: var(--text-soft); }
+.wk-nav-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 210px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px;
+  background: rgba(8,13,26,.97);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 14px;
+  box-shadow: 0 24px 48px -20px rgba(0,0,0,.6);
+  z-index: 600;
+}
+.wk-nav-dropdown a { padding: 10px 14px; border-radius: 9px; }
+.wk-nav-dropdown a:hover, .wk-nav-dropdown a:focus { background: rgba(95,166,37,.1); }
 
 /* Links de palavra: texto puro (nav, rodapé, links inline) — sem fundo/glow,
    só uma troca de cor no hover. initCursor() (no componente) já pula o anel
@@ -344,8 +380,6 @@ html:has(body.keeper-page-body), .keeper-page-body { height: 100%; overflow: hid
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; padding-top: 78px; gap: 24px; }
   .site-header { padding: 14px 20px !important; gap: 12px !important; }
-  .site-nav { overflow-x: auto; flex-wrap: nowrap !important; justify-content: flex-start !important; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-  .site-nav::-webkit-scrollbar { display: none; }
   section { padding-left: 22px !important; padding-right: 22px !important; }
   footer { padding-left: 22px !important; padding-right: 22px !important; }
   .section-divider { padding: 30px 22px !important; }
@@ -362,13 +396,14 @@ html:has(body.keeper-page-body), .keeper-page-body { height: 100%; overflow: hid
   [data-r="pillar-body"] { padding-left: 30px !important; }
   [data-r="cta"] { padding: 36px 28px !important; }
   [data-r="sobre"] { grid-template-columns: 1fr !important; gap: 32px !important; }
-  [data-r="why-wrap"] { grid-template-columns: 1fr !important; gap: 28px !important; }
+  .two-col-wrap { grid-template-columns: 1fr !important; gap: 28px !important; }
   [data-r="why"] { grid-template-columns: repeat(2, 1fr) !important; }
   [data-r="invest"] { grid-template-columns: 1fr !important; }
 }
 @media (max-width: 600px) {
   .hero { padding-top: 60px; }
-  .site-header { padding: 12px 16px !important; }
+  .site-header { padding: 12px 16px !important; flex-wrap: wrap; row-gap: 10px; }
+  .wk-nav-dropdown { right: auto; left: 0; }
   section { padding-left: 16px !important; padding-right: 16px !important; }
   footer { padding-left: 16px !important; padding-right: 16px !important; }
   .section-divider { padding: 22px 16px !important; }

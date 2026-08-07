@@ -78,14 +78,23 @@
         <img src="./images/wk-shield.png" alt="WebKeeper" style="width:34px;height:40px;object-fit:contain;flex-shrink:0;">
         <span style="font-family:'Sora',sans-serif;font-weight:700;font-size:18px;color:#f2f4fa;letter-spacing:.2px;white-space:nowrap;">Web<span style="color:#5FA625;">Keeper</span></span>
       </div>
-      <nav class="site-nav">
-        <sc-for list="{{ navLinks }}" as="link" hint-placeholder-count="8">
-          <a href="{{ link.href }}" class="link-word wk-nav-link site-nav-link">{{ link.label }}</a>
-        </sc-for>
-      </nav>
-      <button onClick="{{ openContact }}" class="btn btn--small">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h6l4 4v13a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"></path><path d="M14 3v4h4"></path><path d="M9.5 12.5h5M9.5 16h3"></path></svg>
-        Solicitar Orçamento</button>
+      <div style="display:flex;align-items:center;gap:12px;flex-shrink:0;">
+        <div ref="{{ menuWrapRef }}" class="wk-menu-wrap">
+          <button onClick="{{ toggleMenu }}" aria-label="Abrir menu de navegação" class="wk-menu-btn">
+            <span></span><span></span><span></span>
+          </button>
+          <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+            <nav class="wk-nav-dropdown">
+              <sc-for list="{{ navLinks }}" as="link" hint-placeholder-count="11">
+                <a href="{{ link.href }}" onClick="{{ closeMenu }}" class="link-word wk-nav-link">{{ link.label }}</a>
+              </sc-for>
+            </nav>
+          </sc-if>
+        </div>
+        <button onClick="{{ openContact }}" class="btn btn--small">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h6l4 4v13a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"></path><path d="M14 3v4h4"></path><path d="M9.5 12.5h5M9.5 16h3"></path></svg>
+          Solicitar Orçamento</button>
+      </div>
     </header>
 
     <!-- HERO -->
@@ -125,6 +134,30 @@
           </div>
         </div>
 
+      </div>
+    </section>
+
+    <div class="section-divider"><div class="divider-line"></div></div>
+
+    <!-- CLIENTES -->
+    <section id="clientes" data-screen-label="Clientes" class="clients-section">
+      <div data-animate="fade-up">
+        <div class="section-intro">
+          <div class="section-subtitle">Clientes</div>
+          <h2 style="font-family:'Sora',sans-serif;font-size:clamp(26px,2.8vw,36px);color:#f2f4fa;font-weight:700;margin:0;letter-spacing:-.5px;">Empresas que já <span class="heading-accent">confiaram no nosso trabalho.</span></h2>
+        </div>
+        <div class="clients-grid">
+          <div style="position:absolute;inset-y:0;left:0;z-index:10;width:90px;background:linear-gradient(to right,#000000,transparent);"></div>
+          <div style="position:absolute;inset-y:0;right:0;z-index:10;width:90px;background:linear-gradient(to left,#000000,transparent);"></div>
+          <div style="display:flex;width:max-content;gap:20px;animation:wk-marquee 38s linear infinite;">
+            <sc-for list="{{ clientsLoop }}" as="cl" hint-placeholder-count="32">
+              <div style="display:flex;align-items:center;justify-content:center;height:88px;width:190px;flex-shrink:0;padding:16px 20px;border-radius:14px;background:{{ cl.bg }};border:1px solid {{ cl.border }};">
+                <img src="{{ cl.logo }}" alt="{{ cl.name }}" title="{{ cl.name }}" style="max-width:100%;max-height:100%;object-fit:contain;">
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <p class="clients-note">Outras empresas em Londrina, Apucarana, São Paulo, Brasil e nos EUA.</p>
       </div>
     </section>
 
@@ -263,30 +296,6 @@
             </div>
           </sc-for>
         </div>
-      </div>
-    </section>
-
-    <div class="section-divider"><div class="divider-line"></div></div>
-
-    <!-- CLIENTES -->
-    <section id="clientes" data-screen-label="Clientes" class="clients-section">
-      <div data-animate="fade-up">
-        <div class="section-intro">
-          <div class="section-subtitle">Clientes</div>
-          <h2 style="font-family:'Sora',sans-serif;font-size:clamp(26px,2.8vw,36px);color:#f2f4fa;font-weight:700;margin:0;letter-spacing:-.5px;">Empresas que já <span class="heading-accent">confiaram no nosso trabalho.</span></h2>
-        </div>
-        <div class="clients-grid">
-          <div style="position:absolute;inset-y:0;left:0;z-index:10;width:90px;background:linear-gradient(to right,#000000,transparent);"></div>
-          <div style="position:absolute;inset-y:0;right:0;z-index:10;width:90px;background:linear-gradient(to left,#000000,transparent);"></div>
-          <div style="display:flex;width:max-content;gap:20px;animation:wk-marquee 38s linear infinite;">
-            <sc-for list="{{ clientsLoop }}" as="cl" hint-placeholder-count="32">
-              <div style="display:flex;align-items:center;justify-content:center;height:88px;width:190px;flex-shrink:0;padding:16px 20px;border-radius:14px;background:{{ cl.bg }};border:1px solid {{ cl.border }};">
-                <img src="{{ cl.logo }}" alt="{{ cl.name }}" title="{{ cl.name }}" style="max-width:100%;max-height:100%;object-fit:contain;">
-              </div>
-            </sc-for>
-          </div>
-        </div>
-        <p class="clients-note">Outras empresas em Londrina, Apucarana, São Paulo, Brasil e nos EUA.</p>
       </div>
     </section>
 
@@ -705,7 +714,8 @@ class Component extends DCLogic {
     this.fabEyesRef = React.createRef();
     this.chatInputRef = React.createRef();
     this.chatScrollRef = React.createRef();
-    this.state = { activeServiceIdx: 0, openFaq: -1, scanning: false, scanResult: null, barsIn: false, chatOpen: false, chatMessages: [], chatInput: '', chatLoading: false, chatAsked: new Set(), voiceEnabled: true, voices: [], selectedVoiceURI: '',
+    this.menuWrapRef = React.createRef();
+    this.state = { activeServiceIdx: 0, openFaq: -1, scanning: false, scanResult: null, barsIn: false, menuOpen: false, chatOpen: false, chatMessages: [], chatInput: '', chatLoading: false, chatAsked: new Set(), voiceEnabled: true, voices: [], selectedVoiceURI: '',
       contactForm: { nome: '', whatsapp: '', email: '', mensagem: '' }, contactSending: false, contactDone: false };
     this.WEB3FORMS_KEY = 'a36da754-961e-40ab-920d-af3545dede05';
     this.formNomeRef = React.createRef();
@@ -719,6 +729,8 @@ class Component extends DCLogic {
       { label: 'O sistema fica sendo meu ou é assinatura?', kw: ['saas','assinatura','próprio','ativo'] },
       { label: 'Vocês atendem minha região?', kw: ['londrina','apucarana','são paulo','regi','remoto'] }
     ];
+    this.toggleMenu = this.toggleMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
     this.toggleChat = this.toggleChat.bind(this);
     this.toggleVoice = this.toggleVoice.bind(this);
     this.CHAT_GREETING = 'Olá! Sou o **Keeper**, assistente da WebKeeper. Pergunte sobre nossos serviços, processo ou investimento.';
@@ -854,6 +866,11 @@ class Component extends DCLogic {
     this.initEyes();
     this.initFabOrb();
     window.addEventListener('resize', this.handleResize = () => this.resizeAll());
+    document.addEventListener('click', this.handleOutsideMenuClick = (e) => {
+      if (this.state.menuOpen && this.menuWrapRef.current && !this.menuWrapRef.current.contains(e.target)) {
+        this.closeMenu();
+      }
+    });
     const loadVoices = () => {
       const all = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
       const pt = all.filter(v => v.lang && v.lang.toLowerCase().startsWith('pt'));
@@ -879,6 +896,14 @@ class Component extends DCLogic {
     this.fabGaze = window.KeeperOrb.attachGaze(this.fabEyesRef.current, {
       anchorEl: this.fabOrbRef.current, mode: 'fixed', max: 3.2, ease: 0.5
     });
+  }
+
+  toggleMenu() {
+    this.setState(s => ({ menuOpen: !s.menuOpen }));
+  }
+
+  closeMenu() {
+    this.setState({ menuOpen: false });
   }
 
   toggleChat() {
@@ -1038,6 +1063,7 @@ class Component extends DCLogic {
   componentWillUnmount() {
     cancelAnimationFrame(this._particleRAF);
     window.removeEventListener('resize', this.handleResize);
+    document.removeEventListener('click', this.handleOutsideMenuClick);
     if (this.eyesGaze) this.eyesGaze.destroy();
     if (this.fabGaze) this.fabGaze.destroy();
     if (window.speechSynthesis) window.speechSynthesis.cancel();
@@ -1317,10 +1343,14 @@ class Component extends DCLogic {
         const last = [...this.state.chatMessages].reverse().find(m => m.role === 'assistant');
         return this.pickFollowUps(last ? last.text : '', this.state.chatAsked).map(r => ({ label: r.label, send: () => this.sendChat(r.label) }));
       })(),
+      menuWrapRef: this.menuWrapRef,
+      menuOpen: this.state.menuOpen,
+      toggleMenu: this.toggleMenu,
+      closeMenu: this.closeMenu,
       navLinks: [
-        { label: 'Início', href: '#' }, { label: 'Serviços', href: '#servicos' },
-        { label: 'IA', href: '#ia' }, { label: 'Processo', href: '#processo' },
-        { label: 'Clientes', href: '#clientes' }, { label: 'Sobre', href: '#sobre' },
+        { label: 'Início', href: '#' }, { label: 'Clientes', href: '#clientes' },
+        { label: 'Serviços', href: '#servicos' }, { label: 'IA', href: '#ia' },
+        { label: 'Processo', href: '#processo' }, { label: 'Sobre', href: '#sobre' },
         { label: 'Projetos', href: '#projetos' }, { label: 'Diagnóstico', href: '#diagnostico' },
         { label: 'Investimento', href: '#investimento' }, { label: 'FAQ', href: '#faq' },
         { label: 'Contato', href: '#contato' }
