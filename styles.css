@@ -378,12 +378,12 @@ html:has(body.keeper-page-body), .keeper-page-body { height: 100%; overflow: hid
 
 /* Responsivo — breakpoints usados pelas seções de WebKeeper-site.html (atributos data-r) */
 @media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; padding-top: 78px; gap: 24px; }
+  .hero { grid-template-columns: minmax(0,1fr); padding-top: 78px; gap: 24px; }
   .site-header { padding: 14px 20px !important; gap: 12px !important; }
   section { padding-left: 22px !important; padding-right: 22px !important; }
   footer { padding-left: 22px !important; padding-right: 22px !important; }
   .section-divider { padding: 30px 22px !important; }
-  [data-r="hero"] { grid-template-columns: 1fr !important; min-height: 0 !important; padding-top: 78px !important; gap: 24px !important; }
+  [data-r="hero"] { grid-template-columns: minmax(0,1fr) !important; min-height: 0 !important; padding-top: 78px !important; gap: 24px !important; }
   [data-r="hero-visual"] { height: 340px !important; }
   [data-r="services-grid"] { grid-template-columns: 1fr !important; }
   [data-r="ia"] { grid-template-columns: 1fr !important; gap: 28px !important; }
