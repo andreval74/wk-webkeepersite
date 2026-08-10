@@ -102,7 +102,7 @@
       <div data-animate="fade-up" class="hero-copy">
         <div class="hero-badge">Fábrica de ideias · Parceira em tecnologia</div>
         <h1 class="hero-heading">
-          Transformamos Ideias em <span class="heading-accent">Sistemas Inteligentes que Vendem.</span>
+          Transformamos Ideias em <span class="heading-accent">Sistemas Inteligentes.</span>
         </h1>
         <p class="hero-text">
           Você traz a ideia, nós entramos como parceiros. Analisamos o desafio e desenvolvemos a solução completa: Inteligência Artificial, automação, Web3, sistemas sob medida e SEO. Resposta em até 24 horas, direto com quem decide.
@@ -116,6 +116,12 @@
               <span style="font-size:12.5px;color:#c4cae0;font-weight:600;">{{ t.label }}</span>
             </div>
           </sc-for>
+        </div>
+        <div style="margin-top:26px;">
+          <button onClick="{{ openApModal }}" style="display:inline-flex;align-items:center;gap:9px;padding:13px 24px;font-size:13.5px;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"></path><path d="M18.5 15.5l.6 1.6 1.6.6-1.6.6-.6 1.6-.6-1.6-1.6-.6 1.6-.6z"></path></svg>
+            Criar apresentação para minha empresa
+          </button>
         </div>
       </div>
 
@@ -674,6 +680,70 @@
       </div>
     </button>
   </div>
+
+  <!-- MODAL: APRESENTAÇÃO PERSONALIZADA -->
+  <sc-if value="{{ apModalOpen }}" hint-placeholder-val="{{ false }}">
+    <div role="dialog" aria-modal="true" aria-labelledby="ap-modal-title" onClick="{{ closeApModal }}" style="position:fixed;inset:0;z-index:5000;background:rgba(5,7,13,.72);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:20px;box-sizing:border-box;">
+      <div onClick="{{ stopApModalClick }}" style="width:min(480px,100%);max-height:88vh;overflow-y:auto;border-radius:20px;border:1px solid rgba(95,166,37,.3);background:#0b0f1a;box-shadow:0 30px 80px -20px rgba(0,0,0,.7);padding:30px 28px;box-sizing:border-box;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:6px;">
+          <div id="ap-modal-title" style="font-family:'Sora',sans-serif;font-size:19px;font-weight:700;color:#f2f4fa;letter-spacing:-.3px;">Criar apresentação para minha empresa</div>
+          <button onClick="{{ closeApModal }}" aria-label="Fechar" class="kp-icon-btn" style="color:#8b93ab;flex-shrink:0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+          </button>
+        </div>
+        <p style="font-size:13px;color:#8b93ab;line-height:1.6;margin:0 0 22px;">Conte um pouco sobre sua empresa. Nossa equipe analisa as informações públicas e prepara uma apresentação personalizada, sem compromisso.</p>
+
+        <sc-if value="{{ apDone }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:14px 0 6px;">
+            <div style="width:48px;height:48px;border-radius:50%;background:rgba(95,166,37,.15);border:1px solid rgba(95,166,37,.4);display:flex;align-items:center;justify-content:center;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5FA625" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+            </div>
+            <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:#f2f4fa;">Recebemos suas informações!</div>
+            <p style="font-size:13px;color:#8b93ab;margin:0;max-width:340px;">Vamos analisar os dados e preparar sua apresentação personalizada. Em breve entramos em contato pelo WhatsApp informado.</p>
+            <button onClick="{{ closeApModal }}" style="margin-top:8px;">Fechar</button>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ !apDone }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div class="wk-field" style="margin-bottom:0;">
+              <div style="font-size:12.5px;font-weight:600;color:#c4cae0;">Nome da empresa</div>
+              <input name="empresa" placeholder="Ex: Estofados Premium" value="{{ apForm.empresa }}" onChange="{{ onApFieldChange }}">
+            </div>
+            <div class="wk-field" style="margin-bottom:0;">
+              <div style="font-size:12.5px;font-weight:600;color:#c4cae0;">Nicho / segmento</div>
+              <input name="nicho" placeholder="Ex: Odontologia, moda, advocacia…" value="{{ apForm.nicho }}" onChange="{{ onApFieldChange }}">
+            </div>
+            <div class="wk-field" style="margin-bottom:0;">
+              <div style="font-size:12.5px;font-weight:600;color:#c4cae0;">Site ou Instagram (opcional)</div>
+              <input name="site" placeholder="https://... ou @seuinstagram" value="{{ apForm.site }}" onChange="{{ onApFieldChange }}">
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div class="wk-field" style="margin-bottom:0;">
+                <div style="font-size:12.5px;font-weight:600;color:#c4cae0;">Seu nome</div>
+                <input name="responsavel" placeholder="Seu nome" value="{{ apForm.responsavel }}" onChange="{{ onApFieldChange }}">
+              </div>
+              <div class="wk-field" style="margin-bottom:0;">
+                <div style="font-size:12.5px;font-weight:600;color:#c4cae0;">WhatsApp</div>
+                <input name="whatsapp" placeholder="(43) 99999-9999" value="{{ apForm.whatsapp }}" onChange="{{ onApWhatsappChange }}">
+              </div>
+            </div>
+            <label style="display:flex;align-items:flex-start;gap:10px;font-size:11.5px;color:#8b93ab;line-height:1.5;cursor:pointer;margin-top:2px;">
+              <input type="checkbox" checked="{{ apForm.consent }}" onChange="{{ onApConsentChange }}" style="margin-top:2px;flex-shrink:0;width:15px;height:15px;">
+              <span>Autorizo a WebKeeper a analisar as informações públicas da empresa informada e a utilizar meus dados de contato para responder a esta solicitação e conversar sobre os serviços apresentados. Estou ciente de que a apresentação será gerada com auxílio de inteligência artificial. Ver <a href="./politica-de-privacidade.html" target="_blank" rel="noopener" class="link-word" style="color:#9fdc6e;">Política de Privacidade</a>.</span>
+            </label>
+            <sc-if value="{{ apError }}" hint-placeholder-val="{{ '' }}">
+              <div style="font-size:12px;color:#ff8a8a;background:rgba(255,80,80,.1);border:1px solid rgba(255,80,80,.3);border-radius:8px;padding:9px 12px;">{{ apError }}</div>
+            </sc-if>
+            <button onClick="{{ submitApresentacao }}" style="width:100%;margin-top:4px;">
+              <sc-if value="{{ apSending }}" hint-placeholder-val="{{ false }}">Enviando…</sc-if>
+              <sc-if value="{{ !apSending }}" hint-placeholder-val="{{ true }}">Criar minha apresentação</sc-if>
+            </button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
 </div>
 
 </x-dc>
@@ -716,7 +786,8 @@ class Component extends DCLogic {
     this.chatScrollRef = React.createRef();
     this.menuWrapRef = React.createRef();
     this.state = { activeServiceIdx: 0, openFaq: -1, scanning: false, scanResult: null, barsIn: false, menuOpen: false, chatOpen: false, chatMessages: [], chatInput: '', chatLoading: false, chatAsked: new Set(), voiceEnabled: true, voices: [], selectedVoiceURI: '',
-      contactForm: { nome: '', whatsapp: '', email: '', mensagem: '' }, contactSending: false, contactDone: false };
+      contactForm: { nome: '', whatsapp: '', email: '', mensagem: '' }, contactSending: false, contactDone: false,
+      apModalOpen: false, apForm: { empresa: '', nicho: '', site: '', responsavel: '', whatsapp: '', consent: false }, apSending: false, apDone: false, apError: '' };
     this.WEB3FORMS_KEY = 'a36da754-961e-40ab-920d-af3545dede05';
     this.formNomeRef = React.createRef();
     this.replyPool = [
@@ -1299,6 +1370,76 @@ class Component extends DCLogic {
     this.setState({ contactSending: false, contactDone: true });
   }
 
+  // --- Apresentação personalizada (Fase 1: fluxo de UI local; a Fase 2 liga ao back-end) ---
+
+  openApModal() {
+    this.setState({ apModalOpen: true, apError: '' });
+  }
+
+  closeApModal() {
+    this.setState({ apModalOpen: false });
+  }
+
+  onApFieldChange(e) {
+    const { name, value } = e.target;
+    this.setState(s => ({ apForm: { ...s.apForm, [name]: value } }));
+  }
+
+  onApConsentChange(e) {
+    const checked = e.target.checked;
+    this.setState(s => ({ apForm: { ...s.apForm, consent: checked } }));
+  }
+
+  formatApWhatsapp(raw) {
+    const digits = (raw || '').replace(/\D/g, '').slice(0, 11);
+    if (digits.length <= 2) return digits;
+    if (digits.length <= 6) return '(' + digits.slice(0, 2) + ') ' + digits.slice(2);
+    if (digits.length <= 10) return '(' + digits.slice(0, 2) + ') ' + digits.slice(2, 6) + '-' + digits.slice(6);
+    return '(' + digits.slice(0, 2) + ') ' + digits.slice(2, 7) + '-' + digits.slice(7);
+  }
+
+  onApWhatsappChange(e) {
+    const formatted = this.formatApWhatsapp(e.target.value);
+    this.setState(s => ({ apForm: { ...s.apForm, whatsapp: formatted } }));
+  }
+
+  isValidApSiteOrInstagram(value) {
+    const v = (value || '').trim();
+    if (!v) return true;
+    if (/^@[a-zA-Z0-9._]{1,30}$/.test(v)) return true;
+    try {
+      const url = new URL(/^https?:\/\//i.test(v) ? v : 'https://' + v);
+      return /^https?:$/.test(url.protocol) && !!url.hostname && url.hostname.includes('.');
+    } catch (e) { return false; }
+  }
+
+  validateApForm() {
+    const f = this.state.apForm;
+    if (!f.empresa.trim()) return 'Informe o nome da empresa.';
+    if (!f.nicho.trim()) return 'Informe o nicho ou segmento da empresa.';
+    if (!f.responsavel.trim()) return 'Informe o nome do responsável.';
+    const waDigits = f.whatsapp.replace(/\D/g, '');
+    if (waDigits.length < 10 || waDigits.length > 11) return 'Informe um WhatsApp válido, com DDD.';
+    if (!this.isValidApSiteOrInstagram(f.site)) return 'Informe um site (https://...) ou usuário do Instagram (@usuario) válido, ou deixe em branco.';
+    if (!f.consent) return 'É necessário autorizar a análise das informações e o contato para continuar.';
+    return '';
+  }
+
+  async submitApresentacao() {
+    if (this.state.apSending) return;
+    const err = this.validateApForm();
+    if (err) { this.setState({ apError: err }); return; }
+    this.setState({ apSending: true, apError: '' });
+    // Fase 1: ainda não existe back-end (isso é a Fase 2). Simula o envio para validar a UI;
+    // a Fase 2 substitui o corpo deste try por um fetch('./api/criar-apresentacao.php', ...).
+    try {
+      await new Promise(resolve => setTimeout(resolve, 900));
+      this.setState({ apSending: false, apDone: true });
+    } catch (e) {
+      this.setState({ apSending: false, apError: 'Não foi possível enviar agora. Tente novamente em instantes.' });
+    }
+  }
+
   renderVals() {
     const wa = (m) => 'https://wa.me/5543999446606?text=' + encodeURIComponent(m);
     return {
@@ -1316,6 +1457,18 @@ class Component extends DCLogic {
       onContactFieldChange: (e) => this.onContactFieldChange(e),
       onContactEnter: (e) => this.onContactEnter(e),
       submitInlineForm: () => this.submitContact(),
+      apModalOpen: this.state.apModalOpen,
+      openApModal: () => this.openApModal(),
+      closeApModal: () => this.closeApModal(),
+      stopApModalClick: (e) => e.stopPropagation(),
+      apForm: this.state.apForm,
+      onApFieldChange: (e) => this.onApFieldChange(e),
+      onApWhatsappChange: (e) => this.onApWhatsappChange(e),
+      onApConsentChange: (e) => this.onApConsentChange(e),
+      apSending: this.state.apSending,
+      apDone: this.state.apDone,
+      apError: this.state.apError,
+      submitApresentacao: () => this.submitApresentacao(),
       chatOpen: this.state.chatOpen, toggleChat: this.toggleChat, chatLoading: this.state.chatLoading,
       voiceEnabled: this.state.voiceEnabled, toggleVoice: this.toggleVoice,
       voiceLabel: this.state.voiceEnabled ? 'Silenciar a voz do Keeper' : 'Reativar a voz do Keeper',
