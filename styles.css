@@ -54,6 +54,10 @@ button { font: inherit; }
   [data-r="cursor"] { display: none !important; }
 }
 
+/* Foco visível para navegação por teclado — !important porque vários campos
+   (inclusive inline, ex.: input do chat) zeram outline para o estado padrão. */
+:focus-visible { outline: 2px solid var(--green-soft) !important; outline-offset: 2px; }
+
 /* Buttons */
 .btn,
 a.btn,
@@ -206,6 +210,11 @@ header nav a {
 .wk-nav-dropdown a { padding: 10px 14px; border-radius: 9px; }
 .wk-nav-dropdown a:hover, .wk-nav-dropdown a:focus { background: rgba(95,166,37,.1); }
 
+/* Backdrop atrás do menu mobile: fecha ao tocar fora e trava o scroll da
+   página por trás, pra não rolar o conteúdo junto com o dropdown aberto. */
+[data-r="nav-backdrop"] { position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 590; }
+body.wk-menu-open { overflow: hidden; }
+
 /* Links de palavra: texto puro (nav, rodapé, links inline) — sem fundo/glow,
    só uma troca de cor no hover. initCursor() (no componente) já pula o anel
    de cursor "grande" pra esses elementos, então o hover fica só nesta regra. */
@@ -213,18 +222,8 @@ header nav a {
 .link-word:hover, .link-word:focus { color: var(--text-soft); }
 
 /* Hero */
-.hero { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; padding: 92px 56px 0; max-width: 1560px; margin: 0 auto; min-height: 72vh; }
-.hero-copy { position: relative; z-index: 2; display: grid; gap: 22px; }
-.hero-badge { font-size: 12.5px; font-weight: 700; letter-spacing: 2px; color: var(--green); text-transform: uppercase; margin-bottom: 22px; }
-.hero-heading { font-family: 'Sora', sans-serif; font-size: clamp(38px, 4vw, 54px); line-height: 1.12; font-weight: 700; color: var(--text); margin: 0 0 22px; letter-spacing: -1px; }
 /* Destaque de duas cores usado em todos os títulos do site (padrão do hero "Transformamos Ideias..."). */
 .heading-accent { background: linear-gradient(100deg, var(--green), var(--green-soft)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: var(--green); }
-.hero-text { font-size: 16.5px; line-height: 1.65; color: #8b93ab; max-width: 500px; margin: 0 0 34px; }
-.hero-actions { display: flex; gap: 16px; margin-bottom: 44px; flex-wrap: wrap; }
-.hero-actions .btn { padding: 14px 26px; font-size: 14.5px; }
-.hero-accent { display: flex; gap: 32px; flex-wrap: wrap; margin-bottom: 28px; }
-.hero-accent span { color: var(--text); }
-.hero-visual { position: relative; height: 520px; display: flex; align-items: center; justify-content: center; }
 
 /* Section dividers, eyebrows e textos padrão */
 .section-divider { max-width: 1560px; margin: 0 auto; padding: var(--section-gap) 56px; }
@@ -250,10 +249,6 @@ header nav a {
 /* Card com o mesmo fundo em gradiente, usado em vários painéis (Cenário Digital,
    detalhe de serviço, Por Que a WebKeeper, Solicite uma proposta) */
 .panel-card { background: linear-gradient(160deg, rgba(30,48,86,.28), rgba(10,16,32,.5)); }
-
-/* Cenário digital */
-.scenario-section { padding: 0 56px 0; max-width: 1560px; margin: 0 auto; scroll-margin-top: 96px; }
-.scenario-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 
 /* Serviços */
 .service-section { padding: 0 56px 0; max-width: 1560px; margin: 0 auto; scroll-margin-top: 96px; }
@@ -305,6 +300,18 @@ html:has(body.keeper-page-body), .keeper-page-body { height: 100%; overflow: hid
 .keeper-site-link { display: inline-flex; align-items: center; justify-content: center; padding: 9px 24px; border-radius: 11px; border: 1.5px solid rgba(95,166,37,.55); background: rgba(95,166,37,.14); color: #eafddc; box-shadow: var(--shadow); transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease; }
 .keeper-site-link:hover { background: rgba(95,166,37,.26); border-color: var(--green); color: rgba(255,255,255,.85); transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(95,166,37,.8), 0 0 18px 3px rgba(95,166,37,.9), 0 0 40px 8px rgba(95,166,37,.55), 0 14px 34px -12px rgba(95,166,37,.5); }
 
+/* Chips de perguntas sugeridas e botões de ação — só aparecem no mobile/tablet
+   (ver media queries no fim do arquivo); no desktop o fluxo já é o
+   autocomplete por Tab + o link "Entrar no site". */
+.keeper-chip-row { display: none; gap: 8px; overflow-x: auto; padding: 0 18px 14px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.keeper-chip-row::-webkit-scrollbar { display: none; }
+.keeper-chip { flex-shrink: 0; white-space: nowrap; padding: 9px 14px; min-height: 36px; border-radius: 999px; border: 1px solid rgba(95,166,37,.4); background: rgba(95,166,37,.1); color: #dfe3f0; font-size: 12.5px; cursor: pointer; font-family: inherit; }
+.keeper-chip:hover, .keeper-chip:focus-visible { border-color: var(--green); background: rgba(95,166,37,.2); }
+.keeper-mobile-actions { display: none; flex-direction: column; gap: 10px; width: 100%; margin-top: 6px; }
+.keeper-mobile-btn { justify-content: center; min-height: 44px; }
+.keeper-mobile-btn--whatsapp { background: #25D366; border-color: #25D366; color: #052e16; }
+.keeper-mobile-btn--whatsapp:hover { background: #1fb959; border-color: #1fb959; color: #052e16; }
+
 /* Processo: badge nasce cinza e vira verde quando a linha do scroll chega nele (JS em initScrollAnimations) */
 .process-badge {
   width: 46px; height: 46px; border-radius: 50%;
@@ -319,7 +326,7 @@ html:has(body.keeper-page-body), .keeper-page-body { height: 100%; overflow: hid
 /* Chat do Keeper (mensagens + botões de ícone) */
 .kp-msg { animation: kp-in .35s ease both; }
 .kp-send-btn { display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 10px; border: none; cursor: pointer; background: linear-gradient(135deg,#3f7a17,#5FA625); color: #fff; flex-shrink: 0; }
-.kp-icon-btn { display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border: none; background: none; cursor: pointer; }
+.kp-icon-btn { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: none; background: none; cursor: pointer; }
 #bg-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; background: transparent; }
 
 /* Fundo animado (aurora) */
@@ -327,7 +334,16 @@ html:has(body.keeper-page-body), .keeper-page-body { height: 100%; overflow: hid
 .wk-aurora span { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .16; will-change: transform; }
 .wk-aurora span:nth-child(1) { width: 52vw; height: 52vw; left: -12vw; top: -10vh; background: #5FA625; animation: wk-aurora-a 26s ease-in-out infinite; }
 .wk-aurora span:nth-child(2) { width: 42vw; height: 42vw; right: -10vw; bottom: -8vh; background: #2f7a3f; animation: wk-aurora-b 32s ease-in-out infinite; }
-@media (prefers-reduced-motion: reduce) { .wk-aurora span { animation: none !important; } }
+@media (prefers-reduced-motion: reduce) {
+  .wk-aurora span { animation: none !important; }
+  /* Mantém só o piscar de olhos (feedback pequeno, de vida) e desliga o
+     resto: flutuação, respiração e giro do orbe são movimento contínuo de
+     grande amplitude, puramente decorativo (WCAG 2.3.3). */
+  .keeper-orb { animation: none !important; }
+  .keeper-ring { animation: none !important; }
+  .keeper-sphere, .keeper-orb.is-speaking .keeper-sphere, .keeper-orb.is-thinking .keeper-sphere { animation: none !important; }
+  .keeper-orb.is-speaking .keeper-bloom { animation: none !important; }
+}
 
 /* Keeper Orb — componente visual compartilhado (esfera animada com "olhos")
    Usado em: WebKeeper.html, WebKeeper-site.html e keeper-orb.html.
@@ -383,21 +399,16 @@ html:has(body.keeper-page-body), .keeper-page-body { height: 100%; overflow: hid
 @media (max-width: 900px) {
   [data-r="hero-vk"] { height: auto !important; min-height: 560px; }
   [data-r="hero-vk"] > div:first-child { position: relative !important; width: 100% !important; height: 260px !important; }
-  [data-r="hero-vk"] > div:nth-child(2) { clip-path: none !important; background: rgba(255,255,255,.97) !important; box-shadow: none !important; }
+  [data-r="hero-vk"] > div:nth-child(2) { display: none !important; }
   [data-r="hero-vk"] > div:nth-child(3) { position: relative !important; height: auto !important; padding: 24px 24px 32px !important; }
   [data-r="hero-vk"] > div:nth-child(3) > div { padding: 0 !important; display: block !important; }
   [data-r="hero-vk"] > div:nth-child(3) > div > div { max-width: 100% !important; }
-  .hero { grid-template-columns: minmax(0,1fr); padding-top: 78px; gap: 24px; }
   .site-header { padding: 14px 20px !important; gap: 12px !important; }
   section { padding-left: 22px !important; padding-right: 22px !important; }
   footer { padding-left: 22px !important; padding-right: 22px !important; }
   .section-divider { padding: 30px 22px !important; }
-  [data-r="hero"] { grid-template-columns: minmax(0,1fr) !important; min-height: 0 !important; padding-top: 78px !important; gap: 24px !important; }
-  [data-r="hero-visual"] { height: 340px !important; }
   [data-r="services-grid"] { grid-template-columns: 1fr !important; }
-  [data-r="ia"] { grid-template-columns: 1fr !important; gap: 28px !important; }
   [data-r="diag"] { grid-template-columns: 1fr !important; gap: 32px !important; }
-  [data-r="ia-chips"] { grid-template-columns: repeat(3, 1fr) !important; }
   [data-r="projects"] { grid-template-columns: repeat(2, 1fr) !important; }
   [data-r="footer"] { grid-template-columns: 1fr 1fr !important; gap: 30px !important; }
   [data-r="process"] { grid-template-columns: repeat(2, 1fr) !important; gap: 30px 20px !important; }
@@ -408,9 +419,19 @@ html:has(body.keeper-page-body), .keeper-page-body { height: 100%; overflow: hid
   .two-col-wrap { grid-template-columns: 1fr !important; gap: 28px !important; }
   [data-r="why"] { grid-template-columns: repeat(2, 1fr) !important; }
   [data-r="invest"] { grid-template-columns: 1fr !important; }
+  /* Tela de entrada do Keeper (WebKeeper.html) — reduz o orbe e o histórico
+     de mensagens pra sobrar espaço vertical pros chips e botões novos. */
+  /* .keeper-page só tinha min-height, então crescia além da viewport com o
+     conteúdo novo (chips + botões) e o overflow-y:auto do .keeper-main nunca
+     entrava em ação — trava a altura pra forçar o scroll interno. */
+  .keeper-page { height: 100vh; height: 100dvh; }
+  .keeper-orb-wrapper { --keeper-size: 104px; }
+  .keeper-main { padding: 6px 22px 22px; overflow-y: auto; }
+  .keeper-messages { max-height: 180px; }
+  .keeper-chip-row { display: flex; }
+  .keeper-mobile-actions { display: flex; }
 }
 @media (max-width: 600px) {
-  .hero { padding-top: 60px; }
   .site-header { padding: 10px 8px !important; gap: 4px !important; flex-wrap: nowrap !important; }
   .site-header > div:first-child { gap: 5px !important; min-width: 0; }
   .site-header > div:last-child { gap: 4px !important; flex-shrink: 0; }
@@ -418,17 +439,41 @@ html:has(body.keeper-page-body), .keeper-page-body { height: 100%; overflow: hid
   .site-header > div:first-child span:first-of-type { font-size: 15px !important; white-space: nowrap; }
   .site-header .btn svg { display: none; }
   .site-header button.btn { padding: 8px 10px !important; font-size: 12px !important; }
-  .wk-menu-btn { width: 30px; height: 30px; flex-shrink: 0; }
+  .wk-menu-btn { width: 44px; height: 44px; flex-shrink: 0; }
   .wk-nav-dropdown { right: auto; left: 50%; transform: translateX(-50%); }
   section { padding-left: 16px !important; padding-right: 16px !important; }
   footer { padding-left: 16px !important; padding-right: 16px !important; }
   .section-divider { padding: 22px 16px !important; }
-  [data-r="hero-visual"] { height: 260px !important; }
   [data-r="pillar-body"] { grid-template-columns: 1fr !important; padding-left: 22px !important; padding-right: 22px !important; }
-  [data-r="ia-chips"] { grid-template-columns: repeat(2, 1fr) !important; }
   [data-r="projects"] { grid-template-columns: 1fr !important; }
   [data-r="process"] { grid-template-columns: 1fr !important; }
   [data-r="footer"] { grid-template-columns: 1fr !important; }
-  [data-r="cta"] { padding: 30px 20px !important; text-align: center; }
+  [data-r="cta"] { padding: 30px 20px !important; text-align: center; justify-content: center !important; }
+  [data-r="footer"] { text-align: center !important; }
+  [data-r="footer"] > div:first-child { display: flex !important; flex-direction: column !important; align-items: center !important; }
+  [data-r="footer-brand-row"], [data-r="footer-socials"] { justify-content: center !important; }
+  [data-r="footer-tagline"] { margin-left: auto !important; margin-right: auto !important; }
+  [data-r="footer-bottom"] { flex-direction: column !important; justify-content: center !important; text-align: center !important; }
   [data-r="why"] { grid-template-columns: 1fr !important; }
+  [data-r="ap-form-row"] { grid-template-columns: 1fr !important; }
+  .keeper-orb-wrapper { --keeper-size: 92px; }
+  .keeper-main { padding: 4px 16px 18px; overflow-y: auto; }
+  .keeper-messages { max-height: 150px; }
+  .keeper-site-links { flex-direction: column; width: 100%; }
+  .keeper-site-links .keeper-site-link { width: 100%; }
+
+  /* Títulos, subtítulos e botões principais centralizados no celular
+     para melhorar a leitura — o conteúdo interno de cards/listas continua
+     alinhado à esquerda, só os cabeçalhos de seção e CTAs são centralizados. */
+  [data-r="hero-copy"] { text-align: center !important; margin-left: auto !important; margin-right: auto !important; }
+  [data-r="hero-cta-row"] { justify-content: center !important; }
+  [data-r="sobre-copy"] { text-align: center !important; }
+  [data-r="why-wrap"] { text-align: center !important; }
+  [data-r="why"] { text-align: left !important; }
+  [data-r="invest-heading"] { text-align: center !important; }
+  [data-r="process-heading"] { text-align: center !important; }
+  [data-r="diag-heading"] { text-align: center !important; }
+  [data-r="projects-heading"] { text-align: center !important; }
+  .service-top { flex-direction: column !important; align-items: center !important; text-align: center !important; }
+  .service-description { margin: 0 auto !important; }
 }
