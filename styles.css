@@ -17,6 +17,7 @@
   --radius: 16px;
   --radius-sm: 10px;
   --shadow: 0 0 22px -6px rgba(95,166,37,.55);
+  --section-gap: 40px;
 }
 
 /* Base reset */
@@ -110,7 +111,7 @@ a[style*="padding"]:hover {
 }
 
 .wk-field { display: flex; flex-direction: column; gap: 6px; }
-.wk-field input {
+.wk-field input, .wk-field select, .wk-field textarea {
   width: 100%;
   box-sizing: border-box;
   background: rgba(8,13,26,.6);
@@ -123,8 +124,10 @@ a[style*="padding"]:hover {
   outline: none;
   transition: border-color .25s ease;
 }
-.wk-field input:focus { border-color: var(--green); }
-.wk-field input::placeholder { color: #5b6280; }
+.wk-field input:focus, .wk-field select:focus, .wk-field textarea:focus { border-color: var(--green); }
+.wk-field input::placeholder, .wk-field textarea::placeholder { color: #5b6280; }
+.wk-field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238b93ab' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+.wk-field select option { background: #0b0f1a; color: #eef1f8; }
 
 /* Botão "Quero essa solução": mesma linguagem visual dos outros botões (borda +
    fundo translúcido + glow no hover), só tingido com a cor do serviço ativo. */
@@ -224,7 +227,7 @@ header nav a {
 .hero-visual { position: relative; height: 520px; display: flex; align-items: center; justify-content: center; }
 
 /* Section dividers, eyebrows e textos padrão */
-.section-divider { max-width: 1560px; margin: 0 auto; padding: 40px 56px; }
+.section-divider { max-width: 1560px; margin: 0 auto; padding: var(--section-gap) 56px; }
 .divider-line { height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,.30), transparent); }
 .section-intro { max-width: 680px; margin: 0 auto; text-align: center; padding: 0 56px; }
 .section-subtitle {
@@ -378,6 +381,12 @@ html:has(body.keeper-page-body), .keeper-page-body { height: 100%; overflow: hid
 
 /* Responsivo — breakpoints usados pelas seções de WebKeeper-site.html (atributos data-r) */
 @media (max-width: 900px) {
+  [data-r="hero-vk"] { height: auto !important; min-height: 560px; }
+  [data-r="hero-vk"] > div:first-child { position: relative !important; width: 100% !important; height: 260px !important; }
+  [data-r="hero-vk"] > div:nth-child(2) { clip-path: none !important; background: rgba(255,255,255,.97) !important; box-shadow: none !important; }
+  [data-r="hero-vk"] > div:nth-child(3) { position: relative !important; height: auto !important; padding: 24px 24px 32px !important; }
+  [data-r="hero-vk"] > div:nth-child(3) > div { padding: 0 !important; display: block !important; }
+  [data-r="hero-vk"] > div:nth-child(3) > div > div { max-width: 100% !important; }
   .hero { grid-template-columns: minmax(0,1fr); padding-top: 78px; gap: 24px; }
   .site-header { padding: 14px 20px !important; gap: 12px !important; }
   section { padding-left: 22px !important; padding-right: 22px !important; }

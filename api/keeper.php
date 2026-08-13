@@ -1,4 +1,11 @@
 <?php
+/**
+ * api/keeper.php — backend do chat do Keeper (assistente de IA).
+ * Recebe POST { messages, system, max_tokens } de WebKeeper.html, monta o
+ * contexto a partir de docs/webkeeper-faq.md (base de conhecimento) e
+ * repassa para a API da Groq usando a chave em api/config.php (fora do
+ * git, ver .gitignore).
+ */
 header('Content-Type: application/json; charset=utf-8');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -80,10 +87,33 @@ $lastUserMessage = '';
 foreach (array_reverse($body['messages']) as $m) {
     if (($m['role'] ?? '') !== 'assistant') { $lastUserMessage = (string) ($m['content'] ?? ''); break; }
 }
-$faqContext = faqBuildContext(__DIR__ . '/../webkeeper-faq.md', $lastUserMessage);
+$faqContext = faqBuildContext(__DIR__ . '/../docs/webkeeper-faq.md', $lastUserMessage);
 if ($faqContext !== '') {
-    $system .= "\n\nBASE DE CONHECIMENTO (use apenas o que for relevante; nunca cite este cabeçalho nem mencione que é um arquivo):\n" . $faqContext;
+    $system .= "\n\nBASE DE CONHECIMENTO (fatos de referência — use apenas o que for relevante, nunca cite este cabeçalho nem mencione que é um arquivo, e NUNCA copie estas frases literalmente: reescreva com suas próprias palavras):\n" . $faqContext;
 }
+
+// Rotação determinística do fechamento: em vez de confiar só na IA pra "lembrar" de variar
+// (o que falhou nos testes — ela sempre puxava pro WhatsApp), o backend decide por código
+// qual tipo de fechamento usar nesta resposta específica, alternando com base em quantas
+// respostas do assistente já existem na conversa. Independe de sessão/cookie.
+$assistantTurns = 0;
+foreach ($body['messages'] as $m) {
+    if (($m['role'] ?? '') === 'assistant') $assistantTurns++;
+}
+$closingModes = [
+    'whatsapp' => 'Feche esta resposta puxando o usuário pro WhatsApp — inclua o link embutido naturalmente na frase, transformando a palavra "WhatsApp" no link (ex.: "fale conosco pelo [WhatsApp](https://wa.me/5543999446606)").',
+    'pergunta' => 'Feche esta resposta SEM nenhum link de WhatsApp — em vez disso, devolva ao usuário uma pergunta curta e específica pra entender melhor a necessidade ou o negócio dele.',
+    'site'     => 'Feche esta resposta sugerindo conhecer o site completo da WebKeeper pra ver mais detalhes, cases e serviços — sem mencionar WhatsApp nem incluir link nesta resposta.',
+    'direto'   => 'Não feche com nenhum convite, pergunta ou link desta vez — apenas responda de forma direta e completa, sem CTA no final.',
+];
+$modeKeys = array_keys($closingModes);
+if ($assistantTurns === 0) {
+    $firstTurnOptions = ['whatsapp', 'pergunta', 'site'];
+    $mode = $firstTurnOptions[array_rand($firstTurnOptions)];
+} else {
+    $mode = $modeKeys[$assistantTurns % count($modeKeys)];
+}
+$system .= "\n\nINSTRUÇÃO DE FECHAMENTO PARA ESTA RESPOSTA (obrigatória, tem prioridade sobre qualquer exemplo do FAQ ou do prompt principal — exceto se esta resposta for uma recusa por segurança/regra de nunca-responder, aí ignore esta instrução e apenas recuse normalmente): " . $closingModes[$mode];
 
 $messages = [];
 if ($system !== '') {

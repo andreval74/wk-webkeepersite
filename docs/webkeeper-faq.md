@@ -1,7 +1,7 @@
 # Base de Conhecimento do Keeper (IA da WebKeeper)
 
 Este arquivo é a fonte de verdade que o Keeper consulta para responder. Contém:
-1. Dados de contato reais (sempre incluir número + link, nunca só o canal).
+1. Dados de contato reais (o link do WhatsApp e a variação de fechamento já são controlados pelas regras do prompt principal — as respostas abaixo trazem só os fatos, não repita o mesmo tipo de fechamento em toda resposta).
 2. Perguntas e respostas mais frequentes, com o padrão de resposta esperado.
 3. Regra de "pivô comercial": se a pergunta for fora do escopo da WebKeeper, mas descrever um negócio/processo real, o Keeper não deve simplesmente recusar, deve identificar a oportunidade de sistema/automação/site para aquele negócio e oferecer.
 4. O que o Keeper NUNCA deve responder, mesmo sob insistência do usuário.
@@ -15,7 +15,7 @@ Este arquivo é a fonte de verdade que o Keeper consulta para responder. Contém
 - Região: Londrina/PR e Apucarana/PR (presencial), além de São Paulo, outras cidades do Brasil e EUA (remoto)
 
 ## Regra de contato (aplicar sempre)
-Toda vez que a resposta mencionar "fale conosco", "entre em contato" ou "via WhatsApp", ela DEVE incluir o número (43) 99944-6606 e o link https://wa.me/5543999446606 na mesma resposta, nunca citar o canal sem os dois dados. O link deve ser escrito em formato markdown clicável, ex: [chame no WhatsApp](https://wa.me/5543999446606), nunca como URL crua.
+Toda vez que a resposta mencionar "fale conosco", "entre em contato" ou "via WhatsApp", ela DEVE incluir o link https://wa.me/5543999446606 na mesma resposta, nunca como URL crua e nunca escrevendo o número de telefone por extenso. O jeito certo é transformar a própria palavra "WhatsApp" no link — [WhatsApp](https://wa.me/5543999446606) — encaixando naturalmente na gramática da frase (ex.: "fale conosco pelo [WhatsApp](https://wa.me/5543999446606)"). Nunca cole um rótulo fixo tipo "[chame no WhatsApp]" sem checar se ele faz sentido gramatical na frase.
 
 ## Regra de pivô comercial (aplicar sempre que a pergunta for "fora do escopo")
 A WebKeeper não presta o serviço fim que o usuário descreveu (ex.: não faz pizza, não é advogado, não vende produto X), mas quase sempre existe um sistema/site/automação que a WebKeeper poderia construir para esse negócio. Nesses casos:
@@ -30,10 +30,10 @@ Exceção: se a pergunta não tem NENHUMA relação com negócio/site/sistema/te
 ## Perguntas frequentes
 
 **Como entro em contato / falar com um humano?**
-Atendimento 100% pelo WhatsApp, 24h, direto comigo, sem intermediários: (43) 99944-6606 (https://wa.me/5543999446606)
+Atendimento 100% pelo WhatsApp, 24h, direto comigo, sem intermediários: [chame no WhatsApp](https://wa.me/5543999446606).
 
 **Quanto custa um projeto / qual o investimento?**
-Não trabalhamos com pacotes fechados de preço. Cada proposta é sob consulta, personalizada ao escopo real, enviada em até 24h após o diagnóstico. Chame no WhatsApp (43) 99944-6606 (https://wa.me/5543999446606) para receber sua proposta.
+Não trabalhamos com pacotes fechados de preço. Cada proposta é sob consulta, personalizada ao escopo real, enviada em até 24h após o diagnóstico.
 
 **Quais serviços vocês oferecem?**
 Inteligência Artificial aplicada, Automação de Processos, Web3 & Blockchain, Sistemas sob Medida, SEO & Performance e Produtos Digitais (landing pages, SaaS).
@@ -57,12 +57,12 @@ Sim, para ideias em estágio inicial sem verba de desenvolvimento, avaliamos ent
 Sim, dentro de Sistemas sob Medida / Produtos Digitais, sob consulta conforme o escopo.
 
 **Quanto tempo demora um projeto?**
-Varia com o escopo; isso é definido na etapa de Planejamento, após o Diagnóstico. Fale no WhatsApp (43) 99944-6606 para estimarmos seu caso.
+Varia com o escopo; isso é definido na etapa de Planejamento, após o Diagnóstico.
 
 ### Contato e atendimento
 
 **Vocês têm loja física ou escritório para visitar?**
-O atendimento é feito diretamente pelo WhatsApp, 24h, o que agiliza muito o processo. Para quem está em Londrina ou Apucarana, também é possível alinhar um encontro presencial: [chame no WhatsApp](https://wa.me/5543999446606) para combinar.
+O atendimento é feito diretamente pelo WhatsApp, 24h, o que agiliza muito o processo. Para quem está em Londrina ou Apucarana, também é possível alinhar um encontro presencial.
 
 **Qual o horário de atendimento?**
 O atendimento é 24 horas por dia, direto pelo WhatsApp, sem intermediários.
@@ -71,19 +71,19 @@ O atendimento é 24 horas por dia, direto pelo WhatsApp, sem intermediários.
 Sim, o atendimento é 24h todos os dias, incluindo fins de semana.
 
 **Qual o e-mail de contato?**
-contato@webkeeper.com.br, mas a forma mais rápida de resposta é pelo WhatsApp: (43) 99944-6606, [chame no WhatsApp](https://wa.me/5543999446606).
+contato@webkeeper.com.br, mas a forma mais rápida de resposta é pelo WhatsApp.
 
 **Vocês têm redes sociais?**
-Sim, estamos no Instagram, Facebook e LinkedIn como WebKeeper. O canal mais direto para conversar, porém, é o WhatsApp: (43) 99944-6606.
+Sim, estamos no Instagram, Facebook e LinkedIn como WebKeeper. O canal mais direto para conversar, porém, é o WhatsApp.
 
 **Como peço um orçamento?**
-Basta chamar no WhatsApp (43) 99944-6606, [clique aqui](https://wa.me/5543999446606), contar seu desafio, e você recebe uma proposta personalizada em até 24 horas.
+Basta chamar no WhatsApp, contar seu desafio, e você recebe uma proposta personalizada em até 24 horas.
 
 **Vocês atendem em inglês para clientes dos EUA?**
-Atendemos empresas nos Estados Unidos remotamente; para alinhar idioma e fuso do atendimento, o ideal é combinar diretamente pelo WhatsApp (43) 99944-6606.
+Atendemos empresas nos Estados Unidos remotamente; para alinhar idioma e fuso do atendimento, o ideal é combinar diretamente pelo WhatsApp.
 
 **Preciso agendar uma reunião para conversar?**
-Não é obrigatório. O primeiro contato pode ser direto pelo WhatsApp (43) 99944-6606. Se o projeto exigir, agendamos uma call ou reunião nas etapas seguintes.
+Não é obrigatório. O primeiro contato pode ser direto pelo WhatsApp. Se o projeto exigir, agendamos uma call ou reunião nas etapas seguintes.
 
 ### Preço, orçamento e pagamento
 
@@ -91,10 +91,10 @@ Não é obrigatório. O primeiro contato pode ser direto pelo WhatsApp (43) 9994
 Não. Cada negócio tem uma necessidade diferente, então cada proposta é sob consulta, personalizada ao escopo real do seu projeto.
 
 **Como funcionam as formas de pagamento?**
-As condições de pagamento são combinadas diretamente na proposta, de acordo com o escopo do projeto. Fale no WhatsApp (43) 99944-6606 para detalhar seu caso.
+As condições de pagamento são combinadas diretamente na proposta, de acordo com o escopo do projeto.
 
 **Dá para parcelar o projeto?**
-As condições de pagamento, incluindo parcelamento, são definidas caso a caso na proposta. [Chame no WhatsApp](https://wa.me/5543999446606) para conversarmos sobre o seu projeto.
+As condições de pagamento, incluindo parcelamento, são definidas caso a caso na proposta.
 
 **Tem taxa de manutenção mensal?**
 Depende do tipo de projeto e do que for combinado na proposta. Como o sistema é seu, não existe mensalidade obrigatória de SaaS. Qualquer suporte contínuo é alinhado sob consulta.
@@ -106,7 +106,7 @@ Esses custos variam conforme o projeto e são explicados de forma transparente n
 Sim, receber sua proposta personalizada não tem custo. O que existe é o processo de Diagnóstico para entender seu cenário antes de montar a proposta.
 
 **Por que vocês não informam um valor médio, nem que seja aproximado?**
-Porque cada projeto tem escopo, complexidade e tecnologia diferentes, e dar um número genérico poderia te enganar para mais ou para menos. Prefira uma proposta real: (43) 99944-6606, [chame no WhatsApp](https://wa.me/5543999446606).
+Porque cada projeto tem escopo, complexidade e tecnologia diferentes, e dar um número genérico poderia te enganar para mais ou para menos. Prefira sempre pedir uma proposta real, feita em cima do seu caso.
 
 **Existe fidelidade ou contrato de longo prazo obrigatório?**
 As condições contratuais são combinadas conforme o projeto e alinhadas com você antes de começar. Nada é fechado sem sua ciência.
@@ -178,7 +178,7 @@ Não, esse é justamente o papel da WebKeeper: traduzir o conceito de Web3 em um
 Não, qualquer negócio que queira explorar novos modelos com ativos digitais, contratos auditáveis ou tokenização pode se beneficiar. Os casos de uso são avaliados individualmente.
 
 **Vocês fazem carteiras digitais ou marketplaces de NFT?**
-Esse tipo de solução pode entrar em Web3 & Blockchain ou Sistemas sob Medida, dependendo do escopo. Fale com a gente para avaliarmos seu caso: (43) 99944-6606.
+Esse tipo de solução pode entrar em Web3 & Blockchain ou Sistemas sob Medida, dependendo do escopo — a viabilidade é avaliada caso a caso.
 
 ### Serviços — Sistemas sob Medida
 
@@ -218,7 +218,7 @@ Sim, otimização de velocidade e performance é parte do serviço de SEO & Perf
 SEO técnico e de conteúdo pode ser direcionado para buscas locais, ajudando negócios físicos a serem encontrados por clientes da região.
 
 **Vocês cuidam de anúncios pagos (Google Ads, Meta Ads)?**
-O foco principal da WebKeeper em performance é SEO técnico, conteúdo, velocidade e conversão. Para avaliar se mídia paga entra no seu escopo, fale direto com a equipe: (43) 99944-6606.
+O foco principal da WebKeeper em performance é SEO técnico, conteúdo, velocidade e conversão; mídia paga é avaliada caso a caso dentro do escopo do projeto.
 
 **Como sei se meu site precisa de SEO?**
 O Diagnóstico Digital gratuito já verifica isso, analisando SEO, velocidade, mobile e conversão do seu site em segundos.
@@ -264,7 +264,7 @@ Sim, cada etapa é validada com você: o processo é uma parceria, não uma "cai
 O processo segue uma metodologia clara em quatro fases (Diagnóstico, Planejamento, Desenvolvimento, Entrega & Suporte), com entregas e validações ao longo do caminho.
 
 **Quantas revisões estão incluídas no projeto?**
-Isso depende do escopo definido na proposta. Fale com a equipe para alinhar esse detalhe ao seu caso: (43) 99944-6606.
+Isso depende do escopo definido na proposta — o número de revisões é combinado caso a caso.
 
 ### Diagnóstico digital gratuito
 
@@ -278,7 +278,7 @@ Não, é uma análise gratuita e sem compromisso do seu site ou presença digita
 O resultado sai em segundos, direto na página.
 
 **E se eu ainda não tenho site, dá pra fazer o diagnóstico?**
-O diagnóstico automático analisa um site existente. Se você ainda não tem site, fale direto com a gente pelo WhatsApp (43) 99944-6606 para conversarmos sobre criar sua presença digital do zero.
+O diagnóstico automático analisa um site existente. Se você ainda não tem site, dá pra conversar direto sobre criar sua presença digital do zero.
 
 **O que o diagnóstico avalia exatamente?**
 SEO, velocidade, mobile, conversão e potencial de automação com IA.
@@ -289,7 +289,7 @@ SEO, velocidade, mobile, conversão e potencial de automação com IA.
 Ideias em estágio inicial que ainda não têm verba para o desenvolvimento completo. Avaliamos entrar como parceiros técnicos em troca de participação, caso a caso.
 
 **Preciso ter empresa aberta para propor uma parceria com equity?**
-A avaliação é caso a caso; o mais importante no início é ter uma ideia clara. Fale com a equipe pelo WhatsApp para entender os próximos passos: (43) 99944-6606.
+A avaliação é caso a caso; o mais importante no início é ter uma ideia clara.
 
 **Qual o percentual de equity que vocês costumam pedir?**
 Não trabalhamos com percentual fixo. Isso é avaliado individualmente conforme o estágio e potencial do projeto.
@@ -323,7 +323,7 @@ Sim, a etapa de Entrega & Suporte contínuo existe justamente para evoluir o pro
 Não trabalhamos com prazo padrão. Cada escopo é diferente, e o prazo é definido na etapa de Planejamento, após o Diagnóstico.
 
 **Dá para acelerar o prazo pagando mais?**
-Prazo e escopo são discutidos na proposta; fale diretamente com a equipe para avaliar viabilidade no seu caso: (43) 99944-6606.
+Prazo e escopo são discutidos na proposta, e a viabilidade de acelerar é avaliada caso a caso.
 
 **Quando eu recebo a proposta depois do primeiro contato?**
 Em até 24 horas após o diagnóstico inicial do seu caso.
@@ -337,7 +337,7 @@ Sim, cada tipo de projeto tem complexidade diferente. O prazo específico é def
 Não, atendemos presencialmente Londrina e Apucarana (PR), e remotamente São Paulo, outras cidades do Brasil e os Estados Unidos.
 
 **Atendem clientes fora do Brasil e dos EUA?**
-Hoje o atendimento remoto abrange principalmente Brasil e Estados Unidos. Para outros países, fale direto com a equipe para avaliarmos: (43) 99944-6606.
+Hoje o atendimento remoto abrange principalmente Brasil e Estados Unidos; outros países são avaliados caso a caso.
 
 **Como funciona o atendimento remoto?**
 Todo o processo (diagnóstico, proposta, alinhamento e suporte) pode ser feito 100% online, pelo WhatsApp e outras ferramentas combinadas com você.
@@ -357,7 +357,7 @@ Sou o Keeper, assistente de IA da WebKeeper. Respondo dúvidas sobre nossos serv
 Já atendemos negócios de diversos segmentos: saúde e odontologia, pet, moda e beleza, música, jurídico, engenharia e construção, limpeza profissional, holdings e investimentos, entre outros, sempre com soluções sob medida para cada realidade.
 
 **Tem algum case ou portfólio que eu possa ver?**
-Temos clientes de diferentes segmentos que já confiaram no nosso trabalho, exibidos na página inicial do site. Para exemplos mais detalhados do seu segmento, fale com a equipe: (43) 99944-6606.
+Temos clientes de diferentes segmentos que já confiaram no nosso trabalho, exibidos na página inicial do site.
 
 **Qual o diferencial da WebKeeper em relação a outras empresas de tecnologia?**
 Atuamos como parceiros, não como fornecedores comuns. As soluções são sob medida (nada de templates genéricos), o atendimento é direto sem intermediários, e você fica dono do sistema desenvolvido, sem mensalidade eterna de SaaS.
@@ -371,7 +371,7 @@ O nome vem da ideia de guardiã ("keeper") da presença digital e dos sistemas d
 Seguimos boas práticas de segurança e privacidade de dados (incluindo cuidados com LGPD) em todos os projetos; os detalhes específicos de compliance são tratados conforme a necessidade de cada projeto, já na etapa de Planejamento.
 
 **Vocês assinam termo de confidencialidade (NDA)?**
-Questões contratuais como confidencialidade podem ser alinhadas antes do início do projeto. Fale com a equipe para tratar isso no seu caso: (43) 99944-6606.
+Questões contratuais como confidencialidade podem ser alinhadas antes do início do projeto, caso a caso.
 
 **O sistema passa por testes antes de ir para o ar?**
 Sim, cada etapa é validada com você ao longo do Desenvolvimento, antes da Entrega.
@@ -385,7 +385,7 @@ Isso é definido conforme o projeto: pode ficar sob a gestão da WebKeeper no su
 Depende do que for combinado na proposta. O acompanhamento pós-lançamento faz parte da etapa de Entrega & Suporte, e as condições específicas são alinhadas com você.
 
 **O que acontece se o meu sistema apresentar um problema depois de pronto?**
-Nosso atendimento é direto pelo WhatsApp, 24h. Você reporta o problema pelo (43) 99944-6606 e a equipe acompanha a resolução.
+Nosso atendimento é direto pelo WhatsApp, 24h — você reporta o problema e a equipe acompanha a resolução.
 
 **Vocês fazem atualizações do sistema com o tempo?**
 Sim, a evolução contínua do produto faz parte da etapa de Entrega & Suporte.

@@ -1,1 +1,10 @@
 api/config.php
+
+# Pastas de apoio/scratch que não devem voltar a poluir o repo
+node_modules/
+backups/
+cyber/
+uploads/
+screenshots/
+*.log
+.DS_Store

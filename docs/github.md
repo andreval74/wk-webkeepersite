@@ -1,18 +1,23 @@
-repo: andreval74/webkeeper
+repo: andreval74/wk-webkeepersite
 branch: main
-path: (root)
+path: WebKeeper-site.html
 
 ## Last sync
-date: 2026-08-03T02:50:49Z
+date: 2026-08-12T02:28:40Z
 
 ### Updated in this project
-- Read repo structure/index.html for reference; site is deployed via index.html + support.js at repo root (x-dc DC runtime).
-- Prepared deploy package here (index.html = Keeper, webkeeper.html = WebKeeper, support.js, robots.txt, sitemap.xml, images/) for manual upload — no push capability available.
-- Confirmed existing repo images (wk-shield.png, p07-*.png, images/clients/*) already match what this project's pages reference; no re-upload needed.
+- Imported the full WebKeeper-site.html page (already DC-shaped) plus styles.css and its images/logos.
+- Created "WebKeeper-site copy.html" as a working copy; swapped its Hero section for the WebKeeper Flyer hero (light diagonal-cut layout), set the page background to the Flyer's site-bg.png, and added a divider line under the header.
+- Earlier: merged copy/sections from WebKeeper-site.html into WebKeeper Vendas.dc.html (market stats, Sobre + Por que, diagnosis scanner, Projetos, FAQ).
+
+## Sync history
+- 2026-08-12T02:09:11Z — merged repo copy/sections into WebKeeper Vendas.dc.html.
 
 ## Screen map
-| Screen | Repo files |
+| Project screen | Repo source |
 |---|---|
-| Keeper (entry/index) | index.html |
-| WebKeeper (business/tech) | webkeeper.html |
-| Runtime | support.js |
+| WebKeeper Vendas.dc.html — Cenário Digital stats | WebKeeper-site.html scenarioStats |
+| WebKeeper Vendas.dc.html — Sobre + Por que | WebKeeper-site.html #sobre, whyCards, aboutParas |
+| WebKeeper Vendas.dc.html — Diagnóstico scanner | WebKeeper-site.html #diagnostico scanner |
+| WebKeeper Vendas.dc.html — Projetos | WebKeeper-site.html projectsData |
+| WebKeeper Vendas.dc.html — FAQ | WebKeeper-site.html faqData |
