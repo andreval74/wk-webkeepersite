@@ -83,6 +83,22 @@
     }
   }
 
+  // Escolhe até `count` sugestões de KeeperConfig.SUGGESTIONS: prioriza as que
+  // batem palavra-chave com a última resposta do Keeper, completa com o resto
+  // do pool na ordem em que aparece, e nunca repete um label já perguntado.
+  // Compartilhada por WebKeeper.html e WebKeeper-site.html — é a mesma lógica
+  // de sugestão nas duas telas.
+  function pickSuggestions(pool, lastReplyText, askedLabels, count) {
+    var asked = askedLabels || new Set();
+    var low = (lastReplyText || '').toLowerCase();
+    var scored = pool
+      .filter(function (r) { return !asked.has(r.label); })
+      .map(function (r) { return { r: r, hit: r.kw.some(function (k) { return low.includes(k); }) }; });
+    var top = scored.filter(function (x) { return x.hit; }).map(function (x) { return x.r; });
+    var rest = scored.filter(function (x) { return !x.hit; }).map(function (x) { return x.r; });
+    return top.concat(rest).slice(0, count);
+  }
+
   async function send(opts) {
     var res = await fetch('./api/keeper.php', {
       method: 'POST',
@@ -99,6 +115,7 @@
     postProcessReply: postProcessReply,
     logQA: logQA,
     buildSystemPromptWithMemory: buildSystemPromptWithMemory,
+    pickSuggestions: pickSuggestions,
     send: send
   };
 

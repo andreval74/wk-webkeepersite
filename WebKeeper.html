@@ -1,9 +1,15 @@
 <!--
   WebKeeper.html — página inicial do site (index.html redireciona pra cá).
   É o widget de chat do "Keeper", o assistente de IA da WebKeeper — não a
-  landing page institucional completa (essa é WebKeeper-site.html).
+  landing page institucional completa (essa é WebKeeper-site.html). O único
+  link de saída daqui é "Entrar no site"; não tem formulário embutido nesta
+  página — quando o Keeper precisa oferecer o formulário, ele mesmo inclui o
+  link pra seção de contato do site na resposta (ver REGRA DO FORMULÁRIO em
+  keeper-config.js).
   Depende de: support.js (runtime que renderiza o bloco x-dc), styles.css,
-  keeper-orb.js (animação do orbe) e api/keeper.php (backend do chat).
+  keeper-orb.js (animação do orbe), keeper-config.js (config/regras do
+  Keeper), keeper-chat.js (envio de mensagem e sugestões) e api/keeper.php
+  (backend do chat).
 -->
 <!DOCTYPE html>
 <html>
@@ -64,31 +70,21 @@
   </header>
 
   <main class="keeper-main">
-
     <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;">
-      <div ref="{{ orbRef }}" class="keeper-orb keeper-orb-wrapper {{ M.moodClass }}">
-        <sc-if value="{{ bursting }}" hint-placeholder-val="{{ false }}">
-          <div style="position:absolute;inset:0;pointer-events:none;">
-            <sc-for list="{{ burstIcons }}" as="ic" hint-placeholder-count="6">
-              <div style="position:absolute;left:50%;top:50%;width:0;height:0;transform:translate(-50%,-50%) rotate({{ ic.angle }}deg);">
-                <div style="width:26px;height:26px;margin-top:-13px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(10,16,32,.85);border:1px solid rgba(255,255,255,.12);animation:kp-burst-out 1.3s ease-out {{ ic.delay }}s both;">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9fdc6e" stroke-width="1.8" style="transform:rotate({{ ic.counterAngle }}deg);"><path d="{{ ic.path }}"></path></svg>
-                </div>
-              </div>
-            </sc-for>
-          </div>
-        </sc-if>
+      <!-- Mesmo orbe (marcação, CSS e animação) do botão flutuante do Keeper
+           em WebKeeper-site.html — só o tamanho muda (--keeper-size vem de
+           .keeper-orb-wrapper). O olhar segue o cursor via
+           KeeperOrb.attachGaze (keeper-orb.js), a mesma função usada lá. -->
+      <div ref="{{ orbRef }}" class="keeper-orb keeper-orb-wrapper" style="animation-duration:5s;">
         <div class="keeper-bloom"></div>
-        <div class="keeper-ring-wrap"><div class="keeper-ring"></div></div>
+        <div class="keeper-ring-wrap"><div class="keeper-ring" style="animation-duration:3.5s;"></div></div>
         <div class="keeper-sphere"></div>
         <div class="keeper-highlight"></div>
-        <div class="keeper-eyes" style="transform:{{ gazeStyle }};">
+        <div ref="{{ eyesRef }}" class="keeper-eyes">
           <span class="keeper-eye"></span>
           <span class="keeper-eye"></span>
         </div>
       </div>
-      <h1 class="keeper-title">Keeper</h1>
-      <p class="keeper-status">{{ statusLine }}</p>
     </div>
 
     <div class="keeper-panel">
@@ -120,26 +116,11 @@
         Entrar no site
       </a>
     </div>
-
-    <div class="keeper-mobile-actions">
-      <a href="./WebKeeper-site.html" class="btn keeper-mobile-btn">Conhecer nossos serviços</a>
-      <a href="./WebKeeper-site.html#contato" class="btn keeper-mobile-btn">Enviar formulário</a>
-      <a href="{{ waMobileLink }}" target="_blank" rel="noopener" class="btn keeper-mobile-btn keeper-mobile-btn--whatsapp">Conversar pelo WhatsApp</a>
-    </div>
   </main>
 </div>
 
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900}}">
-
-const SERVICE_ICONS = [
-  'M12 2a5 5 0 0 0-5 5v1a4 4 0 0 0-2 7v1a3 3 0 0 0 3 3h1a5 5 0 0 0 10 0h1a3 3 0 0 0 3-3v-1a4 4 0 0 0-2-7V7a5 5 0 0 0-5-5z',
-  'M8 4l-5 8 5 8M16 4l5 8-5 8',
-  'M12 2 3 7v10l9 5 9-5V7zM12 2v20M3 7l9 5 9-5',
-  'M4 4h16v16H4zM4 9h16M9 13l2 2 4-4',
-  'M11 5a6 6 0 1 0 0 12 6 6 0 0 0 0-12zM20 20l-4.35-4.35',
-  'M7 2h10a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zM11 18h2'
-];
 
 class Component extends DCLogic {
   constructor(props) {
@@ -147,77 +128,57 @@ class Component extends DCLogic {
     this.inputRef = React.createRef();
     this.scrollRef = React.createRef();
     this.orbRef = React.createRef();
-    this.state = { messages: [], input: '', loading: false, mood: 'idle', burstSeed: 0, gaze: { x: 0, y: 5 } };
-    this.suggestionPrompts = KeeperConfig.SUGGESTED_QUESTIONS;
-    this.MOODS = {
-      idle: { moodClass: '', caption: '' },
-      surprised: { moodClass: 'is-surprised', caption: 'Ótima pergunta!' },
-      thinking: { moodClass: 'is-thinking', caption: 'Pensando…' }
-    };
-    this.onMouseMove = this.onMouseMove.bind(this);
-    this.onMouseLeave = this.onMouseLeave.bind(this);
+    this.eyesRef = React.createRef();
+    this.state = { messages: [], input: '', loading: false, asked: new Set() };
   }
 
   componentDidMount() {
-    window.addEventListener('mousemove', this.onMouseMove);
-    document.addEventListener('mouseleave', this.onMouseLeave);
-    setTimeout(() => { this.burst(); }, 300);
+    // Olhar do orbe seguindo o cursor — mesma função (KeeperOrb.attachGaze)
+    // e os mesmos parâmetros usados no botão flutuante de WebKeeper-site.html,
+    // pra ser exatamente a mesma animação nas duas telas.
+    this.gaze = window.KeeperOrb.attachGaze(this.eyesRef.current, {
+      anchorEl: this.orbRef.current, mode: 'fixed', max: 3.2, ease: 0.5
+    });
   }
 
   componentWillUnmount() {
-    window.removeEventListener('mousemove', this.onMouseMove);
-    document.removeEventListener('mouseleave', this.onMouseLeave);
+    if (this.gaze) this.gaze.destroy();
   }
-
-  onMouseMove(e) {
-    if (this.state.mood !== 'idle' || !this.orbRef.current) return;
-    const r = this.orbRef.current.getBoundingClientRect();
-    const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-    const dx = e.clientX - cx, dy = e.clientY - cy;
-    const dist = Math.hypot(dx, dy) || 1;
-    const mag = 10.5;
-    this.setState({ gaze: { x: (dx / dist) * mag, y: (dy / dist) * mag } });
-  }
-
-  onMouseLeave() { this.setState({ gaze: { x: 0, y: 5 } }); }
 
   componentDidUpdate() {
     if (this.scrollRef.current) this.scrollRef.current.scrollTop = this.scrollRef.current.scrollHeight;
   }
 
-  burst() {
-    clearTimeout(this._burstTimer);
-    this.setState({ bursting: false }, () => {
-      requestAnimationFrame(() => this.setState({ bursting: true }));
-      this._burstTimer = setTimeout(() => this.setState({ bursting: false }), 4200);
-    });
+  // Sugestões dinâmicas: mesma lógica/config usada no widget do site
+  // (KeeperConfig.SUGGESTIONS + KeeperChat.pickSuggestions), pontuada contra a
+  // última resposta do Keeper nesta conversa.
+  getSuggestions() {
+    const assistantMsgs = this.state.messages.filter(m => m.role === 'assistant');
+    const lastReply = assistantMsgs.length ? assistantMsgs[assistantMsgs.length - 1].text : '';
+    return KeeperChat.pickSuggestions(KeeperConfig.SUGGESTIONS, lastReply, this.state.asked, 3);
   }
 
   getGhost(input) {
     if (!input) return '';
     const low = input.toLowerCase();
-    const match = this.suggestionPrompts.find(p => p.toLowerCase().startsWith(low) && p.length > input.length);
-    return match || '';
+    const match = this.getSuggestions().find(p => p.label.toLowerCase().startsWith(low) && p.label.length > input.length);
+    return match ? match.label : '';
   }
 
   async send(text) {
     const msg = (typeof text === 'string' ? text : this.state.input).trim();
     if (!msg || this.state.loading) return;
     const history = [...this.state.messages, { role: 'user', text: msg }];
-    this.setState({ messages: history, input: '', loading: true, mood: 'surprised' });
-    await new Promise(r => setTimeout(r, 550));
-    this.setState({ mood: 'thinking' });
+    this.setState(s => ({ messages: history, input: '', loading: true, asked: new Set([...s.asked, msg]) }));
     try {
       const apiMessages = history.map(m => ({ role: m.role, content: m.text }));
       const system = KeeperChat.buildSystemPromptWithMemory(KeeperConfig.SYSTEM_PROMPT_CORE);
       const { reply } = await KeeperChat.send({ system, apiMessages, maxTokens: 160 });
-      this.setState(s => ({ messages: [...s.messages, { role: 'assistant', text: reply }], loading: false, mood: 'idle' }));
-      this.burst();
+      this.setState(s => ({ messages: [...s.messages, { role: 'assistant', text: reply }], loading: false }));
       KeeperChat.logQA(msg, reply, 'entry-page');
     } catch (e) {
       const fallback = KeeperConfig.FALLBACK_ERROR;
-      this.setState(s => ({ messages: [...s.messages, { role: 'assistant', text: fallback }], loading: false, mood: 'idle' }));
-      this.burst();
+      this.setState(s => ({ messages: [...s.messages, { role: 'assistant', text: fallback }], loading: false }));
     }
   }
 
@@ -232,14 +193,10 @@ class Component extends DCLogic {
 
   renderVals() {
     const s = this.state;
-    const M = this.MOODS[s.mood] || this.MOODS.idle;
     const ghost = this.getGhost(s.input);
     return {
-      M, orbRef: this.orbRef,
-      gazeStyle: 'translate(calc(-50% + ' + s.gaze.x + 'px), calc(-50% + ' + s.gaze.y + 'px))',
-      statusLine: M.caption,
-      bursting: s.bursting,
-      burstIcons: Array.from({ length: 6 }).map((_, i) => ({ angle: i * 60, counterAngle: -(i * 60), delay: (i * 0.07).toFixed(2), path: SERVICE_ICONS[i] })),
+      orbRef: this.orbRef,
+      eyesRef: this.eyesRef,
       hasUserQuestion: s.messages.some(m => m.role === 'user'),
       lastUserQuestion: (() => { const u = s.messages.filter(m => m.role === 'user'); return u.length ? u[u.length - 1].text : ''; })(),
       answerSegments: (() => {
@@ -252,7 +209,6 @@ class Component extends DCLogic {
           style: seg.isLink ? 'color:#9fdc6e;text-decoration:underline;cursor:pointer;' : (seg.bold ? 'font-weight:700;color:#9fdc6e;' : '')
         }));
       })(),
-      loading: s.loading,
       input: s.input,
       ghostRemainder: ghost ? ghost.slice(s.input.length) : '',
       inputRef: this.inputRef,
@@ -260,8 +216,7 @@ class Component extends DCLogic {
       onInputChange: (e) => this.setState({ input: e.target.value }),
       onKeyDown: (e) => this.onKeyDown(e),
       send: () => this.send(),
-      suggestedChips: this.suggestionPrompts.map(q => ({ label: q, send: () => this.send(q) })),
-      waMobileLink: KeeperConfig.buildWaLink('mobile-entry')
+      suggestedChips: this.getSuggestions().map(q => ({ label: q.label, send: () => this.send(q.label) }))
     };
   }
 }

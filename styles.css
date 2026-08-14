@@ -61,7 +61,7 @@ button { font: inherit; }
 /* Buttons */
 .btn,
 a.btn,
-button:not(.keeper-orb):not(.kp-icon-btn):not(.kp-send-btn):not(.wk-pillar-btn):not(.wk-menu-btn),
+button:not(.keeper-orb):not(.kp-icon-btn):not(.kp-send-btn):not(.wk-pillar-btn):not(.wk-menu-btn):not(.keeper-site-link):not(.keeper-chip),
 input[type="button"],
 input[type="submit"],
 a[role="button"],
@@ -83,7 +83,7 @@ a[style*="padding"] {
 .btn:hover,
 button:hover,
 a.btn:hover,
-button:not(.keeper-orb):not(.kp-icon-btn):not(.kp-send-btn):not(.wk-pillar-btn):not(.wk-menu-btn):hover,
+button:not(.keeper-orb):not(.kp-icon-btn):not(.kp-send-btn):not(.wk-pillar-btn):not(.wk-menu-btn):not(.keeper-site-link):not(.keeper-chip):hover,
 input[type="button"]:hover,
 input[type="submit"]:hover,
 a[role="button"]:hover,
@@ -279,19 +279,17 @@ body.wk-menu-open { overflow: hidden; }
 .legal-panel-text { font-size: 13.5px; line-height: 1.6; color: var(--text-muted); margin: 0 0 16px; }
 .legal-note { font-size: 12px; color: #5b6280; margin-top: 40px; line-height: 1.6; }
 
-/* Página standalone do Keeper (WebKeeper.html) — o chat ocupa a tela toda,
-   sem scroll na página; :has() escopa o reset de html/body só a essa página. */
-html:has(body.keeper-page-body), .keeper-page-body { height: 100%; overflow: hidden; }
-.keeper-page { position: relative; min-height: 100vh; min-height: 100dvh; color: #f2f4fa; overflow: hidden; display: flex; flex-direction: column; background: radial-gradient(circle at 100% 100%, rgba(95,166,37,.30), transparent 55%), linear-gradient(135deg, #050b16 0%, #0a1420 45%, #0d2818 75%, #123a1f 100%); }
+/* Página standalone do Keeper (WebKeeper.html) — se o conteúdo não couber na
+   tela, quem rola é o navegador (scroll nativo da página), não um container
+   interno; por isso não travamos altura/overflow em html/body/.keeper-page. */
+.keeper-page { position: relative; min-height: 100vh; min-height: 100dvh; color: #f2f4fa; display: flex; flex-direction: column; background: radial-gradient(circle at 100% 100%, rgba(95,166,37,.30), transparent 55%), linear-gradient(135deg, #050b16 0%, #0a1420 45%, #0d2818 75%, #123a1f 100%); }
 .keeper-bg-spot { pointer-events: none; position: absolute; left: 50%; top: -10%; width: 700px; height: 700px; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(circle, rgba(95,166,37,.20), transparent 70%); filter: blur(40px); }
 .keeper-header { position: relative; z-index: 3; display: flex; align-items: center; justify-content: center; padding: 26px 28px 4px; flex-shrink: 0; }
-.keeper-brand { display: flex; align-items: center; gap: 9px; }
-.keeper-brand img { width: 26px; height: 31px; object-fit: contain; }
-.keeper-brand-text { font-family: 'Sora', sans-serif; font-size: 13.5px; font-weight: 600; letter-spacing: .02em; color: #f2f4fa; }
-.keeper-main { position: relative; z-index: 2; flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px 24px 24px; max-width: 720px; margin: 0 auto; width: 100%; box-sizing: border-box; overflow: hidden; }
-.keeper-orb-wrapper { --keeper-size: 130px; flex-shrink: 0; cursor: pointer; }
-.keeper-title { font-family: 'Sora', sans-serif; font-size: clamp(22px, 3.4vw, 30px); font-weight: 800; letter-spacing: -1px; margin: 16px 0 0; }
-.keeper-status { font-size: 12.5px; color: #7f88a0; margin: 4px 0 0; text-align: center; min-height: 16px; }
+.keeper-brand { display: flex; align-items: center; gap: 14px; }
+.keeper-brand img { width: 52px; height: 62px; object-fit: contain; }
+.keeper-brand-text { font-family: 'Sora', sans-serif; font-size: 27px; font-weight: 600; letter-spacing: .02em; color: #f2f4fa; }
+.keeper-main { position: relative; z-index: 2; flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px 24px 24px; max-width: 720px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+.keeper-orb-wrapper { --keeper-size: 130px; flex-shrink: 0; margin-bottom: 16px; }
 .keeper-panel { width: 100%; max-width: 640px; margin-top: 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.04); overflow: hidden; flex-shrink: 0; }
 .keeper-messages { max-height: 220px; min-height: 60px; overflow-y: auto; overflow-x: hidden; padding: 18px 20px; display: flex; flex-direction: column; gap: 10px; }
 .keeper-chat-input { position: relative; width: 100%; box-sizing: border-box; background: none; border: none; outline: none; color: #f2f4fa; font-size: 14.5px; font-family: inherit; }
@@ -300,17 +298,12 @@ html:has(body.keeper-page-body), .keeper-page-body { height: 100%; overflow: hid
 .keeper-site-link { display: inline-flex; align-items: center; justify-content: center; padding: 9px 24px; border-radius: 11px; border: 1.5px solid rgba(95,166,37,.55); background: rgba(95,166,37,.14); color: #eafddc; box-shadow: var(--shadow); transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease; }
 .keeper-site-link:hover { background: rgba(95,166,37,.26); border-color: var(--green); color: rgba(255,255,255,.85); transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(95,166,37,.8), 0 0 18px 3px rgba(95,166,37,.9), 0 0 40px 8px rgba(95,166,37,.55), 0 14px 34px -12px rgba(95,166,37,.5); }
 
-/* Chips de perguntas sugeridas e botões de ação — só aparecem no mobile/tablet
-   (ver media queries no fim do arquivo); no desktop o fluxo já é o
-   autocomplete por Tab + o link "Entrar no site". */
-.keeper-chip-row { display: none; gap: 8px; overflow-x: auto; padding: 0 18px 14px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-.keeper-chip-row::-webkit-scrollbar { display: none; }
-.keeper-chip { flex-shrink: 0; white-space: nowrap; padding: 9px 14px; min-height: 36px; border-radius: 999px; border: 1px solid rgba(95,166,37,.4); background: rgba(95,166,37,.1); color: #dfe3f0; font-size: 12.5px; cursor: pointer; font-family: inherit; }
+/* Chips de perguntas sugeridas — aparecem em qualquer tamanho de tela (desktop
+   e mobile), quebrando linha em vez de rolar horizontalmente, pra nenhuma
+   sugestão ficar escondida/cortada. */
+.keeper-chip-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; padding: 0 18px 14px; }
+.keeper-chip { flex-shrink: 0; white-space: nowrap; padding: 6px 11px; min-height: 28px; border-radius: 999px; border: 1px solid rgba(95,166,37,.4); background: rgba(95,166,37,.1); color: #dfe3f0; font-size: 10px; cursor: pointer; font-family: inherit; }
 .keeper-chip:hover, .keeper-chip:focus-visible { border-color: var(--green); background: rgba(95,166,37,.2); }
-.keeper-mobile-actions { display: none; flex-direction: column; gap: 10px; width: 100%; margin-top: 6px; }
-.keeper-mobile-btn { justify-content: center; min-height: 44px; }
-.keeper-mobile-btn--whatsapp { background: #25D366; border-color: #25D366; color: #052e16; }
-.keeper-mobile-btn--whatsapp:hover { background: #1fb959; border-color: #1fb959; color: #052e16; }
 
 /* Processo: badge nasce cinza e vira verde quando a linha do scroll chega nele (JS em initScrollAnimations) */
 .process-badge {
@@ -376,7 +369,6 @@ html:has(body.keeper-page-body), .keeper-page-body { height: 100%; overflow: hid
 /* Keyframes */
 @keyframes kp-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes kp-cursor { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
-@keyframes kp-burst-out { 0% { transform: translateX(0) scale(.4); opacity: 0; } 15% { opacity: 1; } 80% { opacity: 1; transform: translateX(190px) scale(1.5); } 100% { transform: translateX(210px) scale(1.5); opacity: 0; } }
 @keyframes wk-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes wk-ring-spin { to { transform: rotate(360deg); } }
 @keyframes wk-loader-pop { 0% { opacity: 0; transform: scale(.7); } 100% { opacity: 1; transform: scale(1); } }
@@ -419,17 +411,12 @@ html:has(body.keeper-page-body), .keeper-page-body { height: 100%; overflow: hid
   .two-col-wrap { grid-template-columns: 1fr !important; gap: 28px !important; }
   [data-r="why"] { grid-template-columns: repeat(2, 1fr) !important; }
   [data-r="invest"] { grid-template-columns: 1fr !important; }
-  /* Tela de entrada do Keeper (WebKeeper.html) — reduz o orbe e o histórico
-     de mensagens pra sobrar espaço vertical pros chips e botões novos. */
-  /* .keeper-page só tinha min-height, então crescia além da viewport com o
-     conteúdo novo (chips + botões) e o overflow-y:auto do .keeper-main nunca
-     entrava em ação — trava a altura pra forçar o scroll interno. */
-  .keeper-page { height: 100vh; height: 100dvh; }
+  /* Tela de entrada do Keeper (WebKeeper.html) — só reduz o tamanho do orbe e
+     do histórico de mensagens pra caber melhor numa tela pequena; o resto
+     (chips, "Entrar no site") é igual em qualquer tamanho de tela. */
   .keeper-orb-wrapper { --keeper-size: 104px; }
-  .keeper-main { padding: 6px 22px 22px; overflow-y: auto; }
+  .keeper-main { padding: 6px 22px 22px; }
   .keeper-messages { max-height: 180px; }
-  .keeper-chip-row { display: flex; }
-  .keeper-mobile-actions { display: flex; }
 }
 @media (max-width: 600px) {
   .site-header { padding: 10px 8px !important; gap: 4px !important; flex-wrap: nowrap !important; }

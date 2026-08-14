@@ -58,7 +58,7 @@ function faqBuildContext(string $faqPath, string $lastUserMessage): string {
     $md = file_get_contents($faqPath);
 
     $always = [];
-    foreach (['Dados de contato oficiais', 'Regra de contato (aplicar sempre)', 'Regra de pivô comercial (aplicar sempre que a pergunta for "fora do escopo")', 'O que o Keeper NUNCA deve responder'] as $heading) {
+    foreach (['Dados de contato oficiais', 'Regra de contato (aplicar sempre)', 'Regra do formulário (aplicar sempre)', 'Regra de pivô comercial (aplicar sempre que a pergunta for "fora do escopo")', 'O que o Keeper NUNCA deve responder'] as $heading) {
         $sec = faqExtractSection($md, $heading);
         if ($sec !== '') $always[] = "## $heading\n$sec";
     }

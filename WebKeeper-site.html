@@ -12,6 +12,7 @@
   <script src="./keeper-orb.js"></script>
   <script src="./keeper-config.js"></script>
   <script src="./keeper-chat.js"></script>
+  <script src="./keeper-form.js"></script>
   <script src="./image-slot.js"></script>
   <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
   <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
@@ -642,14 +643,6 @@
         <div style="padding:14px 16px;border-bottom:1px solid rgba(95,166,37,.18);display:flex;align-items:center;justify-content:space-between;">
           <span style="font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:#f2f4fa;">Keeper · assistente WebKeeper</span>
           <div style="display:flex;align-items:center;gap:10px;">
-            <button onClick="{{ toggleVoice }}" aria-label="{{ voiceLabel }}" title="{{ voiceLabel }}" class="kp-icon-btn" style="color:{{ voiceColor }};">
-              <sc-if value="{{ voiceEnabled }}" hint-placeholder-val="{{ true }}">
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4M8 22h8"></path></svg>
-              </sc-if>
-              <sc-if value="{{ !voiceEnabled }}" hint-placeholder-val="{{ false }}">
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4M8 22h8M2 2l20 20"></path></svg>
-              </sc-if>
-            </button>
             <button onClick="{{ toggleChat }}" aria-label="Fechar" class="kp-icon-btn" style="color:#8b93ab;">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>
             </button>
@@ -715,25 +708,12 @@ class Component extends DCLogic {
     this.chatInputRef = React.createRef();
     this.chatScrollRef = React.createRef();
     this.menuWrapRef = React.createRef();
-    this.state = { activeServiceIdx: 0, openFaq: -1, scanning: false, scanResult: null, barsIn: false, menuOpen: false, chatOpen: false, chatMessages: [], chatInput: '', chatLoading: false, chatAsked: new Set(), voiceEnabled: true, voices: [], selectedVoiceURI: '',
-      apForm: { empresa: '', nicho: '', site: '', instagram: '', responsavel: '', whatsapp: '', mensagem: '', consent: false }, apSending: false, apDone: false, apError: '' };
-    this.nichoOptions = ['Odontologia', 'Estética e Beleza', 'Moda e Vestuário', 'Advocacia', 'Saúde e Clínicas', 'Educação', 'Imobiliário', 'Alimentação e Restaurantes', 'Varejo e E-commerce', 'Serviços Profissionais', 'Indústria', 'Outro'];
-    this.WEB3FORMS_KEY = 'a36da754-961e-40ab-920d-af3545dede05';
+    this.state = { activeServiceIdx: 0, openFaq: -1, scanning: false, scanResult: null, barsIn: false, menuOpen: false, chatOpen: false, chatMessages: [], chatInput: '', chatLoading: false, chatAsked: new Set(),
+      apForm: KeeperForm.emptyForm(), apSending: false, apDone: false, apError: '' };
     this.formNomeRef = React.createRef();
-    this.replyPool = [
-      { label: 'Quais serviços vocês oferecem?', kw: ['serviç','ia ','inteligência','automaç','web3','sistema','seo'] },
-      { label: 'Como funciona o processo de vocês?', kw: ['process','diagnóstic','planejamento','desenvolv','entrega'] },
-      { label: 'Quanto custa um projeto?', kw: ['custa','preço','investimento','proposta','orçamento'] },
-      { label: 'Como faço contato / falar com humano?', kw: ['whatsapp','contato','falar com'] },
-      { label: 'Existe parceria com equity?', kw: ['parceria','equity','sócio'] },
-      { label: 'Quero fazer o diagnóstico gratuito', kw: ['diagnóstic','grátis','gratuito'] },
-      { label: 'O sistema fica sendo meu ou é assinatura?', kw: ['saas','assinatura','próprio','ativo'] },
-      { label: 'Vocês atendem minha região?', kw: ['londrina','apucarana','são paulo','regi','remoto'] }
-    ];
     this.toggleMenu = this.toggleMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
     this.toggleChat = this.toggleChat.bind(this);
-    this.toggleVoice = this.toggleVoice.bind(this);
 
     const blue = { color: '#4a86ff', colorBg: 'rgba(74,134,255,.12)', colorSoft: 'rgba(74,134,255,.4)', colorShadow: 'rgba(74,134,255,.3)' };
     const orange = { color: '#ff8a3d', colorBg: 'rgba(255,138,61,.12)', colorSoft: 'rgba(255,138,61,.4)', colorShadow: 'rgba(255,138,61,.3)' };
@@ -912,19 +892,6 @@ class Component extends DCLogic {
       if (this.state.menuOpen) this.closeMenu();
       if (this.state.chatOpen) this.toggleChat();
     });
-    const loadVoices = () => {
-      const all = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
-      const pt = all.filter(v => v.lang && v.lang.toLowerCase().startsWith('pt'));
-      const list = (pt.length ? pt : all).map(v => ({ uri: v.voiceURI, name: v.name, lang: v.lang }));
-      if (list.length) {
-        const daniel = list.find(v => /daniel/i.test(v.name));
-        this.setState(s => ({ voices: list, selectedVoiceURI: s.selectedVoiceURI || (daniel ? daniel.uri : list[0].uri) }));
-      }
-    };
-    if (window.speechSynthesis) {
-      loadVoices();
-      window.speechSynthesis.onvoiceschanged = loadVoices;
-    }
   }
 
   initEyes() {
@@ -953,82 +920,9 @@ class Component extends DCLogic {
   }
 
   toggleChat() {
-    const wasOpen = this.state.chatOpen;
     this.setState(s => ({ chatOpen: !s.chatOpen }), () => {
       if (this.state.chatOpen && this.chatInputRef.current) this.chatInputRef.current.focus();
-      if (!wasOpen && this.state.chatOpen && this.state.chatMessages.length === 0) {
-        setTimeout(() => this.speak(KeeperConfig.GREETING_SHORT), 300);
-      }
-      if (wasOpen && window.speechSynthesis) window.speechSynthesis.cancel();
     });
-  }
-
-  toggleVoice() {
-    if (this.state.voiceEnabled && window.speechSynthesis) window.speechSynthesis.cancel();
-    this.setState(s => ({ voiceEnabled: !s.voiceEnabled }));
-  }
-
-  pickVoice() {
-    const voices = window.speechSynthesis.getVoices();
-    const daniel = voices.find(v => /daniel/i.test(v.name));
-    if (daniel) return daniel;
-    if (this.state.selectedVoiceURI) {
-      const chosen = voices.find(v => v.voiceURI === this.state.selectedVoiceURI);
-      if (chosen) return chosen;
-    }
-    const pt = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith('pt'));
-    if (!pt.length) return null;
-    const byName = (re) => pt.find(v => re.test(v.name));
-    return byName(/male|masculin/i) || byName(/google/i) || byName(/natural|online|neural/i) || pt.find(v => v.lang.toLowerCase() === 'pt-br') || pt[0];
-  }
-
-  speak(text) {
-    if (!this.state.voiceEnabled || !window.speechSynthesis) return;
-    window.speechSynthesis.cancel();
-    const plain = text.replace(/\[([^\]]+)\]\(https?:\/\/[^\s)]+\)/g, '$1').replace(/\*\*/g, '').replace(/\s+/g, ' ').trim();
-    const parts = plain.match(/[^.!?,;]+[.!?,;]?/g) || [plain];
-    const chunks = [];
-    let buf = '';
-    parts.forEach(p => {
-      buf += p;
-      if (/[.!?]\s*$/.test(p.trim()) || buf.length > 90) { chunks.push(buf.trim()); buf = ''; }
-    });
-    if (buf.trim()) chunks.push(buf.trim());
-    const voice = this.pickVoice();
-    const baseRate = 1.58, basePitch = 0.86;
-    let i = 0;
-    const speakNext = () => {
-      if (i >= chunks.length) return;
-      const chunk = chunks[i];
-      const endsComma = /,\s*$/.test(chunk);
-      const endsQuestion = /\?\s*$/.test(chunk);
-      const endsExclaim = /!\s*$/.test(chunk);
-      const isLast = i === chunks.length - 1;
-      const utter = new SpeechSynthesisUtterance(chunk);
-      utter.lang = 'pt-BR';
-      if (voice) utter.voice = voice;
-      utter.rate = baseRate + (Math.random() * 0.04 - 0.02) + (endsComma ? -0.03 : 0);
-      utter.pitch = endsQuestion ? basePitch + 0.14 : endsExclaim ? basePitch + 0.08 : basePitch + (Math.random() * 0.03 - 0.015);
-      utter.volume = 1;
-      utter.onend = () => {
-        i++;
-        const pause = endsComma ? 70 : isLast ? 0 : 130;
-        setTimeout(speakNext, pause);
-      };
-      utter.onerror = () => { i++; setTimeout(speakNext, 0); };
-      window.speechSynthesis.speak(utter);
-    };
-    speakNext();
-  }
-
-  pickFollowUps(lastReply, asked) {
-    const low = (lastReply || '').toLowerCase();
-    const scored = this.replyPool
-      .filter(r => !asked.has(r.label))
-      .map(r => ({ r, hit: r.kw.some(k => low.includes(k)) }));
-    const top = scored.filter(x => x.hit).map(x => x.r);
-    const rest = scored.filter(x => !x.hit).map(x => x.r);
-    return [...top, ...rest].slice(0, 3);
   }
 
   async sendChat(text) {
@@ -1041,12 +935,10 @@ class Component extends DCLogic {
       const system = KeeperChat.buildSystemPromptWithMemory(KeeperConfig.SYSTEM_PROMPT_CORE);
       const { reply } = await KeeperChat.send({ system, apiMessages, maxTokens: 160 });
       this.setState(s => ({ chatMessages: [...s.chatMessages, { role: 'assistant', text: reply }], chatLoading: false }));
-      setTimeout(() => this.speak(reply), 400);
       KeeperChat.logQA(msg, reply, 'site-widget');
     } catch (e) {
       const fallback = KeeperConfig.FALLBACK_ERROR;
       this.setState(s => ({ chatMessages: [...s.chatMessages, { role: 'assistant', text: fallback }], chatLoading: false }));
-      setTimeout(() => this.speak(fallback), 400);
     }
     if (this.chatScrollRef.current) setTimeout(() => { this.chatScrollRef.current.scrollTop = this.chatScrollRef.current.scrollHeight; }, 50);
   }
@@ -1082,7 +974,6 @@ class Component extends DCLogic {
     document.body.classList.remove('wk-menu-open');
     if (this.eyesGaze) this.eyesGaze.destroy();
     if (this.fabGaze) this.fabGaze.destroy();
-    if (window.speechSynthesis) window.speechSynthesis.cancel();
   }
 
   resizeAll() {
@@ -1272,7 +1163,7 @@ class Component extends DCLogic {
   }
 
   goToContactForm(origin) {
-    if (origin && this.nichoOptions.includes(origin)) {
+    if (origin && KeeperForm.NICHO_OPTIONS.includes(origin)) {
       this.setState(s => ({ apForm: { ...s.apForm, nicho: s.apForm.nicho || origin } }));
     }
     const el = document.getElementById('investimento');
@@ -1285,7 +1176,7 @@ class Component extends DCLogic {
   }
 
   resetApForm() {
-    this.setState({ apDone: false, apError: '', apForm: { empresa: '', nicho: '', site: '', instagram: '', responsavel: '', whatsapp: '', mensagem: '', consent: false } });
+    this.setState({ apDone: false, apError: '', apForm: KeeperForm.emptyForm() });
   }
 
   onApFieldChange(e) {
@@ -1298,63 +1189,17 @@ class Component extends DCLogic {
     this.setState(s => ({ apForm: { ...s.apForm, consent: checked } }));
   }
 
-  formatApWhatsapp(raw) {
-    const digits = (raw || '').replace(/\D/g, '').slice(0, 11);
-    if (digits.length <= 2) return digits;
-    if (digits.length <= 6) return '(' + digits.slice(0, 2) + ') ' + digits.slice(2);
-    if (digits.length <= 10) return '(' + digits.slice(0, 2) + ') ' + digits.slice(2, 6) + '-' + digits.slice(6);
-    return '(' + digits.slice(0, 2) + ') ' + digits.slice(2, 7) + '-' + digits.slice(7);
-  }
-
   onApWhatsappChange(e) {
-    const formatted = this.formatApWhatsapp(e.target.value);
+    const formatted = KeeperForm.formatWhatsapp(e.target.value);
     this.setState(s => ({ apForm: { ...s.apForm, whatsapp: formatted } }));
-  }
-
-  isValidApSite(value) {
-    const v = (value || '').trim();
-    if (!v) return true;
-    return /^https?:\/\/.+/.test(v) || /^[\w.-]+\.[a-z]{2,}/i.test(v);
-  }
-
-  isValidApInstagram(value) {
-    const v = (value || '').trim();
-    if (!v) return true;
-    return v.replace(/^@/, '').length > 1;
-  }
-
-  validateApForm() {
-    const f = this.state.apForm;
-    if (!f.empresa.trim()) return 'Informe o nome da empresa.';
-    if (!f.nicho.trim()) return 'Informe o nicho ou segmento da empresa.';
-    if (!f.responsavel.trim()) return 'Informe seu nome.';
-    const waDigits = f.whatsapp.replace(/\D/g, '');
-    if (waDigits.length < 10 || waDigits.length > 11) return 'Informe um WhatsApp válido, com DDD.';
-    if (!this.isValidApSite(f.site)) return 'Informe um site (https://...) válido, ou deixe em branco.';
-    if (!this.isValidApInstagram(f.instagram)) return 'Informe um usuário do Instagram (@usuario) válido, ou deixe em branco.';
-    if (!f.consent) return 'É necessário autorizar a análise das informações e o contato para continuar.';
-    return '';
   }
 
   async submitApresentacao() {
     if (this.state.apSending) return;
-    const err = this.validateApForm();
+    const err = KeeperForm.validate(this.state.apForm);
     if (err) { this.setState({ apError: err }); return; }
     this.setState({ apSending: true, apError: '' });
-    const f = this.state.apForm;
-    try {
-      await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          access_key: this.WEB3FORMS_KEY,
-          subject: 'Novo contato pelo site WebKeeper',
-          from_name: 'Site WebKeeper',
-          empresa: f.empresa, nicho: f.nicho, site: f.site, instagram: f.instagram,
-          responsavel: f.responsavel, whatsapp: f.whatsapp, mensagem: f.mensagem
-        })
-      });
-    } catch (e) { /* segue para a tela de confirmação mesmo em falha de rede, já registramos os dados no serviço */ }
+    await KeeperForm.submit(this.state.apForm);
     this.setState({ apSending: false, apDone: true });
   }
 
@@ -1378,7 +1223,7 @@ class Component extends DCLogic {
       openContactCtaFinal: () => this.goToContactForm(),
       formNomeRef: this.formNomeRef,
       apForm: this.state.apForm,
-      nichoOptions: this.nichoOptions,
+      nichoOptions: KeeperForm.NICHO_OPTIONS,
       resetApForm: () => this.resetApForm(),
       onApFieldChange: (e) => this.onApFieldChange(e),
       onApWhatsappChange: (e) => this.onApWhatsappChange(e),
@@ -1389,9 +1234,6 @@ class Component extends DCLogic {
       submitApresentacao: () => this.submitApresentacao(),
       chatOpen: this.state.chatOpen, toggleChat: this.toggleChat, chatLoading: this.state.chatLoading,
       chatToggleLabel: this.state.chatOpen ? 'Fechar chat com o Keeper' : 'Abrir chat com o Keeper',
-      voiceEnabled: this.state.voiceEnabled, toggleVoice: this.toggleVoice,
-      voiceLabel: this.state.voiceEnabled ? 'Silenciar a voz do Keeper' : 'Reativar a voz do Keeper',
-      voiceColor: this.state.voiceEnabled ? '#9fdc6e' : '#5b6280',
       fabOrbRef: this.fabOrbRef, fabEyesRef: this.fabEyesRef,
       chatInputRef: this.chatInputRef, chatScrollRef: this.chatScrollRef,
       chatInput: this.state.chatInput,
@@ -1413,7 +1255,7 @@ class Component extends DCLogic {
       chatShowQuickReplies: !this.state.chatLoading,
       chatQuickReplies: (() => {
         const last = [...this.state.chatMessages].reverse().find(m => m.role === 'assistant');
-        return this.pickFollowUps(last ? last.text : '', this.state.chatAsked).map(r => ({ label: r.label, send: () => this.sendChat(r.label) }));
+        return KeeperChat.pickSuggestions(KeeperConfig.SUGGESTIONS, last ? last.text : '', this.state.chatAsked, 3).map(r => ({ label: r.label, send: () => this.sendChat(r.label) }));
       })(),
       menuWrapRef: this.menuWrapRef,
       menuOpen: this.state.menuOpen,
