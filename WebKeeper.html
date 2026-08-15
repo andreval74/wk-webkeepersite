@@ -44,6 +44,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
+  <script src="./header.js"></script>
   <script src="./keeper-orb.js"></script>
   <script src="./keeper-config.js"></script>
   <script src="./keeper-chat.js"></script>
@@ -62,12 +63,7 @@
 <div class="keeper-page">
   <div class="keeper-bg-spot"></div>
 
-  <header class="keeper-header">
-    <div class="keeper-brand">
-      <img src="./images/wk-shield.png" alt="WebKeeper">
-      <span class="keeper-brand-text">web<span style="color:#5FA625;">keeper</span></span>
-    </div>
-  </header>
+  <div ref="{{ headerRootRef }}" id="wk-header-root"></div>
 
   <main class="keeper-main">
     <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;">
@@ -87,34 +83,29 @@
       </div>
     </div>
 
-    <div class="keeper-panel">
-      <div ref="{{ scrollRef }}" class="keeper-messages">
-        <sc-if value="{{ hasUserQuestion }}" hint-placeholder-val="{{ false }}">
-          <p class="kp-msg" style="margin:0;font-size:10.5px;color:#6b7290;">Você perguntou: {{ lastUserQuestion }}</p>
-        </sc-if>
-        <div class="kp-msg" style="font-size:12.5px;line-height:1.6;color:#dfe3f0;"><sc-for list="{{ answerSegments }}" as="seg" hint-placeholder-count="1"><sc-if value="{{ seg.isLink }}" hint-placeholder-val="{{ false }}"><a href="{{ seg.href }}" target="_blank" rel="noopener noreferrer" style="{{ seg.style }}">{{ seg.text }}</a></sc-if><sc-if value="{{ !seg.isLink }}" hint-placeholder-val="{{ true }}"><span style="{{ seg.style }}">{{ seg.text }}</span></sc-if></sc-for><span style="animation:kp-cursor 1s step-end infinite;">▍</span></div>
-      </div>
+    <div ref="{{ scrollRef }}" class="keeper-messages">
+      <sc-if value="{{ hasUserQuestion }}" hint-placeholder-val="{{ false }}">
+        <p class="kp-msg" style="margin:0;font-size:10.5px;color:#6b7290;">Você perguntou: {{ lastUserQuestion }}</p>
+      </sc-if>
+      <div class="kp-msg" style="font-size:12.5px;line-height:1.6;color:#dfe3f0;"><sc-for list="{{ answerSegments }}" as="seg" hint-placeholder-count="1"><sc-if value="{{ seg.isLink }}" hint-placeholder-val="{{ false }}"><a href="{{ seg.href }}" target="_blank" rel="noopener noreferrer" style="{{ seg.style }}">{{ seg.text }}</a></sc-if><sc-if value="{{ !seg.isLink }}" hint-placeholder-val="{{ true }}"><span style="{{ seg.style }}">{{ seg.text }}</span></sc-if></sc-for><span style="animation:kp-cursor 1s step-end infinite;">▍</span></div>
+    </div>
+
+    <sc-if value="{{ hasSuggestedChips }}" hint-placeholder-val="{{ true }}">
       <div class="keeper-chip-row" role="list" aria-label="Perguntas sugeridas">
         <sc-for list="{{ suggestedChips }}" as="q" hint-placeholder-count="6">
           <button type="button" class="keeper-chip" onClick="{{ q.send }}">{{ q.label }}</button>
         </sc-for>
       </div>
-      <div style="border-top:1px solid rgba(255,255,255,.08);display:flex;gap:10px;align-items:center;padding:10px 10px 10px 18px;">
-        <div style="position:relative;flex:1;min-width:0;">
-          <div aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;pointer-events:none;font-size:14.5px;font-family:inherit;white-space:pre;overflow:hidden;"><span style="color:transparent;">{{ input }}</span><span style="color:#4d5573;">{{ ghostRemainder }}</span></div>
-          <input ref="{{ inputRef }}" value="{{ input }}" onChange="{{ onInputChange }}" onKeyDown="{{ onKeyDown }}" placeholder="Pergunte sobre a WebKeeper…" class="keeper-chat-input">
-        </div>
-        <button onClick="{{ send }}" aria-label="Enviar" class="kp-send-btn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
-        </button>
-      </div>
-    </div>
+    </sc-if>
 
-    <p class="keeper-quote">Prefere navegar? Conheça nosso site:</p>
-    <div class="keeper-site-links">
-      <a href="./WebKeeper-site.html" class="keeper-site-link">
-        Entrar no site
-      </a>
+    <div class="keeper-panel">
+      <div style="position:relative;flex:1;min-width:0;">
+        <div aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;pointer-events:none;font-size:14.5px;font-family:inherit;white-space:pre;overflow:hidden;"><span style="color:transparent;">{{ input }}</span><span style="color:#4d5573;">{{ ghostRemainder }}</span></div>
+        <input ref="{{ inputRef }}" value="{{ input }}" onChange="{{ onInputChange }}" onKeyDown="{{ onKeyDown }}" placeholder="Pergunte sobre a WebKeeper…" class="keeper-chat-input">
+      </div>
+      <button onClick="{{ send }}" aria-label="Enviar" class="kp-send-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
+      </button>
     </div>
   </main>
 </div>
@@ -129,6 +120,7 @@ class Component extends DCLogic {
     this.scrollRef = React.createRef();
     this.orbRef = React.createRef();
     this.eyesRef = React.createRef();
+    this.headerRootRef = React.createRef();
     this.state = { messages: [], input: '', loading: false, asked: new Set() };
   }
 
@@ -139,10 +131,12 @@ class Component extends DCLogic {
     this.gaze = window.KeeperOrb.attachGaze(this.eyesRef.current, {
       anchorEl: this.orbRef.current, mode: 'fixed', max: 3.2, ease: 0.5
     });
+    this._header = window.WKHeader.mount(this.headerRootRef.current, { page: 'chat' });
   }
 
   componentWillUnmount() {
     if (this.gaze) this.gaze.destroy();
+    if (this._header) this._header.destroy();
   }
 
   componentDidUpdate() {
@@ -194,9 +188,11 @@ class Component extends DCLogic {
   renderVals() {
     const s = this.state;
     const ghost = this.getGhost(s.input);
+    const suggestions = this.getSuggestions();
     return {
       orbRef: this.orbRef,
       eyesRef: this.eyesRef,
+      headerRootRef: this.headerRootRef,
       hasUserQuestion: s.messages.some(m => m.role === 'user'),
       lastUserQuestion: (() => { const u = s.messages.filter(m => m.role === 'user'); return u.length ? u[u.length - 1].text : ''; })(),
       answerSegments: (() => {
@@ -216,7 +212,8 @@ class Component extends DCLogic {
       onInputChange: (e) => this.setState({ input: e.target.value }),
       onKeyDown: (e) => this.onKeyDown(e),
       send: () => this.send(),
-      suggestedChips: this.getSuggestions().map(q => ({ label: q.label, send: () => this.send(q.label) }))
+      hasSuggestedChips: suggestions.length > 0,
+      suggestedChips: suggestions.map(q => ({ label: q.label, send: () => this.send(q.label) }))
     };
   }
 }

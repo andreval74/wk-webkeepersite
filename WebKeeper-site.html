@@ -9,6 +9,7 @@
 <x-dc>
 <helmet>
   <link rel="stylesheet" href="./styles.css">
+  <script src="./header.js"></script>
   <script src="./keeper-orb.js"></script>
   <script src="./keeper-config.js"></script>
   <script src="./keeper-chat.js"></script>
@@ -96,32 +97,7 @@
   <div style="position:relative;z-index:1;">
 
     <!-- NAV -->
-    <header ref="{{ headerRef }}" data-screen-label="Nav" class="site-header">
-      <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
-        <img src="./images/wk-shield.png" alt="WebKeeper" style="width:34px;height:40px;object-fit:contain;flex-shrink:0;">
-        <span style="font-family:'Sora',sans-serif;font-weight:700;font-size:18px;color:#f2f4fa;letter-spacing:.2px;white-space:nowrap;">Web<span style="color:#5FA625;">Keeper</span></span>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px;flex-shrink:0;">
-        <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
-          <div data-r="nav-backdrop" onClick="{{ closeMenu }}" aria-hidden="true"></div>
-        </sc-if>
-        <div ref="{{ menuWrapRef }}" class="wk-menu-wrap">
-          <button onClick="{{ toggleMenu }}" aria-label="Abrir menu de navegação" aria-expanded="{{ menuOpen }}" class="wk-menu-btn">
-            <span></span><span></span><span></span>
-          </button>
-          <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
-            <nav class="wk-nav-dropdown">
-              <sc-for list="{{ navLinks }}" as="link" hint-placeholder-count="11">
-                <a href="{{ link.href }}" onClick="{{ link.onClick }}" class="link-word wk-nav-link">{{ link.label }}</a>
-              </sc-for>
-            </nav>
-          </sc-if>
-        </div>
-        <button onClick="{{ openContact }}" class="btn btn--small">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h6l4 4v13a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"></path><path d="M14 3v4h4"></path><path d="M9.5 12.5h5M9.5 16h3"></path></svg>
-          Entre em contato</button>
-      </div>
-    </header>
+    <div ref="{{ headerRootRef }}" id="wk-header-root"></div>
 
     <div style="max-width:1560px;margin:0 auto;padding:0 40px;"><div style="height:1px;background:linear-gradient(90deg,transparent,rgba(95,166,37,.4),transparent);"></div></div>
 
@@ -701,18 +677,15 @@ class Component extends DCLogic {
     this.loaderRef = React.createRef();
     this.loaderWaveRef = React.createRef();
     this.timelineLineRef = React.createRef();
-    this.headerRef = React.createRef();
+    this.headerRootRef = React.createRef();
     this.analyzerRef = React.createRef();
     this.fabOrbRef = React.createRef();
     this.fabEyesRef = React.createRef();
     this.chatInputRef = React.createRef();
     this.chatScrollRef = React.createRef();
-    this.menuWrapRef = React.createRef();
-    this.state = { activeServiceIdx: 0, openFaq: -1, scanning: false, scanResult: null, barsIn: false, menuOpen: false, chatOpen: false, chatMessages: [], chatInput: '', chatLoading: false, chatAsked: new Set(),
+    this.state = { activeServiceIdx: 0, openFaq: -1, scanning: false, scanResult: null, barsIn: false, chatOpen: false, chatMessages: [], chatInput: '', chatLoading: false, chatAsked: new Set(),
       apForm: KeeperForm.emptyForm(), apSending: false, apDone: false, apError: '' };
     this.formNomeRef = React.createRef();
-    this.toggleMenu = this.toggleMenu.bind(this);
-    this.closeMenu = this.closeMenu.bind(this);
     this.toggleChat = this.toggleChat.bind(this);
 
     const blue = { color: '#4a86ff', colorBg: 'rgba(74,134,255,.12)', colorSoft: 'rgba(74,134,255,.4)', colorShadow: 'rgba(74,134,255,.3)' };
@@ -878,18 +851,12 @@ class Component extends DCLogic {
     }
     this.initLoader();
     this.initScrollAnimations();
-    this.initHeader();
+    this._header = window.WKHeader.mount(this.headerRootRef.current, { page: 'site' });
     this.initEyes();
     this.initFabOrb();
     window.addEventListener('resize', this.handleResize = () => this.resizeAll());
-    document.addEventListener('click', this.handleOutsideMenuClick = (e) => {
-      if (this.state.menuOpen && this.menuWrapRef.current && !this.menuWrapRef.current.contains(e.target)) {
-        this.closeMenu();
-      }
-    });
     document.addEventListener('keydown', this.handleEscape = (e) => {
       if (e.key !== 'Escape') return;
-      if (this.state.menuOpen) this.closeMenu();
       if (this.state.chatOpen) this.toggleChat();
     });
   }
@@ -904,19 +871,6 @@ class Component extends DCLogic {
     this.fabGaze = window.KeeperOrb.attachGaze(this.fabEyesRef.current, {
       anchorEl: this.fabOrbRef.current, mode: 'fixed', max: 3.2, ease: 0.5
     });
-  }
-
-  toggleMenu() {
-    this.setState(s => {
-      const menuOpen = !s.menuOpen;
-      document.body.classList.toggle('wk-menu-open', menuOpen);
-      return { menuOpen };
-    });
-  }
-
-  closeMenu() {
-    document.body.classList.remove('wk-menu-open');
-    this.setState({ menuOpen: false });
   }
 
   toggleChat() {
@@ -943,35 +897,11 @@ class Component extends DCLogic {
     if (this.chatScrollRef.current) setTimeout(() => { this.chatScrollRef.current.scrollTop = this.chatScrollRef.current.scrollHeight; }, 50);
   }
 
-  initHeader() {
-    const h = this.headerRef.current;
-    if (!h) return;
-    const onScroll = () => {
-      if (window.scrollY > 24) {
-        h.style.background = 'rgba(10,15,26,.28)';
-        h.style.backdropFilter = 'blur(14px) saturate(140%)';
-        h.style.webkitBackdropFilter = 'blur(14px) saturate(140%)';
-        h.style.borderBottom = '1px solid rgba(95,166,37,.12)';
-        h.style.boxShadow = '0 8px 30px -22px rgba(0,0,0,.7)';
-      } else {
-        h.style.background = 'rgba(10,15,26,0)';
-        h.style.backdropFilter = 'blur(2px)';
-        h.style.webkitBackdropFilter = 'blur(2px)';
-        h.style.borderBottom = '1px solid rgba(95,166,37,0)';
-        h.style.boxShadow = 'none';
-      }
-    };
-    this._headerScroll = onScroll;
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  }
-
   componentWillUnmount() {
     cancelAnimationFrame(this._particleRAF);
     window.removeEventListener('resize', this.handleResize);
-    document.removeEventListener('click', this.handleOutsideMenuClick);
     document.removeEventListener('keydown', this.handleEscape);
-    document.body.classList.remove('wk-menu-open');
+    if (this._header) this._header.destroy();
     if (this.eyesGaze) this.eyesGaze.destroy();
     if (this.fabGaze) this.fabGaze.destroy();
   }
@@ -1210,10 +1140,13 @@ class Component extends DCLogic {
     const accentRgb = this.hexToRgbStr(accent);
     const density = ({ Compacta: '22px', Padrão: '40px', Espaçosa: '64px' })[this.props.sectionDensity] || '40px';
     const immersive = this.isImmersive() && !this.isTouchOrReducedMotion();
+    const lastAssistantMsg = [...this.state.chatMessages].reverse().find(m => m.role === 'assistant');
+    const chatQuickReplies = KeeperChat.pickSuggestions(KeeperConfig.SUGGESTIONS, lastAssistantMsg ? lastAssistantMsg.text : '', this.state.chatAsked, 3)
+      .map(r => ({ label: r.label, send: () => this.sendChat(r.label) }));
     return {
       wrapperStyle: `--green:${accent};--green-soft:${accentSoft};--green-glow:rgba(${accentRgb},.35);--border:rgba(${accentRgb},.35);--border-strong:rgba(${accentRgb},.55);--section-gap:${density};cursor:${immersive ? 'none' : 'auto'};`,
       immersive,
-      headerRef: this.headerRef,
+      headerRootRef: this.headerRootRef,
       waFloat: KeeperConfig.buildWaLink('site'),
       openContact: () => this.goToContactForm(),
       openContactEspecialista: () => this.goToContactForm('Cenário Digital'),
@@ -1252,23 +1185,8 @@ class Component extends DCLogic {
           style: seg.isLink ? 'text-decoration:underline;' + (m.role === 'assistant' ? 'color:#5FA625;font-weight:600;' : '') : (seg.bold ? 'font-weight:700;' : '')
         }))
       })),
-      chatShowQuickReplies: !this.state.chatLoading,
-      chatQuickReplies: (() => {
-        const last = [...this.state.chatMessages].reverse().find(m => m.role === 'assistant');
-        return KeeperChat.pickSuggestions(KeeperConfig.SUGGESTIONS, last ? last.text : '', this.state.chatAsked, 3).map(r => ({ label: r.label, send: () => this.sendChat(r.label) }));
-      })(),
-      menuWrapRef: this.menuWrapRef,
-      menuOpen: this.state.menuOpen,
-      toggleMenu: this.toggleMenu,
-      closeMenu: this.closeMenu,
-      navLinks: [
-        { label: 'Início', href: '#', onClick: this.closeMenu }, { label: 'Clientes', href: '#clientes', onClick: this.closeMenu },
-        { label: 'Serviços', href: '#servicos', onClick: this.closeMenu },
-        { label: 'Processo', href: '#processo', onClick: this.closeMenu }, { label: 'Sobre', href: '#sobre', onClick: this.closeMenu },
-        { label: 'Projetos', href: '#projetos', onClick: this.closeMenu }, { label: 'Diagnóstico', href: '#diagnostico', onClick: this.closeMenu },
-        { label: 'Investimento', href: '#investimento', onClick: this.closeMenu }, { label: 'FAQ', href: '#faq', onClick: this.closeMenu },
-        { label: 'Contato', href: '#investimento-form', onClick: (e) => { e.preventDefault(); this.closeMenu(); this.goToContactForm(); } }
-      ],
+      chatShowQuickReplies: !this.state.chatLoading && chatQuickReplies.length > 0,
+      chatQuickReplies: chatQuickReplies,
       services: this.servicesData,
       pillars: this.pillarsData.map((p, i) => {
         const active = this.state.activeServiceIdx === i;

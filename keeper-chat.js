@@ -83,20 +83,19 @@
     }
   }
 
-  // Escolhe até `count` sugestões de KeeperConfig.SUGGESTIONS: prioriza as que
-  // batem palavra-chave com a última resposta do Keeper, completa com o resto
-  // do pool na ordem em que aparece, e nunca repete um label já perguntado.
-  // Compartilhada por WebKeeper.html e WebKeeper-site.html — é a mesma lógica
-  // de sugestão nas duas telas.
+  // Escolhe até `count` sugestões de KeeperConfig.SUGGESTIONS, nunca repetindo
+  // um label já perguntado. Compartilhada por WebKeeper.html e
+  // WebKeeper-site.html — é a mesma lógica de sugestão nas duas telas.
+  // Sem conversa ainda (lastReplyText vazio): mostra as perguntas iniciais do
+  // banco, na ordem, como ponto de partida. Depois da primeira resposta do
+  // Keeper: só sugere o que bate palavra-chave com o que foi respondido —
+  // nunca completa com perguntas soltas do banco só pra preencher a fileira.
   function pickSuggestions(pool, lastReplyText, askedLabels, count) {
     var asked = askedLabels || new Set();
     var low = (lastReplyText || '').toLowerCase();
-    var scored = pool
-      .filter(function (r) { return !asked.has(r.label); })
-      .map(function (r) { return { r: r, hit: r.kw.some(function (k) { return low.includes(k); }) }; });
-    var top = scored.filter(function (x) { return x.hit; }).map(function (x) { return x.r; });
-    var rest = scored.filter(function (x) { return !x.hit; }).map(function (x) { return x.r; });
-    return top.concat(rest).slice(0, count);
+    var available = pool.filter(function (r) { return !asked.has(r.label); });
+    if (!low) return available.slice(0, count);
+    return available.filter(function (r) { return r.kw.some(function (k) { return low.includes(k); }); }).slice(0, count);
   }
 
   async function send(opts) {

@@ -9,6 +9,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<script src="./header.js"></script>
 </head>
 <body>
 <x-dc>
@@ -22,15 +23,7 @@
   <link rel="stylesheet" href="./styles.css">
 </helmet>
 <div class="page-legal">
-  <header class="site-header page-header">
-    <a href="./WebKeeper-site.html" class="brand-link">
-      <div class="brand-mark">
-        <img src="./images/wk-shield.png" alt="WebKeeper">
-      </div>
-      <span class="brand-name">Web<span>Keeper</span></span>
-    </a>
-    <a href="./WebKeeper-site.html" class="btn btn--outline">← Voltar ao site</a>
-  </header>
+  <div ref="{{ headerRootRef }}" id="wk-header-root"></div>
 
   <main class="container section">
     <div class="section-subtitle">Documento legal</div>
@@ -60,8 +53,22 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.headerRootRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this._header = window.WKHeader.mount(this.headerRootRef.current, { page: 'legal' });
+  }
+
+  componentWillUnmount() {
+    if (this._header) this._header.destroy();
+  }
+
   renderVals() {
     return {
+      headerRootRef: this.headerRootRef,
       wa: 'https://wa.me/5543999446606?text=' + encodeURIComponent('Olá! Tenho uma dúvida sobre a Política de Privacidade da WebKeeper.'),
       sections: [
         { h: '1. Quem somos', p: [
