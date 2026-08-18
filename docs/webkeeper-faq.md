@@ -351,7 +351,7 @@ Sim, reuniões remotas são combinadas normalmente para clientes fora da região
 ### Empresa, clientes e confiança
 
 **A WebKeeper é uma agência de marketing?**
-Não exatamente. A WebKeeper é uma fábrica de ideias e parceira de tecnologia: atuamos com IA, automação, Web3, sistemas sob medida e SEO, sempre como parceiros do projeto, não como fornecedores comuns.
+Não exatamente. A WebKeeper combina IA, automação, Web3, sistemas sob medida e SEO em um ecossistema de tecnologia aplicada ao seu negócio, sempre como parceiros do projeto, não como fornecedores comuns.
 
 **Quem é o Keeper, essa IA com quem estou falando?**
 Sou o Keeper, assistente de IA da WebKeeper. Respondo dúvidas sobre nossos serviços, processo e como podemos ajudar seu negócio, com atendimento sempre disponível.

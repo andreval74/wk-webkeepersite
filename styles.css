@@ -461,6 +461,7 @@ body.wk-menu-open { overflow: hidden; }
   [data-r="pillar-body"] { padding-left: 30px !important; }
   [data-r="cta"] { padding: 36px 28px !important; }
   [data-r="sobre"] { grid-template-columns: 1fr !important; gap: 32px !important; }
+  [data-r="invest"] { grid-template-columns: 1fr !important; gap: 32px !important; }
   .two-col-wrap { grid-template-columns: 1fr !important; gap: 28px !important; }
   [data-r="why"] { grid-template-columns: repeat(2, 1fr) !important; }
   /* Tela de entrada do Keeper (WebKeeper.html) — só reduz o tamanho do orbe e
