@@ -1,0 +1,40 @@
+{
+  "high_level_description": "A digital logo for Webkeeper on a black background, featuring a stylized 3D hexagonal emblem with white and green geometric shapes and the text 'WEBKEEPER' in a bold, sans-serif font with a green-to-white gradient. Below the main text, the Portuguese phrase 'ECOSSISTEMAS DE IAS PARA NEGÓCIOS' is written in white, flanked by two green horizontal lines with circular endcaps.",
+  "compositional_deconstruction": {
+    "background": "Solid black background.",
+    "elements": [
+      {
+        "type": "obj",
+        "bbox": [
+          15,
+          18,
+          966,
+          285
+        ],
+        "desc": "A large, stylized 3D hexagonal logo on the left side. It features a geometric, crystalline structure with sharp facets. The left half is rendered in a bright, metallic white with subtle gray shading, while the right half is a vibrant, glossy lime green. The logo is framed by a thin, glowing green outline and small, circular green nodes connected by thin lines, suggesting a digital or networked theme."
+      },
+      {
+        "type": "text",
+        "bbox": [
+          336,
+          307,
+          563,
+          977
+        ],
+        "text": "WEBKEEPER",
+        "desc": "Headline-sized text positioned horizontally in the center-right. The font is a bold, modern sans-serif. The letters 'WEB' are solid white, while 'KEEPER' features a vibrant green-to-yellow gradient. The 'E' in 'WEB' is stylized with a horizontal line through its center."
+      },
+      {
+        "type": "text",
+        "bbox": [
+          611,
+          321,
+          663,
+          971
+        ],
+        "text": "———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————\\u20",
+        "desc": "———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————\\u20"
+      }
+    ]
+  }
+}

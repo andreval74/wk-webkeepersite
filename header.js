@@ -8,19 +8,31 @@
   de componentDidMount(), passando uma ref pra uma <div id="wk-header-root"></div>
   vazia no template x-dc (precisa ficar sempre vazia: sem sc-if/sc-for/filhos
   declarados, senão o React reconcilia e apaga o que o header.js injetou aqui).
+
+  Selo da marca (ícone + "WebKeeper" + tagline): a marcação vive em
+  buildBrandHTML() aqui embaixo e é reaproveitada pelo footer.js (mesmo
+  ícone/texto no rodapé). Pra trocar a logo de novo no futuro: troque o
+  arquivo images/logoWK.png (o recorte só do emblema hexagonal, sem a
+  palavra escrita — foi recortado de images/logoWK-verde.png, a arte
+  completa que fica guardada como fonte). Pra trocar o texto/tagline ou as
+  cores, mexa só em buildBrandHTML() e nas classes .wk-brand-text /
+  .wk-brand-accent em styles.css.
 */
 (function (window) {
   'use strict';
 
+  // Ordem acompanha a ordem das seções em WebKeeper-site.html. 'Diagnóstico'
+  // não rola pra seção nenhuma (a ferramenta virou modal, ver
+  // WebKeeper-site.html#checkHashTriggers) — o hash só sinaliza pra abrir o modal.
   var NAV_LINKS = [
     { label: 'Início',       hash: '#' },
     { label: 'Clientes',     hash: '#clientes' },
     { label: 'Serviços',     hash: '#servicos' },
     { label: 'Processo',     hash: '#processo' },
     { label: 'Sobre',        hash: '#sobre' },
+    { label: 'Investimento', hash: '#investimento' },
     { label: 'Projetos',     hash: '#projetos' },
     { label: 'Diagnóstico',  hash: '#diagnostico' },
-    { label: 'Investimento', hash: '#investimento' },
     { label: 'FAQ',          hash: '#faq' },
     { label: 'Contato',      hash: '#investimento-form' }
   ];
@@ -29,6 +41,20 @@
   function crossHref(hash, page) {
     if (page === 'site') return hash; // âncora nativa na própria página
     return hash === '#' ? './WebKeeper-site.html' : './WebKeeper-site.html' + hash;
+  }
+
+  // Ícone + "WebKeeper" + tagline — usado no header e, via WKHeader.buildBrandHTML,
+  // também no rodapé (footer.js) e no loader de WebKeeper-site.html, pra manter a
+  // mesma marcação/cores em todo lugar.
+  function buildBrandHTML() {
+    return ''
+      + '<div class="wk-brand">'
+      +   '<img src="./images/logoWK.png" alt="WebKeeper" style="width:auto;height:44px;object-fit:contain;flex-shrink:0;">'
+      +   '<div class="wk-brand-copy">'
+      +     '<span class="wk-brand-text">Web<span class="wk-brand-accent">Keeper</span></span>'
+      +     '<span style="display:block;font-size:9.5px;font-family:\'Inter\',sans-serif;color:#7d859f;letter-spacing:.2px;white-space:nowrap;">Ecossistemas de IAs para Negócios</span>'
+      +   '</div>'
+      + '</div>';
   }
 
   function buildHTML(page) {
@@ -50,7 +76,7 @@
       +     '<button type="button" class="wk-menu-btn" aria-label="Abrir menu de navegação" aria-expanded="false"><span></span><span></span><span></span></button>'
       +     '<nav class="wk-nav-dropdown" style="display:none;">' + navLinksHtml + '</nav>'
       +   '</div>'
-      +   '<div class="wk-brand"><img src="./images/wk-shield.png" alt="WebKeeper"><span class="wk-brand-text">Web<span class="wk-brand-accent">Keeper</span></span></div>'
+      +   buildBrandHTML()
       + '</div>'
       + '<div class="wk-header-center">'
       +   '<nav class="wk-toggle" data-active="' + (chatIsActive ? 'chat' : 'site') + '" aria-label="Alternar entre Chat e Site">'
@@ -126,5 +152,5 @@
     };
   }
 
-  window.WKHeader = { mount: mount };
+  window.WKHeader = { mount: mount, buildBrandHTML: buildBrandHTML };
 })(window);

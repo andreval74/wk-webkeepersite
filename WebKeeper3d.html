@@ -17,11 +17,11 @@
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="Núcleo 3D — Landing Page Interativa | WebKeeper">
 <meta property="og:description" content="Landing page 3D com scroll cinematográfico: o processo que sustenta cada sistema que a WebKeeper constrói.">
-<meta property="og:image" content="https://www.webkeeper.com.br/images/wk-og.png">
+<meta property="og:image" content="https://www.webkeeper.com.br/images/logoWK.png">
 <meta property="og:url" content="https://www.webkeeper.com.br/WebKeeper3d.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Núcleo 3D — Landing Page Interativa | WebKeeper">
-<meta name="twitter:image" content="https://www.webkeeper.com.br/images/wk-og.png">
+<meta name="twitter:image" content="https://www.webkeeper.com.br/images/logoWK.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -380,15 +380,16 @@ glow.scale.set(2.6, 2.6, 1);
 core.add(glow);
 
 /* WebKeeper logo floating inside the wireframe cage, in place of the old solid core.
-   O PNG fonte (images/wk-shield.png) é só 320x380 — ampliado direto na cena ele fica
+   O PNG fonte (images/logoWK.png, o recorte só do emblema hexagonal — ver
+   header.js pra trocar a logo) é 641x724 — ampliado direto na cena ele fica
    serrilhado. Reamostramos pra um canvas em alta resolução com suavização antes de
    virar textura, e ligamos mipmaps + anisotropia, pra ficar nítido em qualquer zoom. */
 const textureLoader = new THREE.TextureLoader();
-const placeholderLogoTex = textureLoader.load('images/wk-shield.png');
+const placeholderLogoTex = textureLoader.load('images/logoWK.png');
 placeholderLogoTex.colorSpace = THREE.SRGBColorSpace;
 const logoMat = new THREE.SpriteMaterial({ map: placeholderLogoTex, transparent: true, depthWrite: false });
 const logo = new THREE.Sprite(logoMat);
-logo.scale.set(1.34, 1.6, 1); // proporção real de images/wk-shield.png (~64:76)
+logo.scale.set(1.42, 1.6, 1); // proporção real de images/logoWK.png (~641:724)
 
 (function upgradeLogoTexture() {
   const img = new Image();
@@ -412,7 +413,7 @@ logo.scale.set(1.34, 1.6, 1); // proporção real de images/wk-shield.png (~64:7
     logoMat.map = hiResTex;
     logoMat.needsUpdate = true;
   };
-  img.src = 'images/wk-shield.png';
+  img.src = 'images/logoWK.png';
 })();
 core.add(logo);
 

@@ -10,6 +10,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
 <script src="./header.js"></script>
+<script src="./footer.js"></script>
+<script src="./keeper-config.js"></script>
 </head>
 <body>
 <x-dc>
@@ -49,6 +51,9 @@
 
     <p class="legal-note">© 2026 WebKeeper · Londrina/PR, Brasil. Este documento é um modelo geral e não substitui orientação jurídica específica para o seu caso.</p>
   </main>
+
+  <!-- FOOTER — montado por footer.js (WKFooter.mount), igual ao header -->
+  <div ref="{{ footerRootRef }}" id="wk-footer-root"></div>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
@@ -56,19 +61,23 @@ class Component extends DCLogic {
   constructor(props) {
     super(props);
     this.headerRootRef = React.createRef();
+    this.footerRootRef = React.createRef();
   }
 
   componentDidMount() {
     this._header = window.WKHeader.mount(this.headerRootRef.current, { page: 'legal' });
+    this._footer = window.WKFooter.mount(this.footerRootRef.current, { page: 'legal' });
   }
 
   componentWillUnmount() {
     if (this._header) this._header.destroy();
+    if (this._footer) this._footer.destroy();
   }
 
   renderVals() {
     return {
       headerRootRef: this.headerRootRef,
+      footerRootRef: this.footerRootRef,
       wa: 'https://wa.me/5543999446606?text=' + encodeURIComponent('Olá! Tenho uma dúvida sobre os Termos de Uso da WebKeeper.'),
       sections: [
         { h: '1. Aceitação dos termos', p: [

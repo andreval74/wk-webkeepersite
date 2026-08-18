@@ -178,13 +178,21 @@ header nav a {
    containing block do tamanho exato do header (sem altura sobrando) trava o
    sticky, que passa a rolar junto com a página em vez de grudar no topo. */
 #wk-header-root { display: contents; }
+/* Mesmo mecanismo do #wk-header-root, pro <div id="wk-footer-root"> que o
+   footer.js usa pra montar o rodapé compartilhado. */
+#wk-footer-root { display: contents; }
 .wk-header-left   { justify-self: start;  display: flex; align-items: center; gap: 10px; min-width: 0; }
 .wk-header-center { justify-self: center; }
 .wk-header-right  { justify-self: end;    flex-shrink: 0; }
 
+/* Selo da marca (ícone + "WebKeeper" + tagline) — marcação gerada por
+   WKHeader.buildBrandHTML() em header.js, usada no header e no rodapé
+   (footer.js). Tamanho do ícone vem inline (por instância); aqui só o
+   layout compartilhado. */
 .wk-brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
-.wk-brand img { width: 34px; height: 40px; object-fit: contain; flex-shrink: 0; }
-.wk-brand-text { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 18px; color: #f2f4fa; letter-spacing: .2px; white-space: nowrap; }
+.wk-brand img { object-fit: contain; flex-shrink: 0; }
+.wk-brand-copy { display: flex; flex-direction: column; justify-content: center; gap: 2px; min-width: 0; }
+.wk-brand-text { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 18px; color: #f2f4fa; letter-spacing: .2px; white-space: nowrap; line-height: 1; }
 .wk-brand-accent { color: var(--green); }
 
 .wk-toggle {
@@ -455,7 +463,6 @@ body.wk-menu-open { overflow: hidden; }
   [data-r="sobre"] { grid-template-columns: 1fr !important; gap: 32px !important; }
   .two-col-wrap { grid-template-columns: 1fr !important; gap: 28px !important; }
   [data-r="why"] { grid-template-columns: repeat(2, 1fr) !important; }
-  [data-r="invest"] { grid-template-columns: 1fr !important; }
   /* Tela de entrada do Keeper (WebKeeper.html) — só reduz o tamanho do orbe e
      do histórico de mensagens pra caber melhor numa tela pequena; o resto
      (chips, "Entrar no site") é igual em qualquer tamanho de tela. */
@@ -465,8 +472,11 @@ body.wk-menu-open { overflow: hidden; }
 }
 @media (max-width: 600px) {
   .site-header { padding: 10px 8px !important; gap: 6px !important; }
-  .wk-brand-text { display: none; }
-  .wk-brand img { width: 28px !important; height: 33px !important; }
+  /* Só o header aperta (hambúrguer + toggle + botão de contato disputando
+     espaço) — o rodapé usa o mesmo .wk-brand mas tem espaço de sobra, então
+     mantém ícone + nome + tagline completos no mobile. */
+  .site-header .wk-brand-copy { display: none; }
+  .site-header .wk-brand img { width: auto !important; height: 33px !important; }
   .wk-toggle-opt { min-width: 0; padding: 6px 10px; font-size: 11.5px; }
   .wk-header-right .btn svg { display: none; }
   .wk-header-right .btn { padding: 8px 10px !important; font-size: 12px !important; }

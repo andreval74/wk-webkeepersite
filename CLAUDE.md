@@ -44,6 +44,29 @@ bloco de documentação de uso no topo de cada arquivo). Imagens soltas em `<ima
 persistidas no sidecar `.image-slots.state.json` pela ferramenta de autoria; fora dessa
 ferramenta, o slot é só uma imagem estática via `src`.
 
+### Header, rodapé e logo (`header.js` / `footer.js`)
+
+`WebKeeper.html`, `WebKeeper-site.html`, `politica-de-privacidade.html` e `termos-de-uso.html`
+compartilham cabeçalho e rodapé via dois scripts vendorizados que manipulam o DOM direto (fora do
+runtime "dc", mesmo padrão de `keeper-orb.js`): cada página só declara uma `<div id="wk-header-
+root">`/`<div id="wk-footer-root">` vazia no template `<x-dc>` e chama `WKHeader.mount(el, {
+page })` / `WKFooter.mount(el, { page })` em `componentDidMount()` (com `.destroy()` no
+`componentWillUnmount()`). `page` é `'chat'` (`WebKeeper.html`) | `'site'` (`WebKeeper-site.html`)
+| `'legal'` (páginas legais) — controla se os links de âncora do menu/rodapé apontam nativamente
+(`#hash`, só em `WebKeeper-site.html`) ou pra `./WebKeeper-site.html#hash` (nas outras páginas).
+`footer.js` depende de `keeper-config.js` já carregado (usa `KeeperConfig.buildWaLink` pro link de
+WhatsApp).
+
+**Logo**: o ícone da marca (hexágono "K") usado no header, no rodapé, na tela de carregamento de
+`WebKeeper-site.html`, no favicon, no `og:image`/`twitter:image`/`schema.org logo` e na cena 3D de
+`WebKeeper3d.html` é sempre `images/logoWK.png` — esse é o arquivo canônico pra trocar a logo no
+futuro (é gerado a partir de `images/logoWK-verde.png`, a arte completa com a palavra "WEBKEEPER"
+escrita, que fica guardada só como fonte, recortando a região do emblema). O texto "WebKeeper" e a
+tagline "Ecossistemas de IAs para Negócios" são HTML normal (não fazem parte da imagem) — a
+marcação de ícone+texto+tagline vive em `WKHeader.buildBrandHTML()` (`header.js`) e é reaproveitada
+pelo `footer.js`; as cores (`.wk-brand-text`/`.wk-brand-accent`, branco+verde) vivem em `styles.css`
+na seção "Header unificado (header.js)".
+
 ### Keeper (assistente de chat com IA)
 
 Dividido em scripts compartilhados para que `WebKeeper.html` e `WebKeeper-site.html` não divirjam
