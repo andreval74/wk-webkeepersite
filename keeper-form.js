@@ -37,13 +37,12 @@
   }
 
   function validate(f) {
-    if (!f.empresa.trim()) return 'Informe o nome da empresa.';
-    if (!f.nicho.trim()) return 'Informe o nicho ou segmento da empresa.';
-    if (!f.responsavel.trim()) return 'Informe seu nome.';
-    var waDigits = f.whatsapp.replace(/\D/g, '');
+    if (!String(f.empresa || '').trim()) return 'Informe o nome da empresa.';
+    if (!String(f.responsavel || '').trim()) return 'Informe seu nome.';
+    var waDigits = (f.whatsapp || '').replace(/\D/g, '');
     if (waDigits.length < 10 || waDigits.length > 11) return 'Informe um WhatsApp válido, com DDD.';
-    if (!isValidSite(f.site)) return 'Informe um site (https://...) válido, ou deixe em branco.';
-    if (!isValidInstagram(f.instagram)) return 'Informe um usuário do Instagram (@usuario) válido, ou deixe em branco.';
+    if (f.site && !isValidSite(f.site)) return 'Informe um site (https://...) válido, ou deixe em branco.';
+    if (f.instagram && !isValidInstagram(f.instagram)) return 'Informe um usuário do Instagram (@usuario) válido, ou deixe em branco.';
     if (!f.consent) return 'É necessário autorizar a análise das informações e o contato para continuar.';
     return '';
   }
@@ -52,16 +51,24 @@
   // mesmo comportamento que já existia no formulário do site).
   async function submit(f) {
     try {
+      var payload = {
+        access_key: WEB3FORMS_KEY,
+        subject: 'Novo contato pelo site WebKeeper',
+        from_name: 'Site WebKeeper',
+        empresa: f.empresa,
+        site: f.site || '',
+        responsavel: f.responsavel,
+        whatsapp: f.whatsapp,
+        mensagem: f.mensagem
+      };
+
+      if (f.nicho) payload.nicho = f.nicho;
+      if (f.instagram) payload.instagram = f.instagram;
+
       await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_KEY,
-          subject: 'Novo contato pelo site WebKeeper',
-          from_name: 'Site WebKeeper',
-          empresa: f.empresa, nicho: f.nicho, site: f.site, instagram: f.instagram,
-          responsavel: f.responsavel, whatsapp: f.whatsapp, mensagem: f.mensagem
-        })
+        body: JSON.stringify(payload)
       });
     } catch (e) { /* segue para a tela de confirmação mesmo em falha de rede */ }
   }

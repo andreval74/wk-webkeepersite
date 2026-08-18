@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Núcleo 3D — Landing Page Interativa | WebKeeper</title>
-<meta name="description" content="Demonstração interativa 3D da WebKeeper: role a página e veja, em tempo real, o processo que sustenta cada sistema que construímos — do diagnóstico ao lançamento.">
-<meta name="keywords" content="webkeeper, landing page interativa, experiência 3D, three.js, portfólio webkeeper, landing page premium">
+<title>WebKeeper | Ecossistemas de IAs para Negócios</title>
+<meta name="description" content="A WebKeeper entende seu negócio, conecta as tecnologias certas e constrói soluções com IA, sistemas e automação trabalhando em conjunto.">
+<meta name="keywords" content="webkeeper, ecossistemas de IA para negócios, inteligência artificial para empresas, sistemas, automação, transformação digital">
 <meta name="author" content="WebKeeper">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="language" content="pt-BR">
@@ -15,12 +15,12 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="WebKeeper">
 <meta property="og:locale" content="pt_BR">
-<meta property="og:title" content="Núcleo 3D — Landing Page Interativa | WebKeeper">
-<meta property="og:description" content="Landing page 3D com scroll cinematográfico: o processo que sustenta cada sistema que a WebKeeper constrói.">
+<meta property="og:title" content="WebKeeper | Ecossistemas de IAs para Negócios">
+<meta property="og:description" content="Entendemos o negócio, conectamos tecnologias e construímos soluções com IA, sistemas e automação trabalhando juntas.">
 <meta property="og:image" content="https://www.webkeeper.com.br/images/logoWK.png">
 <meta property="og:url" content="https://www.webkeeper.com.br/WebKeeper3d.html">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Núcleo 3D — Landing Page Interativa | WebKeeper">
+<meta name="twitter:title" content="WebKeeper | Ecossistemas de IAs para Negócios">
 <meta name="twitter:image" content="https://www.webkeeper.com.br/images/logoWK.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -79,8 +79,11 @@
   #hero h1 em{font-style:normal;color:var(--green-soft);}
   #hero p{margin-top:22px;font-size:16px;line-height:1.65;color:var(--text-muted);max-width:46ch;}
 
+  .caps-list{margin-top:18px;display:flex;flex-direction:column;align-items:flex-start;gap:10px;}
+  .caps-list .cap-item{font-size:13px;letter-spacing:0.14em;color:var(--green-soft);padding:8px 18px;border:1px solid rgba(95,166,37,.28);border-radius:999px;background:rgba(95,166,37,.08);}
+
   #final .panel{max-width:560px;margin:0 auto;text-align:center;}
-  #final .final-card{
+  .final-card{
     pointer-events:auto;padding:40px 36px;border-radius:20px;
     background:linear-gradient(160deg, rgba(30,48,86,.4), rgba(10,16,32,.7));
     border:1px solid rgba(95,166,37,.22);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
@@ -156,6 +159,7 @@
     }
     section.step:nth-child(even) .panel p{margin-left:auto;margin-right:auto;}
     .stage-idx{top:66px;right:20px;}
+    .caps-list{align-items:center;}
     #final .final-card{padding:28px 22px;}
     .wk3d-modal{padding:24px 20px;}
   }
@@ -170,73 +174,82 @@
 <canvas id="stage"></canvas>
 
 <div id="wk-header-root"></div>
-<div class="stage-idx mono">Etapa <b id="stepIdx">00</b> / 06</div>
+<div class="stage-idx mono">Etapa <b id="stepIdx">00</b> / 07</div>
 
 <main>
   <section class="step" id="hero">
     <div class="panel">
-      <div class="eyebrow">Experiência 3D — veja como a estratégia vira sistema</div>
-      <h1>O cérebro que transforma <em>ideias em resultado real.</em></h1>
-      <p>Na WebKeeper, cada projeto começa com entendimento, passa por arquitetura, construção e entrega com acompanhamento real — para que a solução gere valor desde o primeiro uso.</p>
+      <div class="eyebrow">ECOSSISTEMAS DE IAs PARA NEGÓCIOS</div>
+      <h1>Seu problema não precisa de mais uma <em>ferramenta.</em></h1>
+      <p>Entendemos o negócio, conectamos tecnologias e construímos soluções com IA, sistemas e automação trabalhando juntas.</p>
+      <div class="cta-actions" style="justify-content:flex-start;margin-top:22px;">
+        <a href="#diagnostico" class="btn-ghost mono" style="text-decoration:none;">Descubra como ↓</a>
+      </div>
     </div>
   </section>
 
-  <section class="step" data-stage="1">
+  <section class="step" id="diagnostico" data-stage="1">
     <div class="panel">
       <span class="pn mono">01 · Diagnóstico</span>
-      <h2>Entender <em>antes</em> de construir.</h2>
-      <p>Mapeamos objetivos, oportunidades e gargalos do negócio para definir o que realmente precisa ser resolvido antes de qualquer decisão técnica.</p>
+      <h2>Entender antes de <em>construir.</em></h2>
+      <p>Começamos pelo negócio: identificamos problemas, oportunidades e processos que podem ser melhorados antes de decidir qual tecnologia utilizar.</p>
     </div>
   </section>
 
   <section class="step" data-stage="2">
     <div class="panel">
       <span class="pn mono">02 · Arquitetura</span>
-      <h2>Estratégia e <em>sistema</em> em sincronia.</h2>
-      <p>Definimos stack, fluxos, prazos e prioridades com clareza para que a solução seja escalável, funcional e alinhada ao crescimento do negócio.</p>
+      <h2>A <em>tecnologia certa</em> para cada parte do problema.</h2>
+      <p>Definimos como IA, sistemas, automações, dados e integrações podem trabalhar juntos dentro de uma solução simples e funcional.</p>
     </div>
   </section>
 
   <section class="step" data-stage="3">
     <div class="panel">
       <span class="pn mono">03 · Construção</span>
-      <h2>Execução <em>com direção.</em></h2>
-      <p>Transformamos o planejamento em interfaces, automações e produtos reais, com comunicação direta e acompanhamento prático em cada etapa.</p>
+      <h2>Da estratégia para <em>algo que funciona.</em></h2>
+      <p>Transformamos o planejamento em sistemas, agentes de IA, automações e experiências digitais prontas para serem utilizadas no negócio.</p>
     </div>
   </section>
 
   <section class="step" data-stage="4">
     <div class="panel">
       <span class="pn mono">04 · Lançamento</span>
-      <h2>Solução <em>no ar</em> e pronta para uso.</h2>
-      <p>Validação, documentação e publicação com foco em performance, experiência e estabilidade — sem deixar a ideia apenas em apresentação.</p>
+      <h2>Da construção para a <em>operação.</em></h2>
+      <p>Testamos, validamos e colocamos a solução em funcionamento com foco em estabilidade, experiência e uso real.</p>
     </div>
   </section>
 
   <section class="step" data-stage="5">
     <div class="panel">
       <span class="pn mono">05 · Evolução</span>
-      <h2>O trabalho <em>não para</em> no deploy.</h2>
-      <p>Acompanhamos o resultado após o lançamento para ajustar, evoluir e manter o sistema alinhado ao ritmo do seu negócio.</p>
+      <h2>Tecnologia que <em>acompanha o negócio.</em></h2>
+      <p>Depois da entrega, a solução pode continuar evoluindo conforme surgem novos dados, necessidades e oportunidades.</p>
     </div>
   </section>
 
-  <section class="step" data-stage="6">
+  <section class="step" id="capacidades" data-stage="6">
     <div class="panel">
-      <span class="pn mono">06 · Soluções</span>
-      <h2>Sites, sistemas e <em>automação em um só fluxo.</em></h2>
-      <p>Construímos landing pages, plataformas, integrações e experiências digitais que unem estratégia, tecnologia e alto desempenho em cada ponto de contato.</p>
+      <span class="pn mono">06 · Tecnologia aplicada</span>
+      <h2>Diferentes tecnologias. <em>Um único objetivo.</em></h2>
+      <p>Cada problema pede uma combinação diferente. Construímos e conectamos as peças necessárias para cada negócio.</p>
+      <div class="caps-list">
+        <span class="mono cap-item">Ecossistemas</span>
+        <span class="mono cap-item">SaaS</span>
+        <span class="mono cap-item">IAs &amp; Automação</span>
+        <span class="mono cap-item">WebServiços</span>
+      </div>
     </div>
   </section>
 
   <section class="step" id="final" data-stage="7">
     <div class="panel">
       <div class="final-card">
-        <span class="pn mono">07 · Contato</span>
-        <h2>Pronto para transformar <em>sua ideia em um sistema que funciona?</em></h2>
+        <span class="pn mono">07 · Próximo passo</span>
+        <h2>Qual problema podemos ajudar sua empresa a <em>resolver?</em></h2>
+        <p>Conte um pouco sobre sua empresa. Nós analisamos o cenário e entramos em contato para entender o próximo passo.</p>
         <div class="cta-actions">
-          <a href="https://wa.me/5543999446606" class="btn-primary">Falar no WhatsApp →</a>
-          <button type="button" class="btn-ghost mono" id="openContactModalBtn">Preencher formulário</button>
+          <button type="button" class="btn-primary" id="openContactModalBtn">Quero analisar meu projeto</button>
         </div>
       </div>
     </div>
@@ -253,57 +266,50 @@
     </button>
 
     <div id="wk3dModalForm">
-      <h3 id="wk3dModalTitle">Entre em contato</h3>
-      <p class="sub">Conte um pouco sobre sua empresa. Nossa equipe faz uma avaliação e entra em contato, sem compromisso.</p>
+      <h3 id="wk3dModalTitle">Qual problema podemos ajudar sua empresa a resolver?</h3>
+      <p class="sub">Conte um pouco sobre sua empresa. Nós analisamos o cenário e entramos em contato para entender o próximo passo.</p>
 
       <div class="row">
-        <div class="wk-field" style="margin-bottom:0;">
-          <div style="font-size:12.5px;font-weight:600;color:var(--text-soft);">Nome da empresa</div>
-          <input id="wk3dEmpresa" placeholder="Ex: Estofados Premium">
+        <div class="wk-field" style="margin-bottom:0;grid-column:1 / -1;">
+          <div style="font-size:12.5px;font-weight:600;color:var(--text-soft);">Empresa *</div>
+          <input id="wk3dEmpresa" placeholder="Nome da empresa">
         </div>
-        <div class="wk-field" style="margin-bottom:0;">
-          <div style="font-size:12.5px;font-weight:600;color:var(--text-soft);">Nicho / segmento</div>
-          <select id="wk3dNicho"><option value="">Selecione...</option></select>
+      </div>
+      <div class="row">
+        <div class="wk-field" style="margin-bottom:0;grid-column:1 / -1;">
+          <div style="font-size:12.5px;font-weight:600;color:var(--text-soft);">Site</div>
+          <input id="wk3dSite" placeholder="https://suaempresa.com.br">
+          <div style="margin-top:6px;font-size:11px;color:var(--text-muted);">Não tem site? Sem problema.</div>
         </div>
       </div>
       <div class="row">
         <div class="wk-field" style="margin-bottom:0;">
-          <div style="font-size:12.5px;font-weight:600;color:var(--text-soft);">Site (opcional)</div>
-          <input id="wk3dSite" placeholder="https://seusite.com.br">
+          <div style="font-size:12.5px;font-weight:600;color:var(--text-soft);">Seu nome *</div>
+          <input id="wk3dResponsavel" placeholder="Como podemos chamar você?">
         </div>
         <div class="wk-field" style="margin-bottom:0;">
-          <div style="font-size:12.5px;font-weight:600;color:var(--text-soft);">Instagram (opcional)</div>
-          <input id="wk3dInstagram" placeholder="@seuinstagram">
-        </div>
-      </div>
-      <div class="row">
-        <div class="wk-field" style="margin-bottom:0;">
-          <div style="font-size:12.5px;font-weight:600;color:var(--text-soft);">Seu nome</div>
-          <input id="wk3dResponsavel" placeholder="Seu nome">
-        </div>
-        <div class="wk-field" style="margin-bottom:0;">
-          <div style="font-size:12.5px;font-weight:600;color:var(--text-soft);">WhatsApp</div>
-          <input id="wk3dWhatsapp" placeholder="(43) 99999-9999">
+          <div style="font-size:12.5px;font-weight:600;color:var(--text-soft);">WhatsApp *</div>
+          <input id="wk3dWhatsapp" placeholder="(00) 00000-0000">
         </div>
       </div>
       <div class="wk-field" style="margin-bottom:12px;">
-        <div style="font-size:12.5px;font-weight:600;color:var(--text-soft);">Como podemos ajudar?</div>
-        <textarea id="wk3dMensagem" rows="3" placeholder="Conte o que você precisa e sua principal dificuldade hoje" style="width:100%;box-sizing:border-box;resize:none;font-family:inherit;"></textarea>
+        <div style="font-size:12.5px;font-weight:600;color:var(--text-soft);">O que você gostaria de melhorar?</div>
+        <textarea id="wk3dMensagem" rows="3" placeholder="Conte rapidamente o problema, ideia ou processo que gostaria de melhorar." style="width:100%;box-sizing:border-box;resize:none;font-family:inherit;"></textarea>
       </div>
       <label class="consent">
         <input type="checkbox" id="wk3dConsent">
-        <span>Autorizo a WebKeeper a analisar as informações públicas da empresa informada e a utilizar meus dados de contato para responder a esta solicitação e conversar sobre os serviços apresentados.</span>
+        <span>Autorizo a WebKeeper a analisar informações públicas da empresa informada e utilizar meus dados de contato para responder a esta solicitação.</span>
       </label>
       <div class="error" id="wk3dError"></div>
-      <button type="button" class="btn-primary submit-btn" id="wk3dSubmit">Enviar formulário</button>
+      <button type="button" class="btn-primary submit-btn" id="wk3dSubmit">Analisar meu projeto</button>
     </div>
 
     <div class="success" id="wk3dSuccess">
       <div class="success-icon">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5FA625" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
       </div>
-      <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--text);">Recebemos suas informações!</div>
-      <p style="font-size:13px;color:var(--text-muted);margin:0;max-width:340px;">Vamos avaliar os dados. Em breve entramos em contato pelo WhatsApp informado.</p>
+      <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--text);">Recebemos seu projeto.</div>
+      <p style="font-size:13px;color:var(--text-muted);margin:0;max-width:340px;">Vamos analisar as informações e entraremos em contato pelos dados informados.</p>
       <button type="button" class="btn-ghost mono" id="wk3dModalCloseSuccess">Fechar</button>
     </div>
   </div>
@@ -356,6 +362,8 @@ scene.add(fill);
 
 /* Core group */
 const core = new THREE.Group();
+const baseCoreScale = isMobile ? 0.72 : 0.82;
+core.scale.setScalar(baseCoreScale);
 scene.add(core);
 
 /* Soft green glow behind the logo (canvas-generated radial gradient, no extra asset) */
@@ -466,6 +474,9 @@ gsap.ticker.add(() => {
   core.rotation.y += dt * 0.18;
   core.rotation.x += dt * 0.04;
   nodes.rotation.y -= dt * 0.06;
+  camera.position.set(camState.x, camState.y, camState.z);
+  lookTarget.set(camState.lx, camState.ly, 0);
+  camera.lookAt(lookTarget);
   renderer.render(scene, camera);
 });
 gsap.ticker.lagSmoothing(0);
@@ -473,15 +484,33 @@ gsap.ticker.lagSmoothing(0);
 /* ===================== SCROLL-DRIVEN CAMERA ===================== */
 const lookTarget = new THREE.Vector3(0, 0, 0);
 
+/* lx é o ponto (em x) pra onde a câmera "olha" — como o objeto fica sempre na
+   origem, afastar o alvo do olhar do lado oposto ao texto empurra visualmente
+   o globo pro lado vazio da tela (texto à esquerda → lx negativo → globo some
+   pra direita, e vice-versa). Reduzido em telas pequenas (lxMul) pro globo não
+   sair da área visível no FOV mais estreito do mobile.
+   IMPORTANTE: lx é animado separadamente, pelos mesmos triggers por-etapa que
+   revelam o texto (ver STEP TEXT REVEAL abaixo) — não pelo timeline contínuo
+   de scroll (camTl) — porque o timeline contínuo é escalado pelo scroll total
+   da página e não bate exatamente com a etapa que está visível naquele
+   instante; usar os dois pra controlar o mesmo eixo gerava dessincronia (globo
+   do lado errado). x/y/z/ly continuam no timeline contínuo (mesma órbita de
+   sempre); só o deslocamento lateral segue o texto. */
+const lxMul = isMobile ? 0.55 : 1;
 const waypoints = [
-  { x: 0,    y: 0,    z: 7.0, lx: 0,    ly: 0 },     // hero
-  { x: 2.3,  y: 0.5,  z: 4.6, lx: 0,    ly: 0 },     // 01 diagnóstico
-  { x: -2.5, y: 0.8,  z: 4.2, lx: 0,    ly: 0.1 },   // 02 arquitetura
-  { x: 0,    y: 2.5,  z: 3.6, lx: 0,    ly: 0 },     // 03 construção
-  { x: 2.6,  y: -0.9, z: 3.1, lx: 0,    ly: 0.2 },   // 04 lançamento
-  { x: -1.9, y: -1.2, z: 3.4, lx: 0,    ly: -0.1 },  // 05 evolução
-  { x: 0,    y: 0,    z: 2.4, lx: 0,    ly: 0 }      // final
+  { x: 0,    y: 0,    z: 7.0, lx: -2.0, ly: 0 },     // hero — nth-child ímpar, texto à esquerda
+  { x: 2.3,  y: 0.5,  z: 4.6, lx: 1.0,  ly: 0 },     // 01 diagnóstico — par, texto à direita
+  { x: -2.5, y: 0.8,  z: 4.2, lx: -0.9, ly: 0.1 },   // 02 arquitetura — ímpar, texto à esquerda
+  { x: 0,    y: 2.5,  z: 3.6, lx: 0.8,  ly: 0 },     // 03 construção — par, texto à direita
+  { x: 2.6,  y: -0.9, z: 3.1, lx: -0.7, ly: 0.2 },   // 04 lançamento — ímpar, texto à esquerda
+  { x: -1.9, y: -1.2, z: 3.4, lx: 0.75, ly: -0.1 },  // 05 evolução — par, texto à direita
+  { x: 1.6,  y: 1.0,  z: 2.8, lx: -0.6, ly: 0.1 },   // 06 tecnologia aplicada — ímpar, texto à esquerda
+  { x: 0,    y: 0,    z: 2.4, lx: 0,    ly: 0 }      // final — texto centralizado
 ];
+
+const camState = { x: camera.position.x, y: camera.position.y, z: camera.position.z, lx: waypoints[0].lx * lxMul, ly: waypoints[0].ly };
+lookTarget.set(camState.lx, camState.ly, 0);
+camera.lookAt(lookTarget);
 
 if (!reduced) {
   const camTl = gsap.timeline({
@@ -492,22 +521,12 @@ if (!reduced) {
       scrub: 0.6
     }
   });
-  const camState = { x: camera.position.x, y: camera.position.y, z: camera.position.z, lx: 0, ly: 0 };
   for (let i = 1; i < waypoints.length; i++) {
     const wp = waypoints[i];
-    camTl.to(camState, {
-      x: wp.x, y: wp.y, z: wp.z, lx: wp.lx, ly: wp.ly,
-      duration: 1, ease: 'power1.inOut',
-      onUpdate: () => {
-        camera.position.set(camState.x, camState.y, camState.z);
-        lookTarget.set(camState.lx, camState.ly, 0);
-        camera.lookAt(lookTarget);
-      }
-    }, '>');
+    camTl.to(camState, { x: wp.x, y: wp.y, z: wp.z, ly: wp.ly, duration: 1, ease: 'power1.inOut' }, '>');
   }
 } else {
-  camera.position.set(0, 0.4, 5.4);
-  camera.lookAt(0, 0, 0);
+  camState.x = 0; camState.y = 0.4; camState.z = 5.4; camState.lx = 0; camState.ly = 0;
 }
 
 /* Accent shift per stage: variações de luminosidade do verde de marca */
@@ -525,7 +544,6 @@ document.querySelectorAll('.step').forEach((step, i) => {
     end: 'bottom 35%',
     onEnter: () => {
       gsap.to(panel, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' });
-      document.getElementById('stepIdx').textContent = String(i).padStart(2, '0');
       colorA.set(shellMat.color.getHex());
       colorB.set(accentColors[i] ?? 0x5FA625);
       gsap.to(accentState, {
@@ -537,10 +555,7 @@ document.querySelectorAll('.step').forEach((step, i) => {
         onComplete: () => { accentState.t = 0; }
       });
     },
-    onEnterBack: () => {
-      gsap.to(panel, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
-      document.getElementById('stepIdx').textContent = String(i).padStart(2, '0');
-    },
+    onEnterBack: () => gsap.to(panel, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }),
     onLeave: () => gsap.to(panel, { opacity: 0, y: -16, duration: 0.5, ease: 'power2.in' }),
     onLeaveBack: () => gsap.to(panel, { opacity: 0, y: 16, duration: 0.5, ease: 'power2.in' })
   });
@@ -549,6 +564,40 @@ document.querySelectorAll('.step').forEach((step, i) => {
 if (reduced) {
   document.querySelectorAll('.panel').forEach(p => gsap.set(p, { opacity: 1, y: 0 }));
 }
+
+/* ===================== ETAPA ATIVA (contador + deslocamento lateral do globo) =====================
+   Descobre qual .step está com o meio da seção mais próximo do centro da
+   viewport e sincroniza o número "ETAPA" e o lx (lado pra onde o globo é
+   empurrado) com ela. Mais confiável que amarrar isso aos thresholds
+   percentuais dos triggers de fade de texto acima (que, nesta página,
+   disparam bem antes da seção ficar visível — ok pro fade suave do texto,
+   cedo demais pra mover a câmera sem descolar do texto errado). */
+/* Crescimento progressivo do globo — além da aproximação natural da câmera
+   (z decrescente nos waypoints, preservada), o objeto também escala pra cima
+   a cada etapa, deixando o "aumentar de tamanho ao descer a página" explícito
+   e sempre crescente, mesmo nos trechos em que a órbita original recua um
+   pouco o z (ex.: 05 evolução). */
+const stepScaleMul = [0.85, 0.95, 1.08, 1.25, 1.45, 1.7, 2.05, 2.7];
+const stepEls = Array.from(document.querySelectorAll('.step'));
+let activeStepIdx = -1;
+function updateActiveStep() {
+  const center = window.scrollY + window.innerHeight / 2;
+  let idx = 0;
+  for (let i = 0; i < stepEls.length; i++) {
+    if (stepEls[i].offsetTop <= center) idx = i; else break;
+  }
+  if (idx === activeStepIdx) return;
+  activeStepIdx = idx;
+  document.getElementById('stepIdx').textContent = String(idx).padStart(2, '0');
+  if (!reduced) {
+    const targetLx = (waypoints[idx] ? waypoints[idx].lx : 0) * lxMul;
+    gsap.to(camState, { lx: targetLx, duration: 0.9, ease: 'power2.out', overwrite: true });
+    const targetScale = baseCoreScale * (stepScaleMul[idx] ?? 1);
+    gsap.to(core.scale, { x: targetScale, y: targetScale, z: targetScale, duration: 1, ease: 'power2.out', overwrite: true });
+  }
+}
+window.addEventListener('scroll', updateActiveStep, { passive: true });
+updateActiveStep();
 
 /* ===================== LIGHTWEIGHT FPS READOUT (dev sanity check) ===================== */
 let frames = 0, lastCheck = performance.now();
@@ -574,14 +623,7 @@ gsap.ticker.add(() => {
   const successEl = document.getElementById('wk3dSuccess');
   const errorEl = document.getElementById('wk3dError');
   const submitBtn = document.getElementById('wk3dSubmit');
-  const nichoSelect = document.getElementById('wk3dNicho');
   const whatsappInput = document.getElementById('wk3dWhatsapp');
-
-  KeeperForm.NICHO_OPTIONS.forEach(n => {
-    const opt = document.createElement('option');
-    opt.value = n; opt.textContent = n;
-    nichoSelect.appendChild(opt);
-  });
 
   whatsappInput.addEventListener('input', (e) => {
     e.target.value = KeeperForm.formatWhatsapp(e.target.value);
@@ -590,9 +632,7 @@ gsap.ticker.add(() => {
   function readForm() {
     return {
       empresa: document.getElementById('wk3dEmpresa').value,
-      nicho: nichoSelect.value,
       site: document.getElementById('wk3dSite').value,
-      instagram: document.getElementById('wk3dInstagram').value,
       responsavel: document.getElementById('wk3dResponsavel').value,
       whatsapp: whatsappInput.value,
       mensagem: document.getElementById('wk3dMensagem').value,
@@ -601,17 +641,16 @@ gsap.ticker.add(() => {
   }
 
   function resetModal() {
-    ['wk3dEmpresa', 'wk3dSite', 'wk3dInstagram', 'wk3dResponsavel', 'wk3dWhatsapp', 'wk3dMensagem'].forEach(id => {
+    ['wk3dEmpresa', 'wk3dSite', 'wk3dResponsavel', 'wk3dWhatsapp', 'wk3dMensagem'].forEach(id => {
       document.getElementById(id).value = '';
     });
-    nichoSelect.value = '';
     document.getElementById('wk3dConsent').checked = false;
     errorEl.textContent = '';
     errorEl.classList.remove('is-visible');
     formEl.style.display = '';
     successEl.classList.remove('is-visible');
     submitBtn.disabled = false;
-    submitBtn.textContent = 'Enviar formulário';
+    submitBtn.textContent = 'Analisar meu projeto';
   }
 
   function openModal() {
