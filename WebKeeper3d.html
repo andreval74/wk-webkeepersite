@@ -11,6 +11,7 @@
 <meta name="language" content="pt-BR">
 <meta name="theme-color" content="#05070d">
 <link rel="canonical" href="https://www.webkeeper.com.br/WebKeeper3d.html">
+<link rel="icon" href="./images/logoWK.png" type="image/png">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="WebKeeper">
@@ -29,6 +30,16 @@
 <link rel="stylesheet" href="./styles.css">
 <script src="./header.js"></script>
 <script src="./keeper-form.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "WebKeeper",
+  "url": "https://www.webkeeper.com.br/",
+  "logo": "https://www.webkeeper.com.br/images/logoWK.png",
+  "sameAs": ["https://www.facebook.com/webkeeperia/", "https://www.instagram.com/webkeeperia", "https://www.linkedin.com/company/webkeeper"]
+}
+</script>
 <style>
   :root{
     --bg-start:#071028; --bg-mid:#041425; --bg-end:#001217;
@@ -37,7 +48,7 @@
     --line:rgba(242,244,250,0.14);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
-  html,body{background:linear-gradient(135deg, var(--bg-start) 0%, var(--bg-mid) 50%, var(--bg-end) 100%);color:var(--text);height:100%;}
+  html,body{background:linear-gradient(135deg, var(--bg-start) 0%, var(--bg-mid) 50%, var(--bg-end) 100%);background-attachment:fixed;color:var(--text);height:100%;}
   body{font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;overscroll-behavior-y:none;}
   .serif{font-family:'Sora',sans-serif;}
   .mono{font-family:'Inter',sans-serif;letter-spacing:0.1em;text-transform:uppercase;}
@@ -432,12 +443,16 @@ const shellMat = new THREE.LineBasicMaterial({ color: 0x5FA625, transparent: tru
 const shell = new THREE.LineSegments(shellEdges, shellMat);
 core.add(shell);
 
-/* Outer node ring — lightweight Points, fewer on mobile */
-const nodeCount = isMobile ? 140 : 360;
+/* Campo de estrelas — Points soltos na cena (não dentro de "core"), pra
+   cobrirem a tela toda e não se moverem/escalarem junto com o globo (que tem
+   seu próprio deslocamento lateral e crescimento por etapa). Raio bem maior
+   que o objeto, sempre mais distante que qualquer posição de câmera da
+   órbita (z 2.4–7), pra não "explodir" de tamanho perto da câmera. */
+const nodeCount = isMobile ? 1400 : 3500;
 const nodeGeo = new THREE.BufferGeometry();
 const positions = new Float32Array(nodeCount * 3);
 for (let i = 0; i < nodeCount; i++) {
-  const r = 2.3 + Math.random() * 0.9;
+  const r = 6 + Math.random() * 9;
   const theta = Math.random() * Math.PI * 2;
   const phi = Math.acos((Math.random() * 2) - 1);
   positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
@@ -451,7 +466,7 @@ const nodeMat = new THREE.PointsMaterial({
   blending: THREE.AdditiveBlending, depthWrite: false
 });
 const nodes = new THREE.Points(nodeGeo, nodeMat);
-core.add(nodes);
+scene.add(nodes);
 
 /* ===================== RESIZE ===================== */
 let resizeTimer;
@@ -487,8 +502,12 @@ const lookTarget = new THREE.Vector3(0, 0, 0);
 /* lx é o ponto (em x) pra onde a câmera "olha" — como o objeto fica sempre na
    origem, afastar o alvo do olhar do lado oposto ao texto empurra visualmente
    o globo pro lado vazio da tela (texto à esquerda → lx negativo → globo some
-   pra direita, e vice-versa). Reduzido em telas pequenas (lxMul) pro globo não
-   sair da área visível no FOV mais estreito do mobile.
+   pra direita, e vice-versa). Módulo calculado pra usar boa parte do FOV
+   horizontal disponível em cada distância de câmera, deixando o globo bem
+   mais afastado do bloco de texto (não só "do lado oposto e perto").
+   No mobile não há deslocamento lateral nenhum — o texto já é centralizado
+   por CSS nesse breakpoint, então o globo fica sempre olhando reto pro centro
+   e o único movimento é o crescimento de escala por etapa (ver stepScaleMul).
    IMPORTANTE: lx é animado separadamente, pelos mesmos triggers por-etapa que
    revelam o texto (ver STEP TEXT REVEAL abaixo) — não pelo timeline contínuo
    de scroll (camTl) — porque o timeline contínuo é escalado pelo scroll total
@@ -496,19 +515,18 @@ const lookTarget = new THREE.Vector3(0, 0, 0);
    instante; usar os dois pra controlar o mesmo eixo gerava dessincronia (globo
    do lado errado). x/y/z/ly continuam no timeline contínuo (mesma órbita de
    sempre); só o deslocamento lateral segue o texto. */
-const lxMul = isMobile ? 0.55 : 1;
 const waypoints = [
-  { x: 0,    y: 0,    z: 7.0, lx: -2.0, ly: 0 },     // hero — nth-child ímpar, texto à esquerda
-  { x: 2.3,  y: 0.5,  z: 4.6, lx: 1.0,  ly: 0 },     // 01 diagnóstico — par, texto à direita
-  { x: -2.5, y: 0.8,  z: 4.2, lx: -0.9, ly: 0.1 },   // 02 arquitetura — ímpar, texto à esquerda
-  { x: 0,    y: 2.5,  z: 3.6, lx: 0.8,  ly: 0 },     // 03 construção — par, texto à direita
-  { x: 2.6,  y: -0.9, z: 3.1, lx: -0.7, ly: 0.2 },   // 04 lançamento — ímpar, texto à esquerda
-  { x: -1.9, y: -1.2, z: 3.4, lx: 0.75, ly: -0.1 },  // 05 evolução — par, texto à direita
-  { x: 1.6,  y: 1.0,  z: 2.8, lx: -0.6, ly: 0.1 },   // 06 tecnologia aplicada — ímpar, texto à esquerda
+  { x: 0,    y: 0,    z: 7.0, lx: -3.3, ly: 0 },     // hero — nth-child ímpar, texto à esquerda
+  { x: 2.3,  y: 0.5,  z: 4.6, lx: 2.2,  ly: 0 },     // 01 diagnóstico — par, texto à direita
+  { x: -2.5, y: 0.8,  z: 4.2, lx: -2.0, ly: 0.1 },   // 02 arquitetura — ímpar, texto à esquerda
+  { x: 0,    y: 2.5,  z: 3.6, lx: 1.7,  ly: 0 },     // 03 construção — par, texto à direita
+  { x: 2.6,  y: -0.9, z: 3.1, lx: -1.5, ly: 0.2 },   // 04 lançamento — ímpar, texto à esquerda
+  { x: -1.9, y: -1.2, z: 3.4, lx: 1.6,  ly: -0.1 },  // 05 evolução — par, texto à direita
+  { x: 1.6,  y: 1.0,  z: 2.8, lx: -1.3, ly: 0.1 },   // 06 tecnologia aplicada — ímpar, texto à esquerda
   { x: 0,    y: 0,    z: 2.4, lx: 0,    ly: 0 }      // final — texto centralizado
 ];
 
-const camState = { x: camera.position.x, y: camera.position.y, z: camera.position.z, lx: waypoints[0].lx * lxMul, ly: waypoints[0].ly };
+const camState = { x: camera.position.x, y: camera.position.y, z: camera.position.z, lx: isMobile ? 0 : waypoints[0].lx, ly: waypoints[0].ly };
 lookTarget.set(camState.lx, camState.ly, 0);
 camera.lookAt(lookTarget);
 
@@ -590,8 +608,10 @@ function updateActiveStep() {
   activeStepIdx = idx;
   document.getElementById('stepIdx').textContent = String(idx).padStart(2, '0');
   if (!reduced) {
-    const targetLx = (waypoints[idx] ? waypoints[idx].lx : 0) * lxMul;
-    gsap.to(camState, { lx: targetLx, duration: 0.9, ease: 'power2.out', overwrite: true });
+    if (!isMobile) {
+      const targetLx = waypoints[idx] ? waypoints[idx].lx : 0;
+      gsap.to(camState, { lx: targetLx, duration: 0.9, ease: 'power2.out', overwrite: true });
+    }
     const targetScale = baseCoreScale * (stepScaleMul[idx] ?? 1);
     gsap.to(core.scale, { x: targetScale, y: targetScale, z: targetScale, duration: 1, ease: 'power2.out', overwrite: true });
   }
